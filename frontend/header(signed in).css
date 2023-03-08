@@ -40,27 +40,6 @@ body{
     text-decoration: underline;
 }
 
-#signin{
-    /*Background and border*/
-    border: none;
-    background: white;
-    border-radius:10px;
-    padding: 5px;
-    min-width: 100px;
-
-    /*Text*/
-    color: black;
-
-    /*Alignment*/
-    float: right;
-    
-
-    /*Spacing*/
-    margin-right: 10px;
-    margin-left: 10px;
-         
-}
-
 #header{
      /*Background*/
      border: none;
@@ -74,4 +53,24 @@ body{
      /*Spacing*/
      margin-right: 50%;
      margin-left: 5%;
+}
+
+#userOptions{
+    background-color: white;
+
+    width: 300px;
+    height: 110px;
+    display: grid;
+    grid-template-rows: repeat(2, 50px);
+    float:right;
+    margin-right: 16%;
+}
+
+.userStuff{
+    background-color: white;
+    display:none;
+    width: 100%;
+    text-align: left;
+    font-size: 20px;
+
 }

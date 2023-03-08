@@ -23,7 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelector("#signin").onclick = function() {
         //temp code. will be replaced later
-        console.log("Sign in button pressed.")
+        console.log("Signed in button pressed.")
     }
 });
+
+
 
