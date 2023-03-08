@@ -1,5 +1,6 @@
-document.addEventListener('DOMContentLoaded', function() {
+var openProfile = false;
 
+document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelector("#home").onclick = function() {
         //temp code. will be replaced later
@@ -24,17 +25,30 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector("#user").onclick = function() {
         //temp code. will be replaced later
         console.log("User button pressed.");
+
+        if (openProfile){
+            openProfile = false;
+            document.querySelectorAll(`.userStuff`).forEach(button =>{
+                    button.style.display = "none";
+            })
+        }
+        else{
+            openProfile = true;
+            document.querySelectorAll(`.userStuff`).forEach(button =>{
+                    button.style.display = "block";
+            })
+        }
         
-        document.querySelectorAll(`.userStuff`).forEach(button =>{
-            button.style.display = "block";
-        })
     }
 
-    /*
-    document.addEventListener('click', function clickOutside(event){
-        document.querySelectorAll(`.userStuff`).forEach(button =>{
-            button.style.display = "none";
-        })
-    })
-    */
+    document.querySelector("#profile").onclick = function(){
+        //temp code. will be replaced later
+        console.log("Profile button pressed.");
+    }
+
+    document.querySelector("#signOut").onclick = function(){
+        //temp code. will be replaced later
+        console.log("Sign out button pressed.");
+    }
+
 });
