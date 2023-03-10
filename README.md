@@ -20,7 +20,7 @@ Note: Need to run the application to test the following
 
 Example of request body (in raw, JSON format):
 
-{
+`{
     "title": "My Recipe",
     "author": "John Doe",
     "description": "This is my recipe.",
@@ -31,4 +31,4 @@ Example of request body (in raw, JSON format):
     "calories": 300,
     "ingredients": [],
     "steps": "Step 1: Cook"
-}
+}`
