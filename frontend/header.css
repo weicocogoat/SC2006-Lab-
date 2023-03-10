@@ -1,6 +1,10 @@
 #bodyy{
-    background-color: #bbbcbd ;
+    background-color: #F6F6F6 ;
     /*margin: 0px;*/
+}
+
+.container {
+    background-color: #FFF;
 }
 
 #heading {

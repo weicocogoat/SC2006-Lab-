@@ -1,0 +1,15 @@
+:root {
+	--accent: #313131; /* currently a dark grey, can change when we decide on an accent color */
+	--light-accent: #707070; /* similar to above comment */
+}
+
+.btn-accent {
+	border-radius: 50px !important;
+	background-color: var(--accent) !important;
+	border-color: var(--accent) !important;
+}
+
+.btn-accent:hover {
+	background-color: var(--light-accent) !important;
+	border-color: var(--light-accent) !important;
+}

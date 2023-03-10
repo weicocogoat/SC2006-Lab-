@@ -1,0 +1,21 @@
+:root {
+	--accent: #313131; /* currently a dark grey, can change when we decide on an accent color */
+	--light-accent: #707070; /* similar to above comment */
+}
+
+.cover_img {
+	width: 100%;
+	color: #ffffff;
+	object-fit: cover;
+	height: 400px;
+}
+
+.recipeContent {
+	margin: 56px 64px;
+}
+
+.recipeStepBox {
+	background-color: #F6F6F6;
+	border-radius: 10px;
+	padding: 16px;
+}
