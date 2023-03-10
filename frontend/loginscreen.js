@@ -20,13 +20,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-
-
 });
 
 function validateForm() {
-    username = document.forms["userDetails"]["username"].value;
-    password = document.forms["userDetails"]["password"].value;
+    user_name = document.forms["userDetails"]["username"].value;
+    pass_word = document.forms["userDetails"]["password"].value;
+
+    const userInfo = {
+        username : user_name,
+        password : pass_word
+    }
+    window.sessionStorage.setItem('user', JSON.stringify(userInfo));
 
     //TODO
     //code to check user and pass against database

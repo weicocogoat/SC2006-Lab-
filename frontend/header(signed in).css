@@ -64,7 +64,7 @@
     width: 300px;
     height: 110px;
     float:right;
-    margin-right: 8%;
+    margin-right: 10%;
 }
 
 .userStuff{
@@ -73,6 +73,9 @@
 
     /*Hide buttons*/
     display: none;
+
+    /*Box looks*/
+    border : 1px solid black;
 
     /*Sizing and alignments*/
     width: 100%;
@@ -83,4 +86,12 @@
 
 #dropdown_menu{
     list-style-type: none;
+}
+
+#userName{
+    float:left;
+}
+
+#user{
+    margin-top: 0.8%;
 }

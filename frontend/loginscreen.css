@@ -1,25 +1,33 @@
 #loginScreen{
+    /*Box's design*/
     /*border: 3px solid black;*/
     background-color: white; /*Temp bg colour*/
     box-shadow: 10px 10px #959696;
     border-radius: 25px;
 
-    /*Positioning*/
+    /*Box's size*/
     width: 30%;
     height: 500px;
+
+    /*Positioning*/
     padding: 20px;
     margin-top: 5%;
     margin-left: 35%;
 
-    /**/
+    /*Aligning text*/
     text-align: center;
 }
 
 #loginForm{
+    /*Box's size*/
     width: 70%;
+
+    /*Box's positioning*/
     margin-left: 15%;
+
     /*border: 3px solid black;*/
 }
+
 
 .loginDetails{
     width:100%;
@@ -38,4 +46,22 @@
 
 .showPassword{
     float:left;
+}
+
+#head{
+    /*Cicle emcompassing the icon*/
+    background-color:black;
+    height: 40%;
+    width: 36%;
+    border-radius: 300px;
+    margin-left: 32%;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#icon{
+    /*Set icon colour and alignment*/
+    color: white;
+    float:center;
 }
