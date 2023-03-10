@@ -12,13 +12,14 @@
 - Basic template done 
 
 ## Backend
-- Have to run the application to test the following
+Note: Need to run the application to test the following
 
 ### Testing of API Routes in Postman
 
 #### [GET] Get All Recipes - http://localhost:8080/recipes/all
 
 Example of request body (in raw, JSON format):
+
 {
     "title": "My Recipe",
     "author": "John Doe",
