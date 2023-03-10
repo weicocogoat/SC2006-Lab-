@@ -1,5 +1,5 @@
-body{
-    background-color: #e3e3e3;
+#bodyy{
+    background-color: #b8b9ba;
     margin: 0px;
 }
 
@@ -58,13 +58,13 @@ body{
 
 #userOptions{
     /*Background*/
-    background-color: white;
+    background-color: #b8b9ba;
 
     /*Sizing and positioning*/
     width: 300px;
     height: 110px;
     float:right;
-    margin-right: 16%;
+    margin-right: 8%;
 }
 
 .userStuff{
