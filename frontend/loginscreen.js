@@ -3,7 +3,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelector("#signin2").onclick = function() {
         //temp code. will be replaced later
-        validateForm();
+        var validate = validateForm();
+        if (validate){
+            window.location.href="homescreen(signed in).html";
+        }
     }
 
     document.querySelector(".showPassword").onclick = function() {
@@ -25,6 +28,7 @@ function validateForm() {
     username = document.forms["userDetails"]["username"].value;
     password = document.forms["userDetails"]["password"].value;
 
+    //TODO
     //code to check user and pass against database
 
 
