@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.108.0">
+    <title>MealMate</title>
+
+    <link rel="stylesheet" type="text/css" href="header.css">
+    <script src="header.js"></script>
+
+    <link rel="stylesheet" href="searchRecipe.css">
+    <script src="searchRecipe.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+    <!--To include icons. *only use free icons. Premium icons wont show up-->
+    <script src="https://kit.fontawesome.com/b2f3636b4c.js" crossorigin="anonymous"></script>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+
+    <link
+        href="C:/Users/Welcome/Desktop/SC2006-Lab--Frontend/frontend/bootstrap-5.3.0-alpha1-examples/assets/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div id="heading">
+        <button id="header">Code Crafters</button>
+        <button id="home" class="homeButton">Home</button>
+        <button id="recipe" class="homeButton">Recipe</button>
+        <button id="storeFinder" class="homeButton">Store Finder</button>
+        <button id="aboutUs" class="homeButton">About Us</button>
+        <button id="signin" class="homeButton">Sign in</button>
+    </div>
+
+    <div class="container p-0">
+        <div class="pageContent">
+            <h1>Browse Recipes</h1>
+
+            <form method="GET" class="form">
+                <input autofocus type="search" id="recipeTitle" placeholder="Enter recipe title" name="recipeTitle"><br>
+                <button type="submit" class="search-button">
+                    <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
+                </button>
+            </form>
+
+            <div class="row">
+                <div class="col-sm-12 col-lg-3">
+                    <h4>Filter Options</h4>
+                    <hr class="mt-4 mb-4">
+
+                    <h5>By Calories</h5>
+                    <div class="slidecontainer">
+                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                        <p>Value (kcal): <span id="val"></span></p>
+                    </div>
+
+                    <h5>By Diet Type</h5>
+                    <form class="dietType">
+                        <div>
+                            <input type="radio" name="dairyFree" id="dairyFree" />
+                            <label for="dairyFree">Dairy-free</label>
+                        </div>
+
+                        <div>
+                            <input type="radio" name="glutenFree" id="glutenFree" />
+                            <label for="glutenFree">Gluten-free</label>
+                        </div>
+
+                        <div>
+                            <input type="radio" name="vegan" id="vegan" />
+                            <label for="vegan">Vegan</label>
+                        </div>
+
+                        <div>
+                            <input type="radio" name="vegetarian" id="vegetarian" />
+                            <label for="vegetarian">Vegetarian</label>
+                        </div>
+                    </form>
+                    <p></p>
+                    <h5>By Meal Type</h5>
+                    <form class="mealType">
+                        <div>
+                            <input type="radio" name="breakfast" id="breakfast" />
+                            <label for="breakfast">Breakfast</label>
+                        </div>
+
+                        <div>
+                            <input type="radio" name="lunch" id="lunch" />
+                            <label for="lunch">Lunch</label>
+                        </div>
+
+                        <div>
+                            <input type="radio" name="dinner" id="dinner" />
+                            <label for="dinner">Dinner</label>
+                        </div>
+
+                        <div>
+                            <input type="radio" name="dessert" id="dessert" />
+                            <label for="dessert">Dessert</label>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-sm-12 col-lg-9">
+                    <div class="searchResults">
+                        <div class="card shadow-sm">
+                            <div class="row no-gutters">
+                                <div class="col-md-3">
+                                    <img src="images/pancakes.jpg" class="card-img" alt="Alternative text for image">
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="card-body">
+                                        <div id="firstLine">
+                                            <h5 id="title">Recipe Title</h5>
+                                            <h6 id="star-rating"> 3.5 <i class="fa-solid fa-star"></i></h6>
+                                        </div>
+                                        <div id="secondLine" class="fw-bold text-muted">
+                                            <p id="servingSize">2 servings</p> 
+                                            <p id="duration"> 45 minutes</p>
+                                        </div>
+                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        </p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <button type="button" id="readMore"><h6>Read More <i
+                                                class="fa-solid fa-arrow-right"></i></h6></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

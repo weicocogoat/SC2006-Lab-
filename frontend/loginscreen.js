@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function validateForm() {
-    user_name = document.forms["userDetails"]["username"].value;
-    pass_word = document.forms["userDetails"]["password"].value;
+    const user_name = document.forms["userDetails"]["username"].value;
+    const pass_word = document.forms["userDetails"]["password"].value;
 
     const userInfo = {
         username : user_name,
@@ -40,13 +40,13 @@ function validateForm() {
 
 
     //Empty username and password
-    if (username == "") {
-      alert("Username must be filled out");
+    if (user_name.length < 8) {
+      alert("Username must be at least 8 characters");
       return false;
     }
 
-    if (password == "") {
-        alert("Password must be filled out");
+    if (pass_word.length < 8 ) {
+        alert("Password must be at least 8 characters");
         return false;
     }
     return true;
