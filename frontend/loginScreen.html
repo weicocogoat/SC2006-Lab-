@@ -32,16 +32,18 @@
                 <i id ="icon" class="fa-solid fa-utensils fa-8x"></i>
             </div>
             <form id = "loginForm" name = "userDetails">
-                <input type = "text" placeholder = "Username" name ="username" class = "loginDetails" id = "username">
-                <input type = "password" placeholder = "Password" name ="password" class = "loginDetails" id = "password">
+                <input type = "text" id = "username" placeholder = "Username" name ="username" class = "loginDetails" required>
+                <input type = "password" id = "password" placeholder = "Password" name ="password" class = "loginDetails" required>
                 <!--Alignment is off-->
-                <input type = "checkbox" placeholder = "Show Password" name = "ShowPassword" class = "showPassword">
-                <label class ="showPassword" >Show Password</label>
+                <div class="input-group">
+                    <input type = "checkbox" placeholder = "Show Password" name = "ShowPassword" class = "showPassword">
+                    <label class ="showPassword" >Show Password</label>
+                </div>
                 <button type = "button" id = "signin2" class = "loginDetails">Sign in</button> 
 
                 Don't have an account yet?<br>
                 Click
-                <a href ="basetemplate.html">here</a> <!--Link to be changed-->
+                <a href ="registration.html">here</a> <!--Link changed from basetemplate to registrationś-->
                 to sign up!
             </form>
         </div>
