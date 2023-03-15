@@ -1,8 +1,7 @@
 package com.codecrafters.MealMate.repository;
 
-import com.codecrafters.MealMate.model.Recipe;
+import com.codecrafters.MealMate.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
 
 /*
     We extend MongoRepository<T, ID> where
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
  */
 
-@Repository
-public interface RecipeRepository extends MongoRepository<Recipe, String> {
-
+public interface UserRepository extends MongoRepository<User, String> {
+    User findByEmail(String email);
 }

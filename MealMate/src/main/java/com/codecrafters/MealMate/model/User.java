@@ -1,7 +1,9 @@
 package com.codecrafters.MealMate.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document("users")
 public class User {
     @Id
     private String id;
@@ -11,14 +13,16 @@ public class User {
     private String email;
     private int height;
     private int weight;
+    private double bmi;
 
-    public User(String id, String username, String password, String email, int height, int weight) {
+    public User(String id, String username, String password, String email, int height, int weight, double bmi) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.height = height;
         this.weight = weight;
+        this.bmi = bmi;
     }
 
     public String getId() {
@@ -67,5 +71,13 @@ public class User {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public double getBmi() {
+        return bmi;
+    }
+
+    public void setBmi(double bmi) {
+        this.bmi = bmi;
     }
 }
