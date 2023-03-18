@@ -7,9 +7,14 @@
 	border-radius: 50px !important;
 	background-color: var(--accent) !important;
 	border-color: var(--accent) !important;
+	color: #fff !important;
 }
 
 .btn-accent:hover {
 	background-color: var(--light-accent) !important;
 	border-color: var(--light-accent) !important;
+}
+
+.container {
+	background-color: #fff;
 }

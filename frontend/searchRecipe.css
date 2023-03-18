@@ -133,3 +133,30 @@
     -webkit-transition: .2s;
     transition: opacity .2s;
 }
+
+#ingredientList li {
+    list-style-type: none;
+    padding: 16px 0px;
+    background-color: #F6F6F6;
+    border-radius: 10px;
+    margin: 16px 0px;
+    padding: 16px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+#ingredientList li img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    margin-right: 16px;
+}
+
+#ingredientList li button {
+    border-radius: 48px;
+}
+
+#ingredientList li button:hover {
+    background-color: #313131;
+    color: #fff;
+}

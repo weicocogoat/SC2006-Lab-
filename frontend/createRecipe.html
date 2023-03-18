@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>MealMate | Create Recipe</title>
+        <!--Include the header's css and js files-->
+        <link rel="stylesheet" href="main.css">
+        <link rel ="stylesheet" href="header.css">
+        <link rel="stylesheet" href="recipeDetails.css">
+        <link rel="stylesheet" href="searchRecipe.css">
+
+        <!-- Scripts -->
+        <script src = "header.js"></script>
+        <script src="createRecipe.js"></script>
+
+        <!--Include bootstrap's stuff-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+        <!--To include icons. *only use free icons. Premium icons wont show up-->
+        <script src="https://kit.fontawesome.com/b2f3636b4c.js" crossorigin="anonymous"></script>
+    </head>
+
+    <body id = "bodyy">
+        <!--Header buttons-->
+        <div id = "heading">
+            <button id="header">Code Crafters</button>
+            <button id = "home" class="homeButton">Home</button>
+            <button id = "recipe" class="homeButton">Recipe</button>
+            <button id = "storeFinder" class="homeButton">Store Finder</button>
+            <button id = "aboutUs" class="homeButton">About Us</button>
+            <button id = "signin" class="homeButton">Sign in</button> 
+        </div>
+
+        <div class="container p-5">
+            <h1 class="mb-5">Create Recipe</h1>
+
+            <form id="newRecipeForm" name="newRecipeForm">
+
+                <h4 class="mb-4">General Information</h4>
+
+                <div class="row">
+                    <div class="col-12 col-lg-4 mb-4">
+                        <label for="title"><h6 class="form-label mb-2">Recipe Title</h6></label>
+                        <input type="text" id="title" class="form-control" placeholder="Recipe Title" required>
+                    </div>
+
+                    <div class="col-12 col-lg-4 mb-4">
+                        <label for="portions"><h6 class="form-label">Serving Size</h6></label>
+                        <input type="number" id="portions" class="form-control" placeholder="Serving Size" required>
+                    </div>
+
+                    <div class="col-12 col-lg-4 mb-4">
+                        <label for="prepTime"><h6 class="form-label">Preparation Time</h6></label>
+                        <input type="number" id="prepTime" class="form-control" placeholder="Preparation Time (in hours)" required>
+                    </div>
+                </div>
+
+                <!-- Meal Type -->
+                <label for="mealType"><h6>Meal Type</h6></label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected disabled>Select a Meal Type</option>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="dinner">Dinner</option>
+                    <option value="dessert">Dessert</option>
+                </select>
+
+                <br>
+
+                <!-- Diet Type -->
+                <label><h6 class="form-label">Diet Type</h6></label><br>
+                <div class="form-check form-check-inline mb-4">
+                    <input class="form-check-input" type="checkbox" value="" id="dairyFree">
+                    <label class="form-check-label" for="dairyFree">
+                        Dairy-Free
+                    </label>
+                </div>
+
+                <div class="form-check form-check-inline mb-4">
+                    <input class="form-check-input" type="checkbox" value="" id="glutenFree">
+                    <label class="form-check-label" for="glutenFree">
+                        Gluten-Free
+                    </label>
+                </div>
+
+                <div class="form-check form-check-inline mb-4">
+                    <input class="form-check-input" type="checkbox" value="" id="vegan">
+                    <label class="form-check-label" for="vegan">
+                        Vegan
+                    </label>
+                </div>
+
+                <div class="form-check form-check-inline mb-4">
+                    <input class="form-check-input" type="checkbox" value="" id="vegetarian">
+                    <label class="form-check-label" for="vegetarian">
+                        Vegetarian
+                    </label>
+                </div>
+
+                <br>
+
+                <!-- Description -->
+                <label for="desc"><h6 class="form-label mb-3">Description</h6></label>
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <textarea id="desc" class="form-control" placeholder="Recipe Description" rows="4" required></textarea>
+                    </div>
+                </div>
+
+                <hr class="my-5">
+
+                <!-- Ingredients Section -->                
+                <div class="row">
+
+                    <!-- Search Ingredients -->
+                    <div class="col-12 col-lg-6">
+                        <label><h4 class="mb-4">Search Ingredients</h4></label>
+                        <input autofocus type="search" id="ingredientInput" placeholder="Enter ingredient name..." name="ingredientInput" class="form-control"><br>
+                        <button type="button" class="search-button" onclick="searchIngredient()">
+                            <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
+                        </button>
+                        <br>
+
+                        <div>
+                            <ul id="ingredientList" class="p-0">
+                                <li>
+                                    <img src="https://spoonacular.com/cdn/ingredients_100x100/apple.jpg">
+                                    Apple
+                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button>
+                                </li>
+
+                                <li>
+                                    <img src="https://spoonacular.com/cdn/ingredients_100x100/applesauce.png">
+                                    apple sauce
+                                    <button type="button" class="btn"><i class="fa-solid fa-plus"></i></button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Selected Ingredients -->
+                    <div class="col-12 col-lg-6">
+                        <label><h4>Ingredient List</h4></label>
+                    </div>
+                </div>
+                
+
+                <hr class="my-5">
+
+                <!-- Steps Section -->
+                <label class="mb-3"><h4>List of Steps</h4></label>
+                <br>
+                <textarea id="stepInput" class="form-control" placeholder="Enter step here..." rows="2"></textarea><br>
+                <button type="button" class="btn btn-accent mb-4" onclick="addStep()"><i class="fa-solid fa-plus"></i> Add Step</button>
+
+                <ol id="stepsList">
+                    
+                </ol>
+
+                <hr class="my-5">
+
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-accent">Create Recipe</button>
+                </div>
+                
+            </form>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add <span id="ingredientName">Ingredient Name</span></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <label for="quantity"><h6>Quantity of Ingredient</h6></label>
+                        <input class="form-control" type="number" placeholder="Quantity">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
