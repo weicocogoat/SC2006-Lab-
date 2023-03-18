@@ -3,6 +3,16 @@
 	--light-accent: #707070; /* similar to above comment */
 }
 
+#body{
+    background-color: #f6f6f6;
+    font-family: Poppins;
+    /*margin: 0px;*/
+}
+
+.container {
+	background-color: #fff;
+}
+
 .btn-accent {
 	border-radius: 50px !important;
 	background-color: var(--accent) !important;
@@ -15,13 +25,28 @@
 	border-color: var(--light-accent) !important;
 }
 
-#body {
-    background-color: #bbbcbd ; /*#f6f6f6*/
-    /*margin: 0px;*/
-    font-family: Poppins;
-}
-
 .form-control {
 	border-radius: 48px !important;
 	padding: 0.35rem 1.5rem !important;
+}
+
+.homeButton a {
+    text-decoration: none;
+    /* removes underlines */
+    color: #faf5f5;
+    /* inherits the color from the parent element */
+}
+
+.homeButton a:hover {
+    text-decoration: underline;
+    /* adds underline on hover */
+}
+
+#signin a {
+    text-decoration: none;
+    color: black;
+}
+
+.active {
+    border-bottom: 3px solid white;
 }

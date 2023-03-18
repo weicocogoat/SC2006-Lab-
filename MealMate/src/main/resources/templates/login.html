@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>MealMate | Login</title>
 
@@ -21,14 +21,8 @@
 
     </head>
     <body id="bodyy">
-        <div id = "heading">
-            <button id="header">Code Crafters</button>
-            <button id="home" class="homeButton active"><a href="/">Home</a></button>
-            <button id="recipe" class="homeButton"><a href="recipes">Recipe</a></button>
-            <button id="storeFinder" class="homeButton"><a href="#">Store Finder</a></button>
-            <button id="aboutUs" class="homeButton"><a href="#">About Us</a></button>
-            <button id="signin" class="homeButton"><a href="login">Sign In</a></button> 
-        </div>
+        <!-- Navigation Bar -->
+        <div th:insert="fragments/navbar.html :: navbar"></div>
 
         <!--Login screen stuff-->
         <div id = "loginScreen">
@@ -49,9 +43,8 @@
                 </div>
 
                 <div class="d-grid gap-2 mb-3">
-                  <button class="btn btn-accent" type = "button" id = "signin2" class = "loginDetails">Sign In</button> 
+                  <button class="btn btn-accent loginDetails" type="button" id="signin2">Sign In</button>
                 </div>
-
                 Don't have an account yet?<br>
                 Click
                 <a href="/register">here</a> <!--Link changed from basetemplate to registrationś-->
