@@ -26,9 +26,6 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
 
-    <link
-        href="C:/Users/Welcome/Desktop/SC2006-Lab--Frontend/frontend/bootstrap-5.3.0-alpha1-examples/assets/dist/css/bootstrap.min.css"
-        rel="stylesheet">
 
 </head>
 
@@ -112,9 +109,11 @@
                     </form>
                 </div>
 
+                
                 <div class="col-sm-12 col-lg-9">
-                    <div class="searchResults">
-                        <div class="card shadow-sm">
+                    <!-- If want to load data dynamically, comment this section here -->
+                    <div id="searchResults" class="searchResults">
+                        <div class="card shadow-sm mb-4">
                             <div class="row no-gutters">
                                 <div class="col-md-3">
                                     <img src="images/pancakes.jpg" class="card-img" alt="Alternative text for image">
@@ -140,6 +139,10 @@
                                 </div>
                             </div>
                         </div>
+                    </div> <!-- Until here -->
+
+                    <!-- This is the recipe container that will hold the dynamic data retrieved from DB -->
+                    <div id="recipeContainer">
                     </div>
                 </div>
             </div>
