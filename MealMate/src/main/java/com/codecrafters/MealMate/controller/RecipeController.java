@@ -3,11 +3,13 @@ package com.codecrafters.MealMate.controller;
 import com.codecrafters.MealMate.model.Recipe;
 import com.codecrafters.MealMate.repository.RecipeRepository;
 import com.codecrafters.MealMate.services.RecipeService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/recipes")
@@ -31,14 +33,13 @@ public class RecipeController {
         return recipeRepo.findAll();
     }
 
-    /*
     @CrossOrigin
-    @GetMapping("/{id}")
-    public Recipe getRecipeById(@PathVariable String id)
+    @GetMapping("/find/{id}")
+    public Optional<Recipe> getRecipeById(@PathVariable String id)
     {
+        //ObjectId recipeId = new ObjectId(id);
         return recipeRepo.findById(id);
     }
-     */
 
     @CrossOrigin
     @PostMapping("/add")

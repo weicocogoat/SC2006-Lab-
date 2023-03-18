@@ -21,14 +21,16 @@ Note: Need to run the application to test the following
 Example of request body (in raw, JSON format):
 
 `{
-    "title": "My Recipe",
-    "author": "John Doe",
-    "description": "This is my recipe.",
-    "dateCreated": "2023-03-11T00:00:00",
+    "title": "Recipe 2",
+    "author": "Jane Doe",
+    "description": "This is my recipe 2.",
+    "dateCreated": "2023-03-18T00:00:00",
     "numOfBookmarks": 0,
     "preparationTime": "1 Hour",
     "portions": 2,
     "calories": 300,
     "ingredients": [],
-    "steps": "Step 1: Cook"
+    "steps": "Step 1: Cook",
+    "dietType": "",
+    "mealType": "Lunch"
 }`

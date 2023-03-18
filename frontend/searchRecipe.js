@@ -53,11 +53,11 @@ function getRecipes() {
 		.then((resp) => resp.json())
 		.then(function(response) {
 
-			//console.log(response);
+			console.log(response);
 
 			response.forEach(function (item, index) {
                 const recipeObj = {
-                	id: item._id,	// currently returning undefined, need to fix
+                	id: item.id,	// currently returning undefined, need to fix
                     author: item.author,
                     calories: item.calories,
                     dateCreated: item.dateCreated,
@@ -84,7 +84,7 @@ function getRecipes() {
 
 // Render and Display Recipes in View
 function displayRecipes() {
-	console.log(listOfRecipes);
+	//console.log(listOfRecipes);
 	const recipeViewList = [];	// Array that will hold all individual HTML views to generate of each recipe
 
 	for(var i=0; i < listOfRecipes.length; i++) {
@@ -100,4 +100,21 @@ function displayRecipes() {
 	// Insert into Recipe Container
 	const recipeContainer = document.getElementById("recipeContainer");
 	recipeContainer.innerHTML = recipeViewHTML;
+}
+
+function getRecipeDetails() {
+	const url = window.location.href;
+	const recipeId = url.split("/")[4];
+	console.log(recipeId);
+
+	fetch("http://localhost:8080/recipes/find/" + recipeId)
+		.then((resp) => resp.json())
+		.then(function(response) {
+
+			console.log(response);
+
+
+		}).catch(function(error) {
+			console.log(error);
+		});
 }

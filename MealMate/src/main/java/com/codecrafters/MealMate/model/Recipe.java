@@ -1,5 +1,7 @@
 package com.codecrafters.MealMate.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,6 +10,7 @@ import java.time.LocalDateTime;
 @Document("recipes")
 public class Recipe {
     @Id
+    @JsonSerialize(using=ToStringSerializer.class)      // https://stackoverflow.com/questions/9065042/java-spring-mappingjacksonjsonview-not-doing-tostring-on-mongodb-objectid
     private String id;
 
     private String title;
