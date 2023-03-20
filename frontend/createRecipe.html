@@ -123,10 +123,11 @@
 
                         <div>
                             <ul id="ingredientList" class="p-0">
+                                <!-- Some static data -->
                                 <li>
                                     <img src="https://spoonacular.com/cdn/ingredients_100x100/apple.jpg">
                                     Apple
-                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button>
+                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-ingredientID="" onclick="displayModalDetails()"><i class="fa-solid fa-plus"></i></button>
                                 </li>
 
                                 <li>
@@ -176,8 +177,22 @@
                     </div>
 
                     <div class="modal-body">
-                        <label for="quantity"><h6>Quantity of Ingredient</h6></label>
-                        <input class="form-control" type="number" placeholder="Quantity">
+                        <div class="row">
+                            <div class="col-12 col-lg-6 mb-3">
+                                <label for="quantity"><h6>Quantity of Ingredient</h6></label>
+                                <input class="form-control" type="number" placeholder="Quantity">
+                            </div>
+
+                            <div class="col-12 col-lg-6 mb-3">
+                                <label for="quantity"><h6>Nutrition Values</h6></label>
+                                <p id="nutirionValues">Not calculated yet</p>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-sm btn-accent" onclick="calculateNutrition()">Calculate Nutrition Values</button>
+                        </div>
+
                     </div>
 
                     <div class="modal-footer">
