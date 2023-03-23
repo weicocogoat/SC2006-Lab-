@@ -8,6 +8,9 @@
         <link rel="stylesheet" href="recipeDetails.css">
         <link rel="stylesheet" href="searchRecipe.css">
 
+        <!-- Toastr Js -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+
         <!-- Scripts -->
         <script src = "header.js"></script>
         <script src="createRecipe.js"></script>
@@ -123,7 +126,7 @@
 
                         <div>
                             <ul id="ingredientList" class="p-0">
-                                <!-- Some static data -->
+                                <!-- Some static data 
                                 <li>
                                     <img src="https://spoonacular.com/cdn/ingredients_100x100/apple.jpg">
                                     Apple
@@ -134,7 +137,7 @@
                                     <img src="https://spoonacular.com/cdn/ingredients_100x100/applesauce.png">
                                     apple sauce
                                     <button type="button" class="btn"><i class="fa-solid fa-plus"></i></button>
-                                </li>
+                                </li>-->
                             </ul>
                         </div>
                     </div>
@@ -180,7 +183,7 @@
                         <div class="row">
                             <div class="col-12 col-lg-6 mb-3">
                                 <label for="quantity"><h6>Quantity of Ingredient</h6></label>
-                                <input class="form-control" type="number" placeholder="Quantity">
+                                <input class="form-control" type="number" placeholder="Quantity" />
                             </div>
 
                             <div class="col-12 col-lg-6 mb-3">
@@ -202,5 +205,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- Scripts -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     </body>
 </html>

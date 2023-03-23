@@ -5,7 +5,9 @@ function searchIngredient() {
 
 	if(ingredient.length == 0) {
 		// Show some error msg here
-		console.log("pls enter");
+		//console.log("pls enter");
+		toastr.success('Click Button');
+		
 	} else {
 		// Reset Search Results
 		const ingredientsCont = document.getElementById("ingredientList");
@@ -33,26 +35,46 @@ function searchIngredient() {
 }
 
 function displayResults(ingredient) {
-	console.log(ingredient);
+	//console.log(ingredient);
+	const item = {
+		id: ingredient.id,
+		name: ingredient.name,
+		image: ingredient.image
+	};
+
+	console.log(item);
+
+	const ingredientString = JSON.stringify(ingredient);
+	console.log("String: " + ingredientString);
 
 	const ingredientsCont = document.getElementById("ingredientList");
 
+	
 	const newItem = 
 	`<li>
 		<img src="https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}">
 		${ingredient.name}
-		<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-ingredientId="${ingredient.id}" onclick="displayModalDetails(${ingredient})"><i class="fa-solid fa-plus"></i></button>
+		<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-ingredientId="${ingredient.id}" onclick="displayModalDetails(${ingredientString})"><i class="fa-solid fa-plus"></i></button>
 	</li>`;
+	
+
+	/*
+	const newItem = 
+	"<li>
+		<img src='https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}'>
+		"+ingredient.name+" <button type='button' class='btn' data-bs-toggle='modal' data-bs-target='#exampleModal' data-ingredientId='ingredient.id' onclick='displayModalDetails(item.id)'><i class="fa-solid fa-plus"></i></button>
+	</li>';
+	*/
 
 	ingredientList.innerHTML += newItem;
 }
 
 function displayModalDetails(ingredient) {
-	// Load Details
-	const name = document.getElementById("ingredientName");
-	name.innerHTML = ingredient.name;
+	console.log("displayModalDetails calling...");
+	console.log("getting argument.." + ingredient);
+	console.log("parsing.." + JSON.parse(ingredient));
 }
-
+ 		
 function calculateNutrition(item) {
 	console.log(item); 
 
