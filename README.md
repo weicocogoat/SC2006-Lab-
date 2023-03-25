@@ -1,7 +1,7 @@
 # SC2006-Lab-Software-Engineering
 
 ## How To Navigate
-###Frontend
+### Frontend
 MealMate > src > main > resources
 Static folder is where the CSS, JS and image folders are kept. 
 Templates folder is where all the HTML files are stored. 
