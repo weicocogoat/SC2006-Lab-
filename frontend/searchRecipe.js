@@ -30,8 +30,8 @@ const recipeView = (id, title, numOfBookmarks, portions, time, desc) =>
 	                        <h6 id="star-rating">${numOfBookmarks} <i class="fa-solid fa-star"></i></h6>
 	                    </div>
 	                    <div id="secondLine" class="fw-bold text-muted">
-	                        <p id="servingSize">${portions} servings</p> 
-	                        <p id="duration">${time}</p>
+	                        <p id="servingSize">${portions} Servings</p> 
+	                        <p id="duration">${time} Hour(s)</p>
 	                    </div>
 	                    <p class="card-text">${desc}</p>
 	                    <div class="d-flex justify-content-between align-items-center">
@@ -58,16 +58,18 @@ function getRecipes() {
 			response.forEach(function (item, index) {
                 const recipeObj = {
                 	id: item.id,	// currently returning undefined, need to fix
+                	title: item.title,
                     author: item.author,
-                    calories: item.calories,
-                    dateCreated: item.dateCreated,
                     description: item.description,
-                    ingredients: item.ingredients,
+                    dateCreated: item.dateCreated,
+                    mealType: item.mealType,
+                    dietType: item.dietType,
                     numOfBookmarks: item.numOfBookmarks,
-                    portions: item.portions,
-                    preparationTime: item.preparationTime,
-                    steps: item.steps,
-                    title: item.title
+                    prepTime: item.prepTime,
+                    servingSize: item.servingSize,
+                    calories: item.calories,                    
+                    ingredients: item.ingredients,
+                    steps: item.steps
                };
 
                // Store inside global array
@@ -89,7 +91,7 @@ function displayRecipes() {
 
 	for(var i=0; i < listOfRecipes.length; i++) {
 		const recipe = listOfRecipes[i];
-		const itemViewHTML = recipeView(recipe.id, recipe.title, recipe.numOfBookmarks, recipe.portions, recipe.preparationTime, recipe.description);
+		const itemViewHTML = recipeView(recipe.id, recipe.title, recipe.numOfBookmarks, recipe.servingSize, recipe.prepTime, recipe.description);
 
 		recipeViewList.push(itemViewHTML);
 	}

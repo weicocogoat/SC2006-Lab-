@@ -1,5 +1,6 @@
 package com.codecrafters.MealMate.model;
 
+import com.codecrafters.MealMate.enums.MealType;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.springframework.data.annotation.Id;
@@ -17,24 +18,37 @@ public class Recipe {
     private String author;
     private String description;
     private LocalDateTime dateCreated;
+    private MealType mealType;
+    private String[] dietType;
     private int numOfBookmarks;
-    private String preparationTime;
-    private int portions;
+    private String prepTime;
+    private int servingSize;
     private int calories;
     private Ingredient[] ingredients;
-    private String steps;
+    private RecipeStep[] steps;
 
-    public Recipe(String title, String author, String description, LocalDateTime dateCreated, int numOfBookmarks, String preparationTime, int portions, int calories, Ingredient[] ingredients, String steps) {
+    public Recipe(String id, String title, String author, String description, LocalDateTime dateCreated, MealType mealType, String[] dietType, int numOfBookmarks, String prepTime, int servingSize, int calories, Ingredient[] ingredients, RecipeStep[] steps) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.description = description;
         this.dateCreated = dateCreated;
+        this.mealType = mealType;
+        this.dietType = dietType;
         this.numOfBookmarks = numOfBookmarks;
-        this.preparationTime = preparationTime;
-        this.portions = portions;
+        this.prepTime = prepTime;
+        this.servingSize = servingSize;
         this.calories = calories;
         this.ingredients = ingredients;
         this.steps = steps;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -69,6 +83,22 @@ public class Recipe {
         this.dateCreated = dateCreated;
     }
 
+    public MealType getMealType() {
+        return mealType;
+    }
+
+    public void setMealType(MealType mealType) {
+        this.mealType = mealType;
+    }
+
+    public String[] getDietType() {
+        return dietType;
+    }
+
+    public void setDietType(String[] dietType) {
+        this.dietType = dietType;
+    }
+
     public int getNumOfBookmarks() {
         return numOfBookmarks;
     }
@@ -77,20 +107,20 @@ public class Recipe {
         this.numOfBookmarks = numOfBookmarks;
     }
 
-    public String getPreparationTime() {
-        return preparationTime;
+    public String getPrepTime() {
+        return prepTime;
     }
 
-    public void setPreparationTime(String preparationTime) {
-        this.preparationTime = preparationTime;
+    public void setPrepTime(String prepTime) {
+        this.prepTime = prepTime;
     }
 
-    public int getPortions() {
-        return portions;
+    public int getServingSize() {
+        return servingSize;
     }
 
-    public void setPortions(int portions) {
-        this.portions = portions;
+    public void setServingSize(int servingSize) {
+        this.servingSize = servingSize;
     }
 
     public int getCalories() {
@@ -109,11 +139,11 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public String getSteps() {
+    public RecipeStep[] getSteps() {
         return steps;
     }
 
-    public void setSteps(String steps) {
+    public void setSteps(RecipeStep[] steps) {
         this.steps = steps;
     }
 }

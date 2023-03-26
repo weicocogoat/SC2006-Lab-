@@ -207,6 +207,9 @@ function addStep() {
 	`;
 
 	stepsList.innerHTML += stepView;
+
+	// Reset input value
+	document.getElementById("stepInput").value = "";
 }
 
 // Remove Step from List
@@ -249,7 +252,7 @@ function createRecipe() {
 		title: recipeTitle,
 		author: "John Doe",
 		description: description,
-		dateCreated: new Date().toLocaleString(),
+		dateCreated: new Date().toISOString(),
 		mealType: mealType,
 		dietType: dietType,
 		numOfBookmarks: 0,
@@ -260,11 +263,14 @@ function createRecipe() {
 		steps: listOfSteps
 	};
 
-	console.log(newRecipe);
+	console.log(JSON.stringify(newRecipe));
 
 	fetch('http://localhost:8080/recipes/save', {
              method: 'POST',
-             body: newRecipe
+             headers: {
+                 'content-type': 'application/json'
+             },
+             body: JSON.stringify(newRecipe)
          })
          .then(response => response.json())
          .then(data => {
