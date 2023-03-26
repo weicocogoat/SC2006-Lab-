@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="css/header.css">
+
+        <!-- Scripts -->
+        <script src="js/header.js"></script>
+    </head>
+    <body>
+        <div th:fragment="navbar" id="heading">
+            <button id="header">Code Crafters</button>
+            <button id="home" class="homeButton" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active' : ''}"><a th:href="@{/}">Home</a></button>
+            <button id = "recipe" class="homeButton" th:classappend="${#httpServletRequest.getRequestURI() == '/recipes' ? 'active' : ''}"><a th:href="@{/recipes}">Recipe</a></button>
+            <button id = "storeFinder" class="homeButton" th:classappend="${#httpServletRequest.getRequestURI() == '/stores' ? 'active' : ''}"><a href="#">Store Finder</a></button>
+            <button id = "aboutUs" class="homeButton" th:classappend="${#httpServletRequest.getRequestURI() == '/about' ? 'active' : ''}"><a href="#">About Us</a></button>
+            <button id = "signin" class="homeButton"><a th:href="@{/login}">Sign In</a></button>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>MealMate | Registration</title>
+
+    <!-- Stylesheets -->
+    <link rel ="stylesheet" href="css/main.css">
+    <link rel ="stylesheet" href="css/header.css">
+    <link rel ="stylesheet" href="css/registration.css">
+
+    <!-- Scripts -->
+    <script src="js/header.js"></script>
+    <script src="js/registration.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+        
+    <!--To include icons. *only use free icons. Premium icons wont show up-->
+    <script src="https://kit.fontawesome.com/b2f3636b4c.js" crossorigin="anonymous"></script>
+
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  </head>
+
+  <body id="body">
+    <!--Navigation Bar -->
+    <div th:insert="fragments/navbar.html :: navbar"></div>
+
+    <div id = "regScreen">
+      <div id="head" class="mb-5">
+        <i id ="icon" class="fa-solid fa-utensils fa-6x"></i>
+      </div>
+
+      <form id="regForm" name="userDetails">
+        <div class="row">
+          <!-- Username -->
+          <div class="col-12 col-lg-6 mb-4">
+            <input class="form-control" type="text" id="username" placeholder="Username" name="username" required>
+          </div>
+
+          <!-- Email Address -->
+          <div class="col-12 col-lg-6 mb-4">
+            <input class="form-control" type="email" id="email" placeholder="Email Address" name="email" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Password -->
+          <div class="col-12 col-lg-6 mb-4">
+             <input class="form-control" type="password" id="password" placeholder="Password" name="password" required>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="col-12 col-lg-6 mb-4">
+            <input class="form-control" type="password" id="confirm-password" placeholder="Confirm Password" name="confirm-password" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Weight -->
+          <div class="col-12 col-lg-6 mb-sm-4 mb-lg-2">
+             <input class="form-control" type="number" id="weight" placeholder="Weight (in kg)" name="weight">
+          </div>
+
+          <!-- Height -->
+          <div class="col-12 col-lg-6 mb-sm-4 mb-lg-2">
+            <input class="form-control" type="number" id="height" placeholder="Height (in cm)" name="height">
+          </div>
+        </div>
+
+        <div class="showpassword mb-4">
+          <input id="showPassword" type = "checkbox" name = "ShowPassword" class="showPassword">
+          <label class="showPassword" for="showPassword">Show Password</label>
+        </div>
+
+        <div class="d-grid gap-2 mb-3">
+          <button class="btn btn-accent" type="button" id="register">Sign Up</button>
+        </div>
+
+        Already have an account?<br>
+        Click
+        <a href="/login">here</a> <!--Link changed from basetemplate to registrationś-->
+        to sign in!
+
+      </form>
+    </div>
+  </body>
+</html>
