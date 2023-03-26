@@ -14,8 +14,9 @@ public class User {
     private int height;
     private int weight;
     private double bmi;
+    private String[] recipeBookmarks;   // Just store the ID of Recipe
 
-    public User(String id, String username, String password, String email, int height, int weight, double bmi) {
+    public User(String id, String username, String password, String email, int height, int weight, double bmi, String[] recipeBookmarks) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -23,6 +24,7 @@ public class User {
         this.height = height;
         this.weight = weight;
         this.bmi = bmi;
+        this.recipeBookmarks = recipeBookmarks;
     }
 
     public String getId() {
@@ -79,5 +81,13 @@ public class User {
 
     public void setBmi(double bmi) {
         this.bmi = bmi;
+    }
+
+    public String[] getRecipeBookmarks() {
+        return recipeBookmarks;
+    }
+
+    public void setRecipeBookmarks(String[] recipeBookmarks) {
+        this.recipeBookmarks = recipeBookmarks;
     }
 }
