@@ -6,7 +6,7 @@ function searchIngredient() {
 	if(ingredient.length == 0) {
 		// Show some error msg here
 		//console.log("pls enter");
-		toastr.success('Click Button');
+		toastr.error('pls enter');
 		
 	} else {
 		// Reset Search Results
@@ -42,6 +42,11 @@ function displayResults(ingredient) {
 	// Once response returns, hide spinner
 	//searchSpinner.classList.remove("d-none");
 
+	const resultsCont = document.getElementById("searchResults");
+
+	// Reset search results first
+	resultsCont.innerHTML = "";
+
 	const item = {
 		id: ingredient.id,
 		name: ingredient.name,
@@ -52,8 +57,6 @@ function displayResults(ingredient) {
 
 	var ingredientString = JSON.stringify(ingredient);
 	ingredientString = ingredientString.replaceAll('"', "'");
-
-	const resultsCont = document.getElementById("searchResults");
 	
 	const newItem = 
 	`<li>
@@ -159,7 +162,7 @@ function addIngredient() {
 
 // Remove Ingredient from List
 function removeIngredient(name) {
-	console.log("Trying to remove..." + name);
+	//console.log("Trying to remove..." + name);
 
 	// Remove from Global Array
 	for(var i = 0; i < ingredientsList.length; i++) {
@@ -172,24 +175,102 @@ function removeIngredient(name) {
 	document.getElementById(name + "ListItem").remove();
 }
 
-const listOfSteps = [];
+const listOfSteps = [];		// Global Array of Steps
 
 // Add Step to List
 function addStep() {
 	const stepInput = document.getElementById("stepInput").value;
 	const stepsList = document.getElementById("stepsList");
 
-	if(stepInput == "") {
-		// some error handling
-	} else {
-		const listItem = document.createElement("li");
-		listItem.appendChild(document.createTextNode(stepInput));
+	let stepNum = listOfSteps.length + 1;
 
-		stepsList.appendChild(listItem);
+	let newStep = {
+		stepNum: stepNum,
+		stepInstruction: stepInput
+	};
 
-		listOfSteps.push(stepInput);
+	console.log(newStep);
 
-		console.log(listOfSteps);
+	listOfSteps.push(newStep);
+
+	console.log(listOfSteps);
+
+	const stepView = `
+		<div id="step${newStep.stepNum}Cont" class="recipeStepBox mb-3">
+	        <h6 class="mb-3">
+	            Step ${newStep.stepNum}
+	            <button class="btn rounded-circle float-end" type="button" onclick="removeStep(${newStep.stepNum})"><i class="fa-solid fa-trash"></i></button>
+	        </h6>
+
+	        <p>${newStep.stepInstruction}</p>
+	    </div>
+	`;
+
+	stepsList.innerHTML += stepView;
+}
+
+// Remove Step from List
+function removeStep(stepNum) {
+	// Remove from Global Array
+	for(var i = 0; i < listOfSteps.length; i++) {
+		if(listOfSteps[i].stepNum == stepNum)
+			listOfSteps.pop(listOfSteps[i]);
 	}
-	console.log(stepInput);
+
+	// Remove from View
+	document.getElementById("step" + stepNum + "Cont").remove();
+}
+
+// Create Recipe
+function createRecipe() {
+	// Get General Information
+	const recipeTitle = document.getElementById("title").value;
+	const servingSize = document.getElementById("servingSize").value;
+	const prepTime = document.getElementById("prepTime").value;
+
+	const mealType = document.getElementById("mealType").value;
+
+	let dietType = [];
+	$('input[name="dietType"]:checked').each(function() {
+		dietType.push(this.value);
+	});
+
+	const description = document.getElementById("desc").value;
+
+	//ingredientsList, listOfSteps
+
+	// Calculate Total Calories for Entire Recipe
+	let totalCalories = 0;
+	for(var i = 0; i < ingredientsList.length; i++) {
+		totalCalories += ingredientsList[i].calories;
+	}
+
+	const newRecipe = {
+		title: recipeTitle,
+		author: "John Doe",
+		description: description,
+		dateCreated: new Date().toLocaleString(),
+		mealType: mealType,
+		dietType: dietType,
+		numOfBookmarks: 0,
+		prepTime: prepTime,
+		servingSize: servingSize,
+		calories: totalCalories,
+		ingredients: ingredientsList,
+		steps: listOfSteps
+	};
+
+	console.log(newRecipe);
+
+	fetch('http://localhost:8080/recipes/save', {
+             method: 'POST',
+             body: newRecipe
+         })
+         .then(response => response.json())
+         .then(data => {
+             console.log('Success:', data);
+         })
+         .catch((error) => {
+             console.error('Error:', error);
+         });
 }

@@ -165,8 +165,9 @@
     color: #fff;
 }
 
-#ingredientList li button:hover {
-    background-color: #D41414;
+#ingredientList li button:hover,
+#stepsList .recipeStepBox h6 button:hover {
+    background-color: #D41414;  /* red */
     color: #fff;
 }
 

@@ -44,8 +44,8 @@
                     </div>
 
                     <div class="col-12 col-lg-4 mb-4">
-                        <label for="portions"><h6 class="form-label">Serving Size</h6></label>
-                        <input type="number" id="portions" class="form-control" placeholder="Serving Size" required>
+                        <label for="servingSize"><h6 class="form-label">Serving Size</h6></label>
+                        <input type="number" id="servingSize" class="form-control" placeholder="Serving Size" required>
                     </div>
 
                     <div class="col-12 col-lg-4 mb-4">
@@ -56,7 +56,7 @@
 
                 <!-- Meal Type -->
                 <label for="mealType"><h6>Meal Type</h6></label>
-                <select class="form-select" aria-label="Default select example">
+                <select id="mealType" class="form-select" aria-label="Default select example">
                     <option selected disabled>Select a Meal Type</option>
                     <option value="breakfast">Breakfast</option>
                     <option value="lunch">Lunch</option>
@@ -69,28 +69,28 @@
                 <!-- Diet Type -->
                 <label><h6 class="form-label">Diet Type</h6></label><br>
                 <div class="form-check form-check-inline mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="dairyFree">
+                    <input class="form-check-input" type="checkbox" name="dietType" value="dairy free" id="dairyFree">
                     <label class="form-check-label" for="dairyFree">
                         Dairy-Free
                     </label>
                 </div>
 
                 <div class="form-check form-check-inline mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="glutenFree">
+                    <input class="form-check-input" type="checkbox" name="dietType" value="gluten free" id="glutenFree">
                     <label class="form-check-label" for="glutenFree">
                         Gluten-Free
                     </label>
                 </div>
 
                 <div class="form-check form-check-inline mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="vegan">
+                    <input class="form-check-input" type="checkbox" name="dietType" value="vegan" id="vegan">
                     <label class="form-check-label" for="vegan">
                         Vegan
                     </label>
                 </div>
 
                 <div class="form-check form-check-inline mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="vegetarian">
+                    <input class="form-check-input" type="checkbox" name="dietType" value="vegetarian" id="vegetarian">
                     <label class="form-check-label" for="vegetarian">
                         Vegetarian
                     </label>
@@ -168,20 +168,20 @@
                 <textarea id="stepInput" class="form-control" placeholder="Enter Step Instructions Here..." rows="2"></textarea><br>
                 <button type="button" class="btn btn-accent mb-4" onclick="addStep()"><i class="fa-solid fa-plus"></i> Add Step</button>
 
-                <ol id="stepsList">
-                    
-                </ol>
+                <div id="stepsList">
+
+                </div>
 
                 <hr class="my-5">
 
                 <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-accent">Create Recipe</button>
+                    <button type="button" class="btn btn-accent" onclick="createRecipe()">Create Recipe</button>
                 </div>
                 
             </form>
         </div>
 
-        <!-- Modal -->
+        <!-- Add Ingredient Modal -->
         <div class="modal fade" id="ingredientModal" tabindex="-1" aria-labelledby="ingredientModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
