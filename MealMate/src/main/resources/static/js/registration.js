@@ -102,10 +102,13 @@ function createUser() {
         recipeBookmarks: []
     };
 
+    console.log("csrf token: " + $('input[name="_csrf"]').val());
+
     fetch('http://localhost:8080/users/register', {
              method: 'POST',
              headers: {
-                 'content-type': 'application/json'
+                 'content-type': 'application/json',
+                 'X-CSRFToken': $('input[name="_csrf"]').val()
              },
              body: JSON.stringify(newUser)
          })
