@@ -23,7 +23,11 @@ public class User {
     public User(String id, String username, String password, String email, int height, int weight, double bmi, String[] recipeBookmarks) {
         this.id = id;
         this.username = username;
-        this.password = password;
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.password = encoder.encode(password).toString();
+
+        //this.password = password;
         this.email = email;
         this.height = height;
         this.weight = weight;

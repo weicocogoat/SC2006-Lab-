@@ -13,7 +13,7 @@ public class AccountController {
     private UserRepository userRepo;
 
 
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin
     @PostMapping("/register")
     public void register(@RequestBody User user) {
         userRepo.save(user);
