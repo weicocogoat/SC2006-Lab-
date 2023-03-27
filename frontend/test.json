@@ -1,0 +1,6 @@
+{
+    "type": "FeatureCollection",
+    "features" : [
+    {"geometry": { "type": "Point", "coordinates": [ 103.901262393433001, 1.40230300615945] }, "type": "Feature","properties": {"storeid": "1", "name" : "LI LI CHENG SUPERMARKET (PUNGGOL) PTE. LTD.","street_name": "PUNGGOL PLACE","blk" : "273C","unit_no" : "884","postal_code": "823273"}}
+    ]
+}

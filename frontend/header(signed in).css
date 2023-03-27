@@ -1,0 +1,97 @@
+#bodyy{
+    background-color: #b8b9ba;
+    margin: 0px;
+}
+
+#heading {
+    /*Background*/
+    background-color: #262424;
+    height : 50px;
+
+    /*Text*/
+    color: #faf5f5;
+    font-family: Arial;
+    display: flex;
+    align-items: center;
+
+}
+
+.homeButton{
+    /*Background*/
+    border: none;
+    background: none;
+
+    /*Text*/
+    color: #faf5f5;
+    font-size: 15px;
+
+    /*Alignment*/
+    float: right;
+    
+
+    /*Spacing*/
+    margin-right: 10px;
+    margin-left: 10px;
+     
+}
+
+.homeButton:hover{
+    opacity: 50%;
+    text-decoration: underline;
+}
+
+#header{
+     /*Background*/
+     border: none;
+     background: none;
+ 
+     /*Text*/
+     color: #faf5f5;
+     font-size: 20px;
+     
+ 
+     /*Spacing*/
+     margin-right: 50%;
+     margin-left: 5%;
+}
+
+
+#userOptions{
+    /*Background*/
+    background-color: #b8b9ba;
+
+    /*Sizing and positioning*/
+    width: 300px;
+    height: 110px;
+    float:right;
+    margin-right: 10%;
+}
+
+.userStuff{
+    /*Background*/
+    background-color: white;
+
+    /*Hide buttons*/
+    display: none;
+
+    /*Box looks*/
+    border : 1px solid black;
+
+    /*Sizing and alignments*/
+    width: 100%;
+    text-align: left;
+    font-size: 20px;
+
+}
+
+#dropdown_menu{
+    list-style-type: none;
+}
+
+#userName{
+    float:left;
+}
+
+#user{
+    margin-top: 0.8%;
+}
