@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // temporary, to be replaced
         var validate = validateForm();
         if (validate) {
-            window.location.href = 'transition.html'
+            //window.location.href = 'transition.html'
         }
     }
 
@@ -68,7 +68,7 @@ function validateForm() {
     window.sessionStorage.setItem('user', JSON.stringify(userInfo));
 
     //Add code to store username, password, height, weight to DB
-
+    createUser();
 
     return true;
 }
@@ -81,4 +81,43 @@ function ValidateEmail(mail)
     }
     alert("You have entered an invalid email address!")
     return false;
+}
+
+function createUser() {
+    const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const weight = document.getElementById("weight").value;
+    const height = document.getElementById("height").value;
+
+    const bmi = calculateBmi(height, weight);
+
+    const newUser = {
+        username: username,
+        password: password,
+        email: email,
+        height: height,
+        weight: weight,
+        bmi: bmi,
+        recipeBookmarks: []
+    };
+
+    fetch('http://localhost:8080/users/register', {
+             method: 'POST',
+             headers: {
+                 'content-type': 'application/json'
+             },
+             body: JSON.stringify(newUser)
+         })
+         .then(response => response.json())
+         .then(data => {
+             console.log('Success:', data);
+         })
+         .catch((error) => {
+             console.error('Error:', error);
+         });
+}
+
+function calculateBmi(height, weight) {
+    return (weight/height/height) * 10000;
 }

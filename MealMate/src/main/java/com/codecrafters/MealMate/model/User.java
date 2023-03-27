@@ -1,11 +1,15 @@
 package com.codecrafters.MealMate.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Document("users")
 public class User {
     @Id
+    @JsonSerialize(using= ToStringSerializer.class)
     private String id;
 
     private String username;
@@ -48,7 +52,8 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.password = encoder.encode(password).toString();
     }
 
     public String getEmail() {

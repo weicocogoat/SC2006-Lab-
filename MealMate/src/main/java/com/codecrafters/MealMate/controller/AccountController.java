@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/account")
+@RequestMapping("/users")
 public class AccountController {
 
     @Autowired
     private UserRepository userRepo;
 
 
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping("/register")
     public void register(@RequestBody User user) {
         userRepo.save(user);

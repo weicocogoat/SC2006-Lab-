@@ -2,10 +2,7 @@ package com.codecrafters.MealMate.controller;
 
 import com.codecrafters.MealMate.model.Recipe;
 import com.codecrafters.MealMate.repository.RecipeRepository;
-import com.codecrafters.MealMate.services.RecipeService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
