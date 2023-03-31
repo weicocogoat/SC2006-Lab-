@@ -1,6 +1,7 @@
 package com.codecrafters.MealMate.controller;
 
 import com.codecrafters.MealMate.model.Meal;
+import com.codecrafters.MealMate.repository.MealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,9 @@ public class MealController {
 
     @CrossOrigin
     @PostMapping("/save")
-    public void saveMeal(@RequestBody Meal recipe)
+    public void saveMeal(@RequestBody Meal recipe) {
+        mealRepo.save(recipe);
+    }
 
     @CrossOrigin
     @DeleteMapping("delete/{id}")
