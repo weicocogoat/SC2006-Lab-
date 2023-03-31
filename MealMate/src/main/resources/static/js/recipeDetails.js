@@ -34,20 +34,24 @@ function getRecipeDetails() {
 }
 
 function loadRecipeDetails(recipe) {
+	const image = document.getElementById("recipeImg");
 	const title = document.getElementById("recipeTitle");
 	const datePublished = document.getElementById("datePublished");
 	const author = document.getElementById("author");
-
 	const prepTime = document.getElementById("preparationTime");
 	const servingSize = document.getElementById("servingSize");
 	const calories = document.getElementById("calories");
-
 	const desc = document.getElementById("description");
 
 	// Display General Information
-
+	image.src = recipe.image;
 	title.innerHTML = recipe.title;
-	datePublished.innerHTML = new Date(recipe.dateCreated).toLocaleDateString();
+
+	let date = new Date(recipe.dateCreated);
+	let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	let dateString = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+	datePublished.innerHTML = dateString;
+
 	author.innerHTML = recipe.author;
 	prepTime.innerHTML = recipe.prepTime + " Hour(s)";
 	servingSize.innerHTML = recipe.servingSize + " Portions";

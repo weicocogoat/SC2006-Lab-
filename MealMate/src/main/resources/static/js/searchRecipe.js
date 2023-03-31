@@ -61,8 +61,8 @@ const recipeView = (recipe) =>
 	        <div class="row no-gutters">
 	            <div class="col-md-3">
 	            	<div class="recipeCardImg">
-	            		<img src="${recipe.image}" class="card-img" alt="Alternative text for image">
-	            		<h5 class="recipeCalories">${recipe.calories} kcal</h5>
+	            		<img src="${recipe.image}" class="card-img">
+	            		<span class="recipeCalories">${recipe.calories} kcal</span>
 	            	</div>
 	                
 	            </div>
@@ -79,7 +79,7 @@ const recipeView = (recipe) =>
 	                    </div>
 	                    <p class="card-text">${recipe.description}</p>
 	                    <div class="d-flex justify-content-between align-items-center">
-	                        <a id="readMore" href="recipes/${recipe.id}"><h6>Read More <i
+	                        <a class="textLink stretched-link" href="recipes/${recipe.id}"><h6>Read More <i
 	                            class="fa-solid fa-arrow-right"></i></h6></a>
 	                    </div>
 	                </div>

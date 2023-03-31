@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <title>MealMate</title>
 
         <!-- Stylesheets -->
@@ -26,7 +29,7 @@
         <div th:insert="fragments/navbar.html :: navbar"></div>
 
         <div class="container p-0">
-            <img class="cover_img" src="../images/pancakes.jpg">
+            <img id="recipeImg" class="cover_img">
 
             <div class="recipeContent">
                 <h2 id="recipeTitle">Recipe Title</h1>
@@ -37,7 +40,7 @@
                 <button type="button" class="btn btn-primary btn-accent btn-sm px-4"><i class="fa-solid fa-bookmark"></i> Add to Bookmarks</button>
 
                 <!-- Details -->
-                <div class="row mt-4 mb-4">
+                <div class="row mt-4 mb-5">
                     <div class="col-sm-12 col-lg-4">
                         <h5><i class="fa-solid fa-clock"></i> Preparation Time</h5>
                         <span id="preparationTime">1</span>
@@ -90,6 +93,34 @@
                         <div id="stepsList">
 
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add to Meal Modal -->
+        <div class="modal fade" id="addMealModal" tabindex="-1" aria-labelledby="addMealModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="addMealModalLabel">Add <span id="modalName">Add to Meal</span></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 col-lg-9 mb-3">
+                                
+                            </div>
+
+                            <div class="col-12 col-lg-3 mb-3">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-accent" onclick="addIngredient()">Add to List</button>
                     </div>
                 </div>
             </div>

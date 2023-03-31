@@ -13,12 +13,24 @@ a {
     text-decoration: none !important;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold !important;
+}
+
+.nav-item {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+}
+
 .container {
 	background-color: #fff;
 }
 
+.btn {
+    border-radius: 50px !important;
+}
+
 .btn-accent {
-	border-radius: 50px !important;
 	background-color: var(--accent) !important;
 	border-color: var(--accent) !important;
 	color: #fff !important;

@@ -157,13 +157,9 @@ let ingredientsList = [];
 // Add Ingredient to List
 function addIngredient() {
 	// Hide Modal, not working need to fix
-	/*
-	var ingredientModal = new bootstrap.Modal(document.getElementById(""), {
-		keyboard: false
-	});
 
+	let ingredientModal = bootstrap.Modal.getInstance(document.querySelector("#ingredientModal"));
 	ingredientModal.hide();
-	*/
 
 	console.log("Trying to add...");
 	console.log(currIngredient);
