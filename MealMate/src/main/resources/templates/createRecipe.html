@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <title>MealMate | Create Recipe</title>
         <!--Include the header's css and js files-->
         <link rel="stylesheet" href="../css/main.css">
@@ -19,7 +21,7 @@
         <script src="https://kit.fontawesome.com/b2f3636b4c.js" crossorigin="anonymous"></script>
     </head>
 
-    <body id = "bodyy">
+    <body id="body">
         <!--Header buttons-->
         <div id = "heading">
             <button id="header">Code Crafters</button>
@@ -54,46 +56,46 @@
                     </div>
                 </div>
 
-                <!-- Meal Type -->
-                <label for="mealType"><h6>Meal Type</h6></label>
-                <select id="mealType" class="form-select" aria-label="Default select example">
-                    <option selected disabled>Select a Meal Type</option>
-                    <option value="breakfast">Breakfast</option>
-                    <option value="lunch">Lunch</option>
-                    <option value="dinner">Dinner</option>
-                    <option value="dessert">Dessert</option>
-                </select>
-
                 <br>
 
-                <!-- Diet Type -->
-                <label><h6 class="form-label">Diet Type</h6></label><br>
-                <div class="form-check form-check-inline mb-4">
-                    <input class="form-check-input" type="checkbox" name="dietType" value="dairy free" id="dairyFree">
-                    <label class="form-check-label" for="dairyFree">
-                        Dairy-Free
-                    </label>
-                </div>
+                <div class="row">
+                    <!-- Recipe Image -->
+                    <div class="col-12 col-lg-6 mb-4">
+                        <label for="image"><h6 class="form-label">Recipe Image</h6></label>
+                        <input id="image" class="form-control pl-0" type="file" onchange="getImage(this)">
+                    </div>
 
-                <div class="form-check form-check-inline mb-4">
-                    <input class="form-check-input" type="checkbox" name="dietType" value="gluten free" id="glutenFree">
-                    <label class="form-check-label" for="glutenFree">
-                        Gluten-Free
-                    </label>
-                </div>
+                    <!-- Diet Type -->
+                    <div class="col-12 col-lg-6 mb-4">
+                        <label><h6 class="form-label">Diet Type</h6></label><br>
+                        <div class="form-check form-check-inline mb-4">
+                            <input class="form-check-input" type="checkbox" name="dietType" value="dairy free" id="dairyFree">
+                            <label class="form-check-label" for="dairyFree">
+                                Dairy-Free
+                            </label>
+                        </div>
 
-                <div class="form-check form-check-inline mb-4">
-                    <input class="form-check-input" type="checkbox" name="dietType" value="vegan" id="vegan">
-                    <label class="form-check-label" for="vegan">
-                        Vegan
-                    </label>
-                </div>
+                        <div class="form-check form-check-inline mb-4">
+                            <input class="form-check-input" type="checkbox" name="dietType" value="gluten free" id="glutenFree">
+                            <label class="form-check-label" for="glutenFree">
+                                Gluten-Free
+                            </label>
+                        </div>
 
-                <div class="form-check form-check-inline mb-4">
-                    <input class="form-check-input" type="checkbox" name="dietType" value="vegetarian" id="vegetarian">
-                    <label class="form-check-label" for="vegetarian">
-                        Vegetarian
-                    </label>
+                        <div class="form-check form-check-inline mb-4">
+                            <input class="form-check-input" type="checkbox" name="dietType" value="vegan" id="vegan">
+                            <label class="form-check-label" for="vegan">
+                                Vegan
+                            </label>
+                        </div>
+
+                        <div class="form-check form-check-inline mb-4">
+                            <input class="form-check-input" type="checkbox" name="dietType" value="vegetarian" id="vegetarian">
+                            <label class="form-check-label" for="vegetarian">
+                                Vegetarian
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <br>
@@ -119,7 +121,7 @@
                             <input id="ingredientInput" class="form-control searchBar" type="search" placeholder="Enter ingredient name..." name="ingredientInput">
 
                             <button type="button" class="input-group-text" onclick="searchIngredient()">
-                                <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
+                                <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
                         </div>
                         <br>
@@ -151,7 +153,9 @@
 
                     <!-- Selected Ingredients -->
                     <div class="col-12 col-lg-6">
-                        <label><h4>Ingredient List</h4></label>
+                        <label><h4 class="mb-4">Ingredient List</h4></label>
+
+                        <p id="noItemsMsg" class="fst-italic text-muted">No items yet</p>
 
                         <ul id="ingredientList" class="p-0">
 
@@ -193,8 +197,8 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-12 col-lg-6 mb-3">
-                                <label for="quantity"><h6>Quantity of Ingredient</h6></label>
-                                <input id="quantity" class="form-control" type="number" placeholder="Quantity" />
+                                <label for="quantity"><h6>Quantity (in <span id="quantityUnit"></span>)</h6></label>
+                                <input id="quantity" class="form-control" type="number" placeholder="Quantity" oninput="calculateNutrition()"/>
                             </div>
 
                             <div class="col-12 col-lg-6 mb-3">
@@ -202,15 +206,9 @@
                                 <p id="nutritionValues">Not calculated yet</p>
                             </div>
                         </div>
-
-                        <div class="d-grid gap-2">
-                            <button type="button" class="btn btn-sm btn-accent" onclick="calculateNutrition()">Calculate Nutrition Values</button>
-                        </div>
-
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-accent" onclick="addIngredient()">Add to List</button>
                     </div>
                 </div>
@@ -221,7 +219,7 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-        <script src="js/header.js"></script>
-        <script src="js/createRecipe.js"></script>
+        <script src="../js/header.js"></script>
+        <script src="../js/createRecipe.js"></script>
     </body>
 </html>

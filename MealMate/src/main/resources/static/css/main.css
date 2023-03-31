@@ -25,9 +25,30 @@
 	border-color: var(--light-accent) !important;
 }
 
-.form-control {
+input.form-control,
+select.form-select  {
 	border-radius: 48px !important;
 	padding: 0.35rem 1.5rem !important;
+}
+
+.input-group input.form-control {
+    border-right: none !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+.input-group .input-group-text {
+    background-color: transparent !important;
+    border-left: none !important;
+}
+
+.input-group .input-group-text {
+    border-top-right-radius: 48px !important;
+    border-bottom-right-radius: 48px !important;
+}
+
+input[type="file"].form-control {
+    padding: 0.35rem 10px !important;
 }
 
 .homeButton a {
