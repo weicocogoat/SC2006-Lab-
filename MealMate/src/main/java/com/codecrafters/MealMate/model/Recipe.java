@@ -16,9 +16,9 @@ public class Recipe {
 
     private String title;
     private String author;
+    private String image;
     private String description;
     private LocalDateTime dateCreated;
-    private MealType mealType;
     private String[] dietType;
     private int numOfBookmarks;
     private String prepTime;
@@ -27,13 +27,13 @@ public class Recipe {
     private Ingredient[] ingredients;
     private RecipeStep[] steps;
 
-    public Recipe(String id, String title, String author, String description, LocalDateTime dateCreated, MealType mealType, String[] dietType, int numOfBookmarks, String prepTime, int servingSize, int calories, Ingredient[] ingredients, RecipeStep[] steps) {
+    public Recipe(String id, String title, String author, String image, String description, LocalDateTime dateCreated, String[] dietType, int numOfBookmarks, String prepTime, int servingSize, int calories, Ingredient[] ingredients, RecipeStep[] steps) {
         this.id = id;
         this.title = title;
         this.author = author;
+        this.image = image;
         this.description = description;
         this.dateCreated = dateCreated;
-        this.mealType = mealType;
         this.dietType = dietType;
         this.numOfBookmarks = numOfBookmarks;
         this.prepTime = prepTime;
@@ -67,6 +67,14 @@ public class Recipe {
         this.author = author;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -81,14 +89,6 @@ public class Recipe {
 
     public void setDateCreated(LocalDateTime dateCreated) {
         this.dateCreated = dateCreated;
-    }
-
-    public MealType getMealType() {
-        return mealType;
-    }
-
-    public void setMealType(MealType mealType) {
-        this.mealType = mealType;
     }
 
     public String[] getDietType() {

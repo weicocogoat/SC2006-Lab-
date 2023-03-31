@@ -12,6 +12,11 @@ public class AccountController {
     @Autowired
     private UserRepository userRepo;
 
+    @CrossOrigin
+    @GetMapping("/login")
+    public void login(@RequestBody User user) {
+
+    }
 
     @CrossOrigin
     @PostMapping("/register")

@@ -1,3 +1,23 @@
+let imgDataURL;
+function getImage(input) {
+	const img = input.files[0];
+
+	const fileReader = new FileReader();
+
+	fileReader.onload = function() {
+		console.log("Result", fileReader.result);
+		imgDataURL = fileReader.result;
+	};
+
+	fileReader.onloadend = function() {
+		console.log(imgDataURL);
+	};
+
+	fileReader.readAsDataURL(img);
+
+	
+}
+
 function searchIngredient() {
 	const ingredient = document.getElementById("ingredientInput").value.trim();
 
@@ -20,6 +40,11 @@ function searchIngredient() {
 		fetch("https://api.spoonacular.com/food/ingredients/autocomplete?query="+ ingredient +"&metaInformation=true&number=2&apiKey=46e36064541946a6bf3c8f20c84f188a")
 			.then((resp) => resp.json())
 			.then(function(response) {
+				
+				// Reset search results first
+				const resultsCont = document.getElementById("searchResults");
+				resultsCont.innerHTML = "";
+
 				response.forEach(function(item, index) {
 					const ingredientObj = {
 						id: item.id,
@@ -43,9 +68,6 @@ function displayResults(ingredient) {
 	//searchSpinner.classList.remove("d-none");
 
 	const resultsCont = document.getElementById("searchResults");
-
-	// Reset search results first
-	resultsCont.innerHTML = "";
 
 	const item = {
 		id: ingredient.id,
@@ -84,6 +106,8 @@ function displayModalDetails(ingredient) {
 				console.log(response);
 
 				let weightPerServing = response.nutrition.weightPerServing;		// An array containing amount (e.g. 108) and unit (e.g. g)
+
+				document.getElementById("quantityUnit").innerHTML = weightPerServing.unit;
 
 				nutrition = response.nutrition.nutrients;
 				calories = [];		// stores amount, percentOfDailyNeeds, unit (e.g. kcal)
@@ -147,6 +171,12 @@ function addIngredient() {
 	// Add to Global Array
 	ingredientsList.push(currIngredient);
 
+	// Remove empty message if visible
+	if(ingredientsList.length != 0) {
+		document.getElementById("noItemsMsg").classList.remove("d-block");
+		document.getElementById("noItemsMsg").classList.add("d-none");
+	}
+
 	// Display Ingredient (right-side list)
 	const ingredientList = document.getElementById("ingredientList");
 
@@ -162,8 +192,6 @@ function addIngredient() {
 
 // Remove Ingredient from List
 function removeIngredient(name) {
-	//console.log("Trying to remove..." + name);
-
 	// Remove from Global Array
 	for(var i = 0; i < ingredientsList.length; i++) {
 		if(ingredientsList[i].name == name) {
@@ -173,6 +201,12 @@ function removeIngredient(name) {
 
 	// Remove from View
 	document.getElementById(name + "ListItem").remove();
+
+	// Display empty list msg if no items
+	if(ingredientsList.length == 0) {
+		document.getElementById("noItemsMsg").classList.remove("d-none");
+		document.getElementById("noItemsMsg").classList.add("d-block");
+	}
 }
 
 const listOfSteps = [];		// Global Array of Steps
@@ -195,6 +229,7 @@ function addStep() {
 
 	console.log(listOfSteps);
 
+	/* original view with step number
 	const stepView = `
 		<div id="step${newStep.stepNum}Cont" class="recipeStepBox mb-3">
 	        <h6 class="mb-3">
@@ -203,6 +238,16 @@ function addStep() {
 	        </h6>
 
 	        <p>${newStep.stepInstruction}</p>
+	    </div>
+	`;
+	*/
+
+	const stepView = `
+		<div id="step${newStep.stepNum}Cont" class="recipeStepBox mb-3">
+	        <p>
+	        	${newStep.stepInstruction}
+	        	<button class="btn rounded-circle float-end" type="button" onclick="removeStep(${newStep.stepNum})"><i class="fa-solid fa-trash"></i></button>
+        	</p>
 	    </div>
 	`;
 
@@ -231,8 +276,6 @@ function createRecipe() {
 	const servingSize = document.getElementById("servingSize").value;
 	const prepTime = document.getElementById("prepTime").value;
 
-	const mealType = document.getElementById("mealType").value;
-
 	let dietType = [];
 	$('input[name="dietType"]:checked').each(function() {
 		dietType.push(this.value);
@@ -251,9 +294,9 @@ function createRecipe() {
 	const newRecipe = {
 		title: recipeTitle,
 		author: "John Doe",
+		image: imgDataURL,
 		description: description,
 		dateCreated: new Date().toISOString(),
-		mealType: mealType,
 		dietType: dietType,
 		numOfBookmarks: 0,
 		prepTime: prepTime,
