@@ -15,7 +15,7 @@ public class MealController {
     private MealRepository mealRepo;
 
     @CrossOrigin
-    @GetMApping("/all")
+    @GetMapping("/all")
     public List<Meal> getMeal()
     {
         return mealRepo.findAll();
@@ -32,7 +32,7 @@ public class MealController {
     @PostMapping("/save")
     public void saveMeal(@RequestBody Meal recipe)
 
-    @CrossPrigin
+    @CrossOrigin
     @DeleteMapping("delete/{id}")
     public void deleteMeal(@PathVariable String id)
     {
