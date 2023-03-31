@@ -14,15 +14,6 @@
     flex-direction: row;
 }
 
-#recipeTitle {
-    width: 100%;
-    padding: 10px 35px 10px 15px;
-    border-radius: 25px;
-    border-color: #383838;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
 .search-button {
     background: transparent;
     border: none;

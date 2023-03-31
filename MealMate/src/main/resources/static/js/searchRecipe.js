@@ -27,7 +27,7 @@ function getRecipes() {
 
 			response.forEach(function (item, index) {
                 const recipeObj = {
-                	id: item.id,	// currently returning undefined, need to fix
+                	id: item.id,
                 	title: item.title,
                     author: item.author,
                     image: item.image,
@@ -122,57 +122,3 @@ function displayRecipes() {
 	recipeContainer.innerHTML = recipeViewHTML;
 }
 
-function getRecipeDetails() {
-	const url = window.location.href;
-	const recipeId = url.split("/")[4];
-	console.log(recipeId);
-
-	fetch("http://localhost:8080/recipes/find/" + recipeId)
-		.then((resp) => resp.json())
-		.then(function(response) {
-
-			console.log(response);
-
-			const recipe = {
-				id: response.id,
-                author: response.author,
-                calories: response.calories,
-                dateCreated: response.dateCreated,
-                description: response.description,
-                ingredients: response.ingredients,
-                numOfBookmarks: response.numOfBookmarks,
-                portions: response.portions,
-                prepTime: response.preparationTime,
-                steps: response.steps,
-                title: response.title
-			}
-
-			loadRecipeDetails(recipe);
-
-
-		}).catch(function(error) {
-			console.log(error);
-		});
-}
-
-/* FOR RECIPE DETAILS PAGE */
-function loadRecipeDetails(recipe) {
-	const title = document.getElementById("recipeTitle");
-	const datePublished = document.getElementById("datePublished");
-	const author = document.getElementById("author");
-
-	const prepTime = document.getElementById("preparationTime");
-	const portions = document.getElementById("portions");
-	const calories = document.getElementById("calories");
-
-	const desc = document.getElementById("description");
-
-	title.innerHTML = recipe.title;
-	datePublished.innerHTML = recipe.dateCreated;
-	author.innerHTML = recipe.author;
-	prepTime.innerHTML = recipe.prepTime;
-	portions.innerHTML = recipe.portions;
-	calories.innerHTML = recipe.calories;
-	desc.innerHTML = recipe.description;
-
-}

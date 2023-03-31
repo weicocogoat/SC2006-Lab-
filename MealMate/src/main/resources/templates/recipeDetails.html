@@ -7,10 +7,11 @@
         <link rel="stylesheet" href="../css/main.css">
         <link rel ="stylesheet" href="../css/header.css">
         <link rel="stylesheet" href="../css/recipeDetails.css">
+        <link rel="stylesheet" href="../css/searchRecipe.css">
 
         <!-- Scripts -->
         <script src="../js/header.js"></script>
-        <script src="../js/searchRecipe.js"></script>
+        <script src="../js/recipeDetails.js"></script>
 
         <!--Include bootstrap's stuff-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -39,17 +40,17 @@
                 <div class="row mt-4 mb-4">
                     <div class="col-sm-12 col-lg-4">
                         <h5><i class="fa-solid fa-clock"></i> Preparation Time</h5>
-                        <span id="preparationTime">1 Hour</span>
+                        <span id="preparationTime">1</span>
                     </div>
 
                     <div class="col-sm-12 col-lg-4">
                         <h5><i class="fa-solid fa-utensils"></i> Serving Portions</h5>
-                        <span id="portions">2</span> Portions
+                        <span id="servingSize">2</span>
                     </div>
 
                     <div class="col-sm-12 col-lg-4">
                         <h5><i class="fa-solid fa-seedling"></i> Nutrition</h5>
-                        <span id="calories">300</span> kcal
+                        <span id="calories">300</span>
                     </div>
                 </div>
 
@@ -67,6 +68,11 @@
                 <div class="row">
                     <div class="col-sm-12 col-lg-3">
                         <h5>Ingredients List</h5>
+
+                        <ul id="ingredientList" class="p-0">
+
+                        </ul>
+                        <!--
                         <ul>
                             <li>120g Butter</li>
                             <li>100g Sugar</li>
@@ -75,17 +81,15 @@
                             <li>2g Baking Powder</li>
                             <li>50ml Fresh Milk</li>
                         </ul>
+                    -->
                     </div>
 
                     <div class="col-sm-12 col-lg-9">
                         <h5>Steps</h5>
 
-                        <div class="recipeStepBox">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                        <div id="stepsList">
+
+                        </div>
                     </div>
                 </div>
             </div>
