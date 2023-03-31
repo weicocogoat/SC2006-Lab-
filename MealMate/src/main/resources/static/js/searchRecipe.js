@@ -15,36 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
 // Array that will hold all recipes retrieved from DB
 const listOfRecipes = [];
 
-// Recipe Card HTML View Template
-const recipeView = (id, title, numOfBookmarks, portions, prepTime, desc) => 
-	`
-	    <div class="card shadow-sm mb-4">
-	        <div class="row no-gutters">
-	            <div class="col-md-3">
-	                <img src="images/pancakes.jpg" class="card-img" alt="Alternative text for image">
-	            </div>
-	            <div class="col-md-9">
-	                <div class="card-body">
-	                    <div id="firstLine">
-	                        <h5 id="title">${title}</h5>
-	                        <h6 id="star-rating">${numOfBookmarks} <i class="fa-solid fa-star"></i></h6>
-	                    </div>
-	                    <div id="secondLine" class="fw-bold text-muted">
-	                        <p id="servingSize">${portions} servings</p> 
-	                        <p id="duration">${prepTime}</p>
-	                    </div>
-	                    <p class="card-text">${desc}</p>
-	                    <div class="d-flex justify-content-between align-items-center">
-	                        <a id="readMore" href="recipes/${id}"><h6>Read More <i
-	                            class="fa-solid fa-arrow-right"></i></h6></a>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	`
-;
-
 // Get All Recipes from DB
 function getRecipes() {
 	console.log("Retrieving receipes from database...");
@@ -58,16 +28,18 @@ function getRecipes() {
 			response.forEach(function (item, index) {
                 const recipeObj = {
                 	id: item.id,	// currently returning undefined, need to fix
+                	title: item.title,
                     author: item.author,
-                    calories: item.calories,
-                    dateCreated: item.dateCreated,
+                    image: item.image,
                     description: item.description,
-                    ingredients: item.ingredients,
+                    dateCreated: item.dateCreated,
+                    dietType: item.dietType,
                     numOfBookmarks: item.numOfBookmarks,
-                    portions: item.portions,
-                    prepTime: item.preparationTime,
-                    steps: item.steps,
-                    title: item.title
+                    prepTime: item.prepTime,
+                    servingSize: item.servingSize,
+                    calories: item.calories,
+                    ingredients: item.ingredients,
+                    steps: item.steps
                };
 
                // Store inside global array
@@ -82,14 +54,62 @@ function getRecipes() {
 		});
 }
 
+// Recipe Card HTML View Template
+const recipeView = (recipe) => 
+	`
+	    <div class="recipeCard card shadow-sm mb-4">
+	        <div class="row no-gutters">
+	            <div class="col-md-3">
+	            	<div class="recipeCardImg">
+	            		<img src="${recipe.image}" class="card-img" alt="Alternative text for image">
+	            		<h5 class="recipeCalories">${recipe.calories} kcal</h5>
+	            	</div>
+	                
+	            </div>
+	            <div class="col-md-9">
+	                <div class="card-body">
+	                	${generateBadges(recipe)}
+	                    <div id="firstLine">
+	                        <h5 id="title">${recipe.title}</h5>
+	                        <h6 id="star-rating">${recipe.numOfBookmarks} <i class="fa-solid fa-star"></i></h6>
+	                    </div>
+	                    <div id="secondLine" class="text-muted">
+	                        <p id="servingSize">${recipe.servingSize} Servings</p> 
+	                        <p id="duration">${recipe.prepTime} Hours</p>
+	                    </div>
+	                    <p class="card-text">${recipe.description}</p>
+	                    <div class="d-flex justify-content-between align-items-center">
+	                        <a id="readMore" href="recipes/${recipe.id}"><h6>Read More <i
+	                            class="fa-solid fa-arrow-right"></i></h6></a>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	`
+;
+
+function generateBadges(recipe) {
+	console.log(recipe.dietType);
+	let badgesView = "";
+
+	for(var i = 0; i < recipe.dietType.length; i++) {
+		let dietType = recipe.dietType[i];
+
+		badgesView += "<span class='badge bg-secondary badgeItem mb-2'>" + dietType + "</span>";
+	}
+
+	return badgesView;
+}
+
 // Render and Display Recipes in View
 function displayRecipes() {
-	//console.log(listOfRecipes);
 	const recipeViewList = [];	// Array that will hold all individual HTML views to generate of each recipe
 
 	for(var i=0; i < listOfRecipes.length; i++) {
 		const recipe = listOfRecipes[i];
-		const itemViewHTML = recipeView(recipe.id, recipe.title, recipe.numOfBookmarks, recipe.portions, recipe.prepTime, recipe.description);
+		//const itemViewHTML = recipeView(recipe.id, recipe.title, recipe.numOfBookmarks, recipe.servingSize, recipe.prepTime, recipe.description);
+		const itemViewHTML = recipeView(recipe);
 
 		recipeViewList.push(itemViewHTML);
 	}
@@ -114,7 +134,7 @@ function getRecipeDetails() {
 			console.log(response);
 
 			const recipe = {
-				id: response.id,	// currently returning undefined, need to fix
+				id: response.id,
                 author: response.author,
                 calories: response.calories,
                 dateCreated: response.dateCreated,
@@ -135,6 +155,7 @@ function getRecipeDetails() {
 		});
 }
 
+/* FOR RECIPE DETAILS PAGE */
 function loadRecipeDetails(recipe) {
 	const title = document.getElementById("recipeTitle");
 	const datePublished = document.getElementById("datePublished");

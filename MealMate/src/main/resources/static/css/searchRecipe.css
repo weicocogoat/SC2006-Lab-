@@ -173,3 +173,24 @@
 #modalName {
     text-transform: capitalize;
 }
+
+.recipeCardImg {
+    position: relative;
+}
+
+.recipeCardImg img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.recipeCalories {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    margin: 0px;
+    background-color: rgba(37, 40, 44, 0.9);
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 15px 10px 15px;
+}

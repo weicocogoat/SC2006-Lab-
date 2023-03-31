@@ -9,6 +9,10 @@
     /*margin: 0px;*/
 }
 
+a {
+    text-decoration: none !important;
+}
+
 .container {
 	background-color: #fff;
 }
