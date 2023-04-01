@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 
 @RestController
-@RequestMapping("/users")
-public class AccountController {
+@RequestMapping("/api/auth")
+public class AuthController {
 
     @Autowired
     private UserRepository userRepo;
