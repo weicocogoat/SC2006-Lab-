@@ -9,12 +9,28 @@
     /*margin: 0px;*/
 }
 
+a {
+    text-decoration: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold !important;
+}
+
+.nav-item {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+}
+
 .container {
 	background-color: #fff;
 }
 
+.btn {
+    border-radius: 50px !important;
+}
+
 .btn-accent {
-	border-radius: 50px !important;
 	background-color: var(--accent) !important;
 	border-color: var(--accent) !important;
 	color: #fff !important;
@@ -25,9 +41,30 @@
 	border-color: var(--light-accent) !important;
 }
 
-.form-control {
+input.form-control,
+select.form-select  {
 	border-radius: 48px !important;
 	padding: 0.35rem 1.5rem !important;
+}
+
+.input-group input.form-control {
+    border-right: none !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+.input-group .input-group-text {
+    background-color: transparent !important;
+    border-left: none !important;
+}
+
+.input-group .input-group-text {
+    border-top-right-radius: 48px !important;
+    border-bottom-right-radius: 48px !important;
+}
+
+input[type="file"].form-control {
+    padding: 0.35rem 10px !important;
 }
 
 .homeButton a {

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         //temp code. will be replaced later
         var validate = validateForm();
         if (validate){
-            window.location.href="homescreen(signed in).html";
+            //window.location.href="homescreen(signed in).html";
         }
     }
 

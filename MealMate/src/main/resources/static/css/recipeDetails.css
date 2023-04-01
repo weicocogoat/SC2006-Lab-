@@ -19,3 +19,13 @@
 	border-radius: 10px;
 	padding: 16px;
 }
+
+.recipeCard .card-img {
+	height: 220px;
+	object-fit: cover;
+}
+
+.badgeItem {
+	margin-right: 8px !important;
+	text-transform: capitalize !important;
+}

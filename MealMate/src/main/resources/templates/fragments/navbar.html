@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Stylesheets -->
         <link rel="stylesheet" href="css/header.css">
@@ -10,13 +11,47 @@
         <script src="js/header.js"></script>
     </head>
     <body>
+        <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">MealMate</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a th:href="@{/}" class="nav-link" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active' : ''}">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a th:href="@{/recipes}" class="nav-link">Recipes</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a th:href="@{/stores}" class="nav-link">Store Finder</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a th:href="@{/about}" class="nav-link">About Us</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="btn btn-light px-4" th:href="@{/login}">Sign In</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--
         <div th:fragment="navbar" id="heading">
             <button id="header">Code Crafters</button>
             <button id="home" class="homeButton" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active' : ''}"><a th:href="@{/}">Home</a></button>
-            <button id = "recipe" class="homeButton" th:classappend="${#httpServletRequest.getRequestURI() == '/recipes' ? 'active' : ''}"><a th:href="@{/recipes}">Recipe</a></button>
+            <a id = "recipe" class="homeButton" th:classappend="${#httpServletRequest.getRequestURI() == '/recipes' ? 'active' : ''}" th:href="@{/recipes}">Recipe</a>
             <button id = "storeFinder" class="homeButton" th:classappend="${#httpServletRequest.getRequestURI() == '/stores' ? 'active' : ''}"><a href="#">Store Finder</a></button>
-            <button id = "aboutUs" class="homeButton" th:classappend="${#httpServletRequest.getRequestURI() == '/about' ? 'active' : ''}"><a href="#">About Us</a></button>
-            <button id = "signin" class="homeButton"><a th:href="@{/login}">Sign In</a></button>
-        </div>
+            <a id = "aboutUs" class="homeButton" th:classappend="${#httpServletRequest.getRequestURI() == '/about' ? 'active' : ''}" href="#">About Us</a>
+            <a id = "signin" class="homeButton" th:href="@{/login}">Sign In</a>
+        </div>-->
     </body>
 </html>
