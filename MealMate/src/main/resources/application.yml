@@ -1,0 +1,24 @@
+#spring.data.mongodb.uri=mongodb+srv://codecrafters2006:20066002@codecrafters.833xjuo.mongodb.net/mealmate
+#spring.data.mongodb.database=mealmate
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://codecrafters2006:20066002@codecrafters.833xjuo.mongodb.net/mealmate
+      database: mealmate
+
+access-token:
+  public: "access-refresh-token-keys/access-token-public.key"
+  private: "access-refresh-token-keys/access-token-private.key"
+  #public: ${ACCESS_TOKEN_PUBLIC_KEY_PATH}
+  #private: ${ACCESS_TOKEN_PRIVATE_KEY_PATH}
+
+refresh-token:
+  public: "access-refresh-token-keys/refresh-token-public.key"
+  private: "access-refresh-token-keys/refresh-token-private.key"
+  #public: ${REFRESH_TOKEN_PUBLIC_KEY_PATH}
+  #private: ${REFRESH_TOKEN_PRIVATE_KEY_PATH}
+
+logging:
+  level:
+    org.springframework.security: DEBUG

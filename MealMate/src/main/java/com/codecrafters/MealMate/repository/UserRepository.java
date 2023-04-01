@@ -4,6 +4,8 @@ import com.codecrafters.MealMate.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /*
     We extend MongoRepository<T, ID> where
     T: Domain type for repository to manage (i.e. Some Entity/Class)
@@ -13,5 +15,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
-    User findByEmail(String email);
+    Optional<User> findByUsername(String username);
+
+    boolean existsByUsername(String username);
 }
