@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>MealMate</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/calendar.css">
+    <th:block th:insert="fragments/style.html :: style"></th:block>
+</head>
+
+<body id="body">
+    <!-- Navigation Bar -->
+    <div th:insert="fragments/navbar.html :: navbar"></div>
+
+    <div class="container p-5">
+        <!-- User Information Section -->
+        <div class="row">
+            <div class="col-sm-12 col-lg-10 mb-4">
+                <h2 id="username">John Doe</h2>
+
+                <p class="mt-3">Joined on <span id="dateJoined" class="fw-bold text-muted">11 March 2023</span></p>
+
+                <button type="button" class="btn btn-primary btn-accent btn-sm px-4">
+                    <i class="fa-solid fa-gear"></i>
+                    Edit Profile
+                </button>
+            </div>
+
+            <div class="col-sm-12 col-lg-2 mb-4">
+                <p class="text-muted">
+                    <span class="fw-bold text-sm-left text-lg-right">Height</span>
+                    161cm
+                </p>
+                <p class="text-muted">
+                    <span class="fw-bold text-sm-left text-lg-right">Weight</span>
+                    50kg
+                </p>
+
+                <p class="text-muted">
+                    <span class="fw-bold text-sm-left text-lg-right">BMI</span>
+                    idk
+                </p>
+            </div>
+        </div>
+
+        <hr class="mt-4 mb-4">
+
+        <!-- Profile Page Tabs -->
+        <ul class="nav nav-tabs mb-4" id="profileTabs" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active" id="diaryTab" data-bs-toggle="tab" data-bs-target="#foodDiary" type="button" aria-controls="foodDiary" aria-selected="true">Food Diary</button>
+            </li>
+
+            <li class="nav-item">
+                <button class="nav-link" id="recipesTab" data-bs-toggle="tab" data-bs-target="#myRecipes" type="button" aria-controls="myRecipes" aria-selected="false">My Recipes</button>
+            </li>
+            
+            <li class="nav-item">
+                <button class="nav-link" id="favTab" data-bs-toggle="tab" data-bs-target="#fav" type="button" aria-controls="fav" aria-selected="false">Favourites</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="profileTabContent">
+            <!-- Food Diary Tab -->
+            <div class="tab-pane fade show active" id="foodDiary" role="tabpanel" aria-labelledby="diary-tab">
+                <!-- Daily Suymmary -->
+                <div class="row mb-5">
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="card h-100 shadow-lg">
+                            <div class="card-body p-4">
+                                <h4 class="mb-5">Daily Summary</h4>
+
+                                <h5>Calories Intake (kcal)</h5>
+                                <p id="caloriesSummary"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Daily Nutrition -->
+                    <div class="col-sm-12 col-lg-8">
+                        <div class="card h-100 shadow-lg">
+                            <div class="card-body p-4">
+                                <div class="d-flex justify-content-between align-items-center mb-5">
+                                    <h4 class="mb-0">Today's Nutrition</h4>
+                                    <div class="dropdown">
+                                        <button class="dropdown-toggle" type="button" id="addMealButton"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa-solid fa-plus"></i> Add New Meal
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="addMealButton">
+                                            <li>
+                                                <a class="dropdown-item" th:href="@{/recipes}">Browse Recipes</a>
+                                            </li>
+
+                                            <li>
+                                                <a class="dropdown-item" id="custom-meal" href="#" data-bs-toggle="modal" data-bs-target="#customMealModal">Create Custom Meal</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <p></p>
+                                <div class="row" id="nutrition">
+                                    <div class="col-sm-6 col-lg-3">
+                                        <h5>Breakfast</h5>
+                                        <p id="bfastCalories"></p>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3">
+                                        <h5>Lunch</h5>
+                                        <p id="lunchCalories"></p>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3">
+                                        <h5>Dinner</h5>
+                                        <p id="dinnerCalories"></p>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3">
+                                        <h5>Dessert</h5>
+                                        <p id="dessertCalories"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- End of Summary -->
+
+                <div class="row">
+                    <!-- Calendar -->
+                    <div class="col-sm-12 col-lg-8 pl-0">
+                        <section class="ftco-section">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="elegant-calencar d-flex">
+                                        <div class="wrap-header d-flex align-items-center img"
+                                            style="background-image: url(../images/calendarbg.jpg);">
+                                            <p id="reset">Today</p>
+                                            <div id="header" class="p-0">
+                                                <!-- <div class="pre-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-left"></i></div> -->
+                                                <div class="head-info">
+                                                    <div class="head-month"></div>
+                                                    <div class="head-day"></div>
+                                                </div>
+                                                <!-- <div class="next-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-right"></i></div> -->
+                                            </div>
+                                        </div>
+                                        <div class="calendar-wrap">
+                                            <div class="w-100 button-wrap">
+                                                <div
+                                                    class="pre-button d-flex align-items-center justify-content-center">
+                                                    <i class="fa fa-chevron-left"></i>
+                                                </div>
+                                                <div
+                                                    class="next-button d-flex align-items-center justify-content-center">
+                                                    <i class="fa fa-chevron-right"></i>
+                                                </div>
+                                            </div>
+                                            <table id="calendar">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Sun</th>
+                                                        <th>Mon</th>
+                                                        <th>Tue</th>
+                                                        <th>Wed</th>
+                                                        <th>Thu</th>
+                                                        <th>Fri</th>
+                                                        <th>Sat</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div> <!-- End of Calendar -->
+
+                    <!-- Meals -->
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="card shadow-lg">
+                            <div class="card-body">
+                                <h5>Meals</h5>
+                                <p></p>
+                                <p><span class="fw-bold text-muted">Breakfast</span><br>Ham Sandwich</p>
+                                <p><span class="fw-bold text-muted">Lunch</span><br>Chicken Curry</p>
+                                <p><span class="fw-bold text-muted">Dinner</span><br>
+                                    <span class="dropdown">
+                                        <button class="dropdown-toggle" type="button" id="addMealButton1"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa-solid fa-plus"></i> Add New Meal
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="addMealButton1">
+                                            <li><a class="dropdown-item" href="#">Browse Recipes</a></li>
+                                            <li><a class="dropdown-item" href="#">Create Custom Meal</a></li>
+                                        </ul>
+                                    </span>
+                                </p>
+                                <p><span class="fw-bold text-muted">Snacks</span><br>
+                                    <span class="dropdown">
+                                        <button class="dropdown-toggle" type="button" id="addMealButton2"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa-solid fa-plus"></i> Add New Meal
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="addMealButton2">
+                                            <li><a class="dropdown-item" href="#">Browse Recipes</a></li>
+                                            <li><a class="dropdown-item" href="#">Create Custom Meal</a></li>
+                                        </ul>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End of Food Diary Tab -->
+
+            <!-- My Recipes Tab -->
+            <div class="tab-pane fade" id="myRecipes" role="tabpanel" aria-labelledby="recipes-tab">
+                <!-- Search Bar 
+                <div class="col-lg-10">
+                    <form method="GET" class="form">
+                        <input autofocus type="search" id="recipeTitle" placeholder="Enter recipe title"
+                            name="recipeTitle"><br>
+                        <button type="submit" class="search-button">
+                            <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="col-lg-2">
+                    <button type="button" class="btn btn-primary btn-accent btn-sm px-4" id="createRecipe"><i
+                            class="fa-solid fa-plus"></i><a href="createRecipe.html"> Create Recipe</a></button>
+                </div> -->
+
+                <div id="myRecipesContainer" class="row">
+
+                </div>
+            </div> <!-- End of Recipes Tab -->
+
+            <!-- Favourites Tab -->
+            <div class="tab-pane fade" id="fav" role="tabpanel" aria-labelledby="fav-tab">
+
+            </div> <!-- End of Favourites Tab -->
+        </div>
+    </div>
+
+
+    <!-- Scripts -->
+    <th:block th:insert="fragments/scripts.html :: scripts"></th:block>
+    <script src=”https://cdnjs.cloudflare.com/ajax/libs/easy-pie-chart/2.1.6/jquery.easypiechart.min.js”></script>
+    <script src="../js/calendar.js"></script>
+    <script src="../js/profile.js"></script>
+</body>
+</html>

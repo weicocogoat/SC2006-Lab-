@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>MealMate | Home</title>
 
@@ -41,10 +42,10 @@
                 <div class="col-sm-12 col-lg-4">
                     <div class="card h-100 shadow-lg">
                         <div class="card-body p-4">
-                            <h4 class="mb-4">Daily Summary</h4>
-                            <p></p>
-                            <h4 id="caloriesSummary"></h4>
-                            <p>Calories Intake (kcal)</p>
+                            <h4 class="mb-5">Daily Summary</h4>
+
+                            <h5>Calories Intake (kcal)</h5>
+                            <p id="caloriesSummary"></p>
                         </div>
                     </div>
                 </div>
@@ -53,7 +54,7 @@
                 <div class="col-sm-12 col-lg-8">
                     <div class="card h-100 shadow-lg">
                         <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-5">
                                 <h4 class="mb-0">Today's Nutrition</h4>
                                 <div class="dropdown">
                                     <button class="dropdown-toggle" type="button" id="addMealButton"
@@ -75,23 +76,19 @@
                             <p></p>
                             <div class="row" id="nutrition">
                                 <div class="col-sm-6 col-lg-3">
-                                    <h6>Breakfast</h6>
-                                    <br>
+                                    <h5>Breakfast</h5>
                                     <p id="bfastCalories"></p>
                                 </div>
                                 <div class="col-sm-6 col-lg-3">
-                                    <h6>Lunch</h6>
-                                    <br>
+                                    <h5>Lunch</h5>
                                     <p id="lunchCalories"></p>
                                 </div>
                                 <div class="col-sm-6 col-lg-3">
-                                    <h6>Dinner</h6>
-                                    <br>
+                                    <h5>Dinner</h5>
                                     <p id="dinnerCalories"></p>
                                 </div>
                                 <div class="col-sm-6 col-lg-3">
-                                    <h6>Dessert</h6>
-                                    <br>
+                                    <h5>Dessert</h5>
                                     <p id="dessertCalories"></p>
                                 </div>
                             </div>

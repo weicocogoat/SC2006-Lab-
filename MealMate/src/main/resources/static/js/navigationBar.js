@@ -51,7 +51,7 @@ $(document).ready(function() {
 					</a>
 
 					<ul class="dropdown-menu" aria-labelledby="userDropdown">
-						<li><a class="dropdown-item" href="#">View Profile</a></li>
+						<li><a class="dropdown-item" href="/profile">View Profile</a></li>
 						<li><a class="dropdown-item" href="#" onclick="logoutUser()">Log Out</a></li>
 					</ul>
 				`;

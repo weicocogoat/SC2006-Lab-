@@ -73,7 +73,6 @@
     transition: opacity .2s;
 }
 
-
 .card-img-top {
     max-height: 200px;
     object-fit: cover;
@@ -91,10 +90,6 @@
 #trendingRecipes {
     padding: 0%;
     padding-left: 5%;
-}
-
-#nutrition {
-    text-align: center;
 }
 
 #addMealButton {

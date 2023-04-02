@@ -37,7 +37,7 @@ $(document).ready(function() {
 
                 for(var i=0; i < listOfRecipes.length; i++) {
                     const recipe = listOfRecipes[i];
-                    const itemViewHTML = recipeView(recipe);
+                    const itemViewHTML = myRecipeView(recipe);
 
                     recipeViewList.push(itemViewHTML);
                 }
@@ -46,7 +46,7 @@ $(document).ready(function() {
                 const recipeViewHTML = recipeViewList.join("\n");
 
                 // Insert into Recipe Container
-                const recipeContainer = document.getElementById("recipeContainer");
+                const recipeContainer = document.getElementById("myRecipesContainer");
                 recipeContainer.innerHTML = recipeViewHTML;
 
               console.log(listOfRecipes);
@@ -94,23 +94,20 @@ function getDailySummary() {
     } 
 }
 
-// Recipe Card View
-const recipeView = (recipe) => 
+const myRecipeView = (recipe) => 
 `
-    <div class="col-sm-12 col-lg-4 mb-3">
-        <div class="card">
-            <img src="${recipe.image}" class="card-img-top">
-            <div class="card-body">
-                <div id="firstLine">
-                    <h5 id="card-title">${recipe.title}</h5>
-                    <h6 id="star-rating"> ${recipe.numOfBookmarks} <i class="fa-solid fa-star"></i></h6>
-                </div>
-                <p class="card-text">${recipe.description}</p>
-
-                <a class="stretched-link" href="recipes/${recipe.id}"></a>
-            </div>
-        </div>
-    </div>
+	<div class="col-sm-12 col-lg-4 mb-3">
+		<div class="card">
+	        <img src="${recipe.image}" class="card-img-top">
+	        <div class="card-body">
+	            <div id="firstLine">
+	                <h5 id="card-title">${recipe.title}</h5>
+	                <h6 id="star-rating"> ${recipe.numOfBookmarks} <i class="fa-solid fa-star"></i></h6>
+	            </div>
+	            <p class="card-text">${recipe.description}</p>
+	        </div>
+	    </div>
+	</div>
 `;
 
 // Create Custom Meal
