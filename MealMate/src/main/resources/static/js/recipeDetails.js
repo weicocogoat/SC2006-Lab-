@@ -52,7 +52,20 @@ function loadRecipeDetails(recipe) {
 	let dateString = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
 	datePublished.innerHTML = dateString;
 
-	author.innerHTML = recipe.author;
+	// Get Author Name
+	fetch("http://localhost:8080/api/users/username/" +  recipe.author)
+		.then(response => {
+			//console.log(response);
+			return response.text();
+		})
+		.then(data => {
+			
+			author.innerHTML = data;
+
+		}).catch(function(error) {
+			console.log(error);
+		});
+
 	prepTime.innerHTML = recipe.prepTime + " Hour(s)";
 	servingSize.innerHTML = recipe.servingSize + " Portions";
 	calories.innerHTML = recipe.calories + " kcal";

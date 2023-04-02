@@ -289,7 +289,7 @@ function createRecipe() {
 
 	const newRecipe = {
 		title: recipeTitle,
-		author: "John Doe",
+		author: sessionStorage.getItem("id"),	// save userId for author
 		image: imgDataURL,
 		description: description,
 		dateCreated: new Date().toISOString(),
