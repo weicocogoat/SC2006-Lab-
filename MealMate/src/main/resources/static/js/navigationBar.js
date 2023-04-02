@@ -19,7 +19,7 @@ $(document).ready(function() {
 	            }
 	        })
 			.then(response => {
-	            console.log('Success:', response);
+	            //console.log('Success:', response);
 
 	            return response.json();
 	         })

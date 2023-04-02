@@ -3,11 +3,9 @@ function getRecipeDetails() {
 	const url = window.location.href;
 	const recipeId = url.split("/")[4];
 
-	fetch("http://localhost:8080/recipes/find/" + recipeId)
+	fetch("http://localhost:8080/api/recipes/find/" + recipeId)
 		.then((resp) => resp.json())
 		.then(function(response) {
-
-			console.log(response);
 
 			const recipe = {
 				id: response.id,
@@ -25,14 +23,15 @@ function getRecipeDetails() {
                 steps: response.steps
 			}
 
+			// Load Recipe Details on View
 			loadRecipeDetails(recipe);
-
 
 		}).catch(function(error) {
 			console.log(error);
 		});
 }
 
+// Load Recipe Details on View
 function loadRecipeDetails(recipe) {
 	const image = document.getElementById("recipeImg");
 	const title = document.getElementById("recipeTitle");
@@ -76,7 +75,6 @@ function loadRecipeDetails(recipe) {
 
 	for(var i = 0; i < recipe.ingredients.length; i++) {
 		let ingredient = recipe.ingredients[i];
-		console.log(ingredient);
 
 		const newItem = 
 		`<li id="${ingredient.name}ListItem">
@@ -93,7 +91,6 @@ function loadRecipeDetails(recipe) {
 
 	for(var i = 0; i < recipe.steps.length; i++) {
 		let step = recipe.steps[i];
-		console.log(step);
 
 		const stepView = `
 			<div id="step${step.stepNum}Cont" class="recipeStepBox mb-3">
@@ -104,4 +101,52 @@ function loadRecipeDetails(recipe) {
 
 		stepsList.innerHTML += stepView;
 	}
+
+	// Update Add to Meal Modal View
+	const mealTitle = document.getElementById("mealHeader");
+	const mealCalories = document.getElementById("mealCalories");
+
+	mealTitle.innerHTML = recipe.title;
+	mealCalories.innerHTML = recipe.calories + " kcal";
+}
+
+// Create New Meal
+function addToMeal() {
+	// New Meal Object
+	const newMeal = {
+		"userId": sessionStorage.getItem("id"),
+		"name": $('#recipeTitle').text(),
+		"calories": $('#calories').text().split(" ")[0],	// get float only, minus 'kcal' string
+		"mealType": $('#mealType').find(':selected').val(),
+		"mealDate": new Date().toISOString()
+	}
+
+	// Create Meal
+	fetch('http://localhost:8080/api/meal/save', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newMeal)
+        })
+        .then(response => {
+        	console.log(response);
+        	//response.json()
+        })
+        .then(data => {
+        	// Some success message here
+
+        	// Hide Modal
+			let mealModal = bootstrap.Modal.getInstance(document.querySelector("#addMealModal"));
+			mealModal.hide();
+
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
+
+// Add to Bookmarks
+function addToBookmark() {
+
 }

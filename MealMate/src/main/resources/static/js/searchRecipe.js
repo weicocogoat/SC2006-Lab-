@@ -19,7 +19,7 @@ const listOfRecipes = [];
 function getRecipes() {
 	console.log("Retrieving receipes from database...");
 
-	fetch("http://localhost:8080/recipes/all")
+	fetch("http://localhost:8080/api/recipes/all")
 		.then((resp) => resp.json())
 		.then(function(response) {
 

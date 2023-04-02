@@ -26,7 +26,7 @@
                 <h2 id="recipeTitle">Recipe Title</h1>
                 <p class="mt-3">Published on <span id="datePublished" class="fw-bold text-muted">11 March 2023</span> by <span id="author" class="fw-bold text-muted">JohnDoe</span></p>
 
-                <button type="button" class="btn btn-primary btn-accent btn-sm px-4"><i class="fa-solid fa-plus"></i> Add to Meal</button>
+                <button type="button" class="btn btn-accent btn-sm px-4" data-bs-toggle="modal" data-bs-target="#addMealModal"><i class="fa-solid fa-plus"></i> Add to Meal</button>
 
                 <button type="button" class="btn btn-primary btn-accent btn-sm px-4"><i class="fa-solid fa-bookmark"></i> Add to Bookmarks</button>
 
@@ -94,28 +94,35 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="addMealModalLabel">Add <span id="modalName">Add to Meal</span></h1>
+                        <h1 class="modal-title fs-5" id="addMealModalLabel">Add to Meal</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-12 col-lg-9 mb-3">
-                                
+                            <div class="col-12 col-lg-8">
+                                <h6 id="mealHeader"></h6>
+                                <span id="mealCalories"></span>
                             </div>
 
-                            <div class="col-12 col-lg-3 mb-3">
-
+                            <div class="col-12 col-lg-4">
+                                <select id="mealType" class="form-select"> 
+                                    <option disabled>Select Meal Type</option>
+                                    <option value="Breakfast">Breakfast</option>
+                                    <option value="Lunch">Lunch</option>
+                                    <option value="Dinner">Dinner</option>
+                                    <option value="Dessert">Dessert</option>
+                                </select>
                             </div>
                         </div>
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-accent" onclick="addIngredient()">Add to List</button>
+                        <button type="button" class="btn btn-accent" onclick="addToMeal()">Add to Meal</button>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> <!-- End of Meal Modal -->
 
         <th:block th:insert="fragments/scripts.html :: scripts"></th:block>
     </body>
