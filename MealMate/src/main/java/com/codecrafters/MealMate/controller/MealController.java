@@ -30,6 +30,12 @@ public class MealController {
     }
 
     @CrossOrigin
+    @GetMapping("/user/{id}")
+    public List<Meal> getMealsByUser(@PathVariable String id) {
+        return mealRepo.findByUserId(id);
+    }
+
+    @CrossOrigin
     @PostMapping("/save")
     public void saveMeal(@RequestBody Meal recipe) {
         mealRepo.save(recipe);
