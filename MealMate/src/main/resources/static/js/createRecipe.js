@@ -156,8 +156,8 @@ let ingredientsList = [];
 
 // Add Ingredient to List
 function addIngredient() {
-	// Hide Modal, not working need to fix
-
+	
+	// Hide Modal
 	let ingredientModal = bootstrap.Modal.getInstance(document.querySelector("#ingredientModal"));
 	ingredientModal.hide();
 
@@ -304,18 +304,18 @@ function createRecipe() {
 
 	console.log(JSON.stringify(newRecipe));
 
-	fetch('http://localhost:8080/recipes/save', {
-             method: 'POST',
-             headers: {
-                 'content-type': 'application/json'
-             },
-             body: JSON.stringify(newRecipe)
-         })
-         .then(response => response.json())
-         .then(data => {
-             console.log('Success:', data);
-         })
-         .catch((error) => {
-             console.error('Error:', error);
-         });
+	fetch('http://localhost:8080/api/recipes/save', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newRecipe)
+        })
+        .then(response => response.json())
+        .then(data => {
+        	console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }

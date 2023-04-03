@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/meal")
+@RequestMapping("/api/meal")
 public class MealController {
     
     @Autowired
@@ -27,6 +27,12 @@ public class MealController {
     public Optional<Meal> getMealById(@PathVariable String id)
     {
         return mealRepo.findById(id);
+    }
+
+    @CrossOrigin
+    @GetMapping("/user/{id}")
+    public List<Meal> getMealsByUser(@PathVariable String id) {
+        return mealRepo.findByUserId(id);
     }
 
     @CrossOrigin
