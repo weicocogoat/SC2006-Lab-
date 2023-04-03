@@ -1,15 +1,12 @@
 package com.codecrafters.MealMate.model;
 
-//import org.springframework.data.annotation.Id;
-//import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-//@Document("feedbacks")
-public class Feedback {
-    //@Id
-    //private String id;
+@Document
 
+public class Feedback {
     private String email;
     private String author;
     private String message;
