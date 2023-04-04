@@ -24,9 +24,6 @@ import java.util.Collections;
 public class AuthController {
 
     @Autowired
-    private UserRepository userRepo;
-
-    @Autowired
     UserDetailsManager userDetailsManager;
 
     @Autowired
@@ -49,9 +46,7 @@ public class AuthController {
 
     @CrossOrigin
     @PostMapping("/register")
-    //public void register(@RequestBody User user) {
     public ResponseEntity register(@RequestBody SignUpDTO signUpDTO) {
-        //userRepo.save(user);
         User user = new User(signUpDTO.getUsername(), signUpDTO.getPassword(), signUpDTO.getEmail(), signUpDTO.getHeight(), signUpDTO.getWeight(), signUpDTO.getBmi(), signUpDTO.getRecipeBookmarks());
         userDetailsManager.createUser(user);
 

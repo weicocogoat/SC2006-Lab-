@@ -5,6 +5,18 @@
     /* similar to above comment */
 }
 
+#homeBanner {
+    background-image: url('../images/banner.jpg');
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    padding: 3rem !important;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .homeButton a {
     text-decoration: none;
     /* removes underlines */

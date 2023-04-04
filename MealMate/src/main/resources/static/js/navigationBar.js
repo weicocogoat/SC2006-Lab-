@@ -20,7 +20,7 @@ $(document).ready(function() {
 	        })
 			.then(response => {
 	            //console.log('Success:', response);
-
+	            
 	            return response.json();
 	         })
 	        .then(data => {
@@ -60,7 +60,6 @@ $(document).ready(function() {
 	            console.error('Error:', error);
 	        });
 	} else {
-		//navbarOptions.innerHTML = `<a class="btn btn-light px-4" th:href="@{/login}">Sign In</a>`;
 		navbarOptions.innerHTML = `<a class="btn btn-light px-4" href="/login">Sign In</a>`;
 	}
 });

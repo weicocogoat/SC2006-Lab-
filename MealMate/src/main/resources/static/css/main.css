@@ -28,6 +28,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn {
     border-radius: 50px !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
 }
 
 .btn-accent {
@@ -65,6 +67,16 @@ select.form-select  {
 
 input[type="file"].form-control {
     padding: 0.35rem 10px !important;
+}
+
+.card {
+    border: none !important;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+    transition: 0.2s;
+}
+
+.card:hover {
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
 }
 
 .homeButton a {

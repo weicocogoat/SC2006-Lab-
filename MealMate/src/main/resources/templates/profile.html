@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>MealMate</title>
+    <title>MealMate | My Profile</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../css/profile.css">
@@ -21,29 +21,30 @@
         <!-- User Information Section -->
         <div class="row">
             <div class="col-sm-12 col-lg-10 mb-4">
-                <h2 id="username">John Doe</h2>
+                <h2 id="username"></h2>
 
                 <p class="mt-3">Joined on <span id="dateJoined" class="fw-bold text-muted">11 March 2023</span></p>
 
+                <!-- maybe add this back later
                 <button type="button" class="btn btn-primary btn-accent btn-sm px-4">
                     <i class="fa-solid fa-gear"></i>
                     Edit Profile
-                </button>
+                </button> -->
             </div>
 
             <div class="col-sm-12 col-lg-2 mb-4">
                 <p class="text-muted">
                     <span class="fw-bold text-sm-left text-lg-right">Height</span>
-                    161cm
+                    <span id="height"></span>
                 </p>
                 <p class="text-muted">
                     <span class="fw-bold text-sm-left text-lg-right">Weight</span>
-                    50kg
+                    <span id="weight"></span>
                 </p>
 
                 <p class="text-muted">
                     <span class="fw-bold text-sm-left text-lg-right">BMI</span>
-                    idk
+                    <span id="bmi"></span>
                 </p>
             </div>
         </div>
@@ -71,7 +72,7 @@
                 <!-- Daily Suymmary -->
                 <div class="row mb-5">
                     <div class="col-sm-12 col-lg-4">
-                        <div class="card h-100 shadow-lg">
+                        <div class="card h-100">
                             <div class="card-body p-4">
                                 <h4 class="mb-5">Daily Summary</h4>
 
@@ -83,7 +84,7 @@
 
                     <!-- Daily Nutrition -->
                     <div class="col-sm-12 col-lg-8">
-                        <div class="card h-100 shadow-lg">
+                        <div class="card h-100">
                             <div class="card-body p-4">
                                 <div class="d-flex justify-content-between align-items-center mb-5">
                                     <h4 class="mb-0">Today's Nutrition</h4>
@@ -136,7 +137,7 @@
                                 <div class="col-lg-12">
                                     <div class="elegant-calencar d-flex">
                                         <div class="wrap-header d-flex align-items-center img"
-                                            style="background-image: url(../images/calendarbg.jpg);">
+                                            style="background-image: url(../images/calendar-bg.jpg);">
                                             <p id="reset">Today</p>
                                             <div id="header" class="p-0">
                                                 <!-- <div class="pre-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-left"></i></div> -->
@@ -236,11 +237,44 @@
 
                     <!-- Meals -->
                     <div class="col-sm-12 col-lg-4">
-                        <div class="card shadow-lg">
+                        <div class="card">
                             <div class="card-body">
-                                <h5>Meals</h5>
-                                <p></p>
-                                <p><span class="fw-bold text-muted">Breakfast</span><br>Ham Sandwich</p>
+                                <h5 class="mb-3">Meals</h5>
+
+                                <hr>
+
+                                <!-- Breakfast Meals -->
+                                <h6 class="text-muted">Breakfast</h6>
+                                <ul id="bfastMeals" class="list-unstyled">
+
+                                </ul>
+
+                                <hr>
+
+                                <!-- Lunch Meals -->
+                                <h6 class="text-muted">Lunch</h6>
+                                <ul id="lunchMeals" class="list-unstyled">
+
+                                </ul>
+
+                                <hr>
+
+                                <!-- Dinner Meals -->
+                                <h6 class="text-muted">Dinner</h6>
+                                <ul id="dinnerMeals" class="list-unstyled">
+
+                                </ul>
+
+                                <hr>
+
+                                <!-- Dessert Meals -->
+                                <h6 class="text-muted">Dessert</h6>
+                                <ul id="dessertMeals" class="list-unstyled">
+
+                                </ul>
+
+
+                                <!--
                                 <p><span class="fw-bold text-muted">Lunch</span><br>Chicken Curry</p>
                                 <p><span class="fw-bold text-muted">Dinner</span><br>
                                     <span class="dropdown">
@@ -266,6 +300,7 @@
                                         </ul>
                                     </span>
                                 </p>
+                            -->
                             </div>
                         </div>
                     </div>
@@ -298,6 +333,40 @@
             <div class="tab-pane fade" id="fav" role="tabpanel" aria-labelledby="fav-tab">
 
             </div> <!-- End of Favourites Tab -->
+        </div>
+    </div>
+
+    <!-- Custom Meal Modal -->
+    <div class="modal fade" id="customMealModal" tabindex="-1" role="dialog" aria-labelledby="customMealModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="modal-title" id="customMealModalLabel">Create Custom Meal
+                    </h4>
+
+                    <br>
+
+                    <select id="mealType" class="form-select mb-4" name="mealType">
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Dinner">Dinner</option>
+                        <option value="Dessert">Dessert</option>
+                    </select>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-7 mb-4">
+                            <input type="text" id="mealName" class="form-control" placeholder="Enter meal name" name="mealName">
+                        </div>
+
+                        <div class="col-sm-12 col-lg-5 mb-4">
+                            <input type="text" id="calories" class="form-control" placeholder="Calories (kcal)" name="calories">
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-accent btn-sm px-4"
+                        id="Add" onclick="addCustomMeal()">Add</button>
+                </div>
+            </div>
         </div>
     </div>
 

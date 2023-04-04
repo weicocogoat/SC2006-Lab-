@@ -8,6 +8,10 @@
     color: #313131 !important;
 }
 
+#profileTabs .nav-item .nav-link:hover {
+    color: rgba(49, 49, 49, 0.75) !important;
+}
+
 #profileTabs .nav-item .active {
     font-weight: bold !important;
     border-bottom: 2px solid #313131 !important;
@@ -23,10 +27,6 @@
     box-shadow: none;
     position: relative;
     text-align: center;
-}
-
-h6 {
-    text-align: center !important;
 }
 
 .progress:after {
@@ -158,10 +158,6 @@ h6 {
     }
 }
 
-#nutrition {
-    text-align: center;
-}
-
 #addMealButton {
     padding-right: 5%;
     border: none;
@@ -177,67 +173,6 @@ h6 {
     opacity: 1;
     -webkit-transition: .2s;
     transition: opacity .2s;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-dialog {
-    position: relative;
-    margin: 10% auto;
-    padding: 0;
-    max-width: 500px;
-    top: 50%;
-    left: 20%;
-    transform: translate(-50%, -50%);
-}
-
-.modal-content {
-    background-color: #fff;
-    margin: 0 auto;
-    padding: 20px;
-    border: none;
-    width: 100%;
-}
-
-#customMealModalLabel {
-    margin-bottom: 6%;
-}
-
-.form {
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-}
-
-#mealType {
-    width: 60%;
-    border-radius: 25px;
-    border-color: #383838;
-    margin-bottom: 6%;
-    padding: 4px;
-}
-
-#mealName {
-    width: 60%;
-    border-radius: 25px;
-    border-color: #383838;
-    margin-bottom: 6%;
-}
-
-#calories {
-    width: 35%;
-    border-radius: 25px;
-    border-color: #383838;
-    margin-left: 5%;
-    margin-bottom: 6%;
 }
 
 #Add {
@@ -272,18 +207,6 @@ h6 {
     transition: opacity .2s;
 }
 
-.row {
-    align-items: center;
-    padding-right: 50px;
-}
-
-.form {
-    display: flex;
-    flex-direction: row;
-    margin-top: 0px;
-    margin-left: 50px;
-}
-
 #recipeTitle {
     width: 100%;
     padding: 10px 35px 10px 15px;
@@ -291,19 +214,6 @@ h6 {
     border-color: #383838;
     margin-top: 20px;
     margin-bottom: 20px;
-}
-
-.search-button {
-    background: transparent;
-    border: none;
-    outline: none;
-    margin-left: -50px;
-
-}
-
-#createRecipe a {
-    text-decoration: none;
-    color: #faf5f5;
 }
 
 .card-img-top {

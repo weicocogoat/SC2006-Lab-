@@ -15,101 +15,94 @@
         <!-- Navigation Bar -->
         <div th:insert="fragments/navbar.html :: navbar"></div>
 
-        <div class="container p-5">
+        <div class="container p-0">
             <!-- Top Banner -->
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <div class="my-5">
-                        <div class="d-flex flex-column align-items-center justify-content-center"
-                            style="height:35vh;padding:0 10%;">
-                            <h1 class="text-white text-center" style="font-size:2.5rem;">Ready to start cooking?</h1>
-                            <p class="text-white text-center" style="font-size:1.5rem;">Find a store near you</p>
-                            <form method="GET" class="form">
-                                <input autofocus type="search" id="postalCode" placeholder="Enter postal code"
-                                    name="postalCode"><br>
-                                <button type="submit" class="search-button">
-                                    <i class="fa-solid fa-magnifying-glass" style="font-size: 1em;"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+            <div id="homeBanner" class="text-center">
+                <div id="homeBannerContent">
+                    <h1 class="text-white">Ready to start cooking?</h1>
+                    <h4 class="text-white fw-normal mb-4">Find a store near you</h4>
+                    
+                    <a class="btn btn-accent" th:href="@{/recipes}">Browse Recipes</a>
+                    <a class="btn btn-accent" th:href="@{/supermarkets}">Find Stores</a>
                 </div>
-            </div> <!-- End of Banner -->
+            </div>
+            <!-- End of Banner -->
 
-            <!-- Daily Summary and Nutrition -->
-            <div class="row mb-5">
-                <!-- Daily Summary -->
-                <div class="col-sm-12 col-lg-4">
-                    <div class="card h-100 shadow-lg">
-                        <div class="card-body p-4">
-                            <h4 class="mb-5">Daily Summary</h4>
+            <!-- Main Content -->
+            <div class="p-5">
+                <!-- Daily Summary and Nutrition -->
+                <div class="row mb-5">
+                    <!-- Daily Summary -->
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="card h-100 shadow-lg">
+                            <div class="card-body p-4">
+                                <h4 class="mb-5">Daily Summary</h4>
 
-                            <h5>Calories Intake (kcal)</h5>
-                            <p id="caloriesSummary"></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Daily Nutrition -->
-                <div class="col-sm-12 col-lg-8">
-                    <div class="card h-100 shadow-lg">
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-center mb-5">
-                                <h4 class="mb-0">Today's Nutrition</h4>
-                                <div class="dropdown">
-                                    <button class="dropdown-toggle" type="button" id="addMealButton"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-solid fa-plus"></i> Add New Meal
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="addMealButton">
-                                        <li>
-                                            <a class="dropdown-item" th:href="@{/recipes}">Browse Recipes</a>
-                                        </li>
-
-                                        <li>
-                                            <a class="dropdown-item" id="custom-meal" href="#" data-bs-toggle="modal" data-bs-target="#customMealModal">Create Custom Meal</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <h5>Calories Intake (kcal)</h5>
+                                <p id="caloriesSummary"></p>
                             </div>
+                        </div>
+                    </div>
 
-                            <p></p>
-                            <div class="row" id="nutrition">
-                                <div class="col-sm-6 col-lg-3">
-                                    <h5>Breakfast</h5>
-                                    <p id="bfastCalories"></p>
+                    <!-- Daily Nutrition -->
+                    <div class="col-sm-12 col-lg-8">
+                        <div class="card h-100 shadow-lg">
+                            <div class="card-body p-4">
+                                <div class="d-flex justify-content-between align-items-center mb-5">
+                                    <h4 class="mb-0">Today's Nutrition</h4>
+                                    <div class="dropdown">
+                                        <button class="dropdown-toggle" type="button" id="addMealButton"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa-solid fa-plus"></i> Add New Meal
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="addMealButton">
+                                            <li>
+                                                <a class="dropdown-item" th:href="@{/recipes}">Browse Recipes</a>
+                                            </li>
+
+                                            <li>
+                                                <a class="dropdown-item" id="custom-meal" href="#" data-bs-toggle="modal" data-bs-target="#customMealModal">Create Custom Meal</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="col-sm-6 col-lg-3">
-                                    <h5>Lunch</h5>
-                                    <p id="lunchCalories"></p>
-                                </div>
-                                <div class="col-sm-6 col-lg-3">
-                                    <h5>Dinner</h5>
-                                    <p id="dinnerCalories"></p>
-                                </div>
-                                <div class="col-sm-6 col-lg-3">
-                                    <h5>Dessert</h5>
-                                    <p id="dessertCalories"></p>
+
+                                <p></p>
+                                <div class="row" id="nutrition">
+                                    <div class="col-sm-6 col-lg-3">
+                                        <h5>Breakfast</h5>
+                                        <p id="bfastCalories"></p>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3">
+                                        <h5>Lunch</h5>
+                                        <p id="lunchCalories"></p>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3">
+                                        <h5>Dinner</h5>
+                                        <p id="dinnerCalories"></p>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3">
+                                        <h5>Dessert</h5>
+                                        <p id="dessertCalories"></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Trending Recipes (maybe show top few bookmarked?) -->
+                <div id="trending" class="mb-4">
+                    <h3>Trending Recipes</h3>
+                    <a id="viewAll" th:href="@{/recipes}">
+                        <h6>View All</h6>
+                    </a>
+                </div>
+
+                <div id="recipeContainer" class="row">
+
+                </div>
             </div>
-
-            <!-- Trending Recipes (maybe show top few bookmarked?) -->
-            <div id="trending" class="mb-4">
-                <h3>Trending Recipes</h3>
-                <a id="viewAll" th:href="@{/recipes}">
-                    <h6>View All</h6>
-                </a>
-            </div>
-
-            <div id="recipeContainer" class="row">
-
-            </div>
-
-
         </div> <!-- End Container -->
 
         <!-- Custom Meal Modal -->

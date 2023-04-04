@@ -91,7 +91,9 @@
         selectedDay = new Date(year, month, o.innerHTML);
         this.drawHeader(o.innerHTML);
         this.setCookie('selected_day', 1);
-        
+
+        // Get meals according to day selected (fn found in profile.js)
+        getMeals(selectedDay);
     };
     
     Calendar.prototype.preMonth = function() {

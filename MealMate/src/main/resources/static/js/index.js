@@ -64,7 +64,18 @@ function getDailySummary() {
     let bfastCalories = 0, lunchCalories = 0, dinnerCalories = 0, dessertCalories = 0;
 
     if(userId != null) {
-        fetch("http://localhost:8080/api/meal/user/" + userId)
+        const mealDTO = {
+            "userId": userId,
+            "mealDate": new Date().toISOString()
+        }
+    
+        fetch('http://localhost:8080/api/meal/find/mealDate', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(mealDTO)
+        })
             .then((resp) => resp.json())
             .then(function(data) {
 
