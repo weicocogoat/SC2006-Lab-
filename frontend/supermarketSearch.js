@@ -18,7 +18,7 @@ function initMap() {
     /*
     //install chrome extension for cors unblock
     //GeoJson file loading
-    map.data.loadGeoJson('test.json', {idPropertyName: 'storeid'});
+    map.data.loadGeoJson('supermarket_cleaned.json', {idPropertyName: 'storeid'});
 
     const apiKey = 'AIzaSyC4iZaPWXAnyjm3siO3GaFQ7YhuOIC8KAk';
     const infoWindow = new google.maps.InfoWindow();

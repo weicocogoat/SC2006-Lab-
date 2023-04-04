@@ -1,0 +1,33 @@
+#Feedback{
+
+    /*background*/
+    border: 3px solid gray;
+    background-color: white;
+
+
+    width: 70%;
+    height: fit-content;
+
+    padding: 20px;
+    margin-top: 3%;
+    margin-left: 15%;
+
+}
+
+#feedback_header{
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom:2%;
+}
+
+.mb-3{
+    font-weight: bold;
+}
+
+#submit{
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    font-size: 18px;
+    width: 100%;
+}
