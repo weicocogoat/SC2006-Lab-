@@ -30,8 +30,8 @@ function searchIngredient() {
 		
 	} else {
 		// Reset Search Results
-		const ingredientsCont = document.getElementById("ingredientList");
-		ingredientsCont.innerHTML = "";
+		//const ingredientsCont = document.getElementById("ingredientList");
+		//ingredientsCont.innerHTML = "";
 
 		// Display Spinner
 		//const searchSpinner = document.getElementById("searchSpinner");
@@ -167,6 +167,10 @@ function addIngredient() {
 	// Add to Global Array
 	ingredientsList.push(currIngredient);
 
+	// Reset Add Ingredient Modal Details
+	$('#quantity').val("");
+	$('#nutritionValues').text("Not calculated yet");
+
 	// Remove empty message if visible
 	if(ingredientsList.length != 0) {
 		document.getElementById("noItemsMsg").classList.remove("d-block");
@@ -290,7 +294,21 @@ function createRecipe() {
 	const newRecipe = {
 		title: recipeTitle,
 		author: sessionStorage.getItem("id"),	// save userId for author
-		image: imgDataURL,
+		description: description,
+		dateCreated: new Date().toISOString(),
+		dietType: dietType,
+		numOfBookmarks: 0,
+		prepTime: prepTime,
+		servingSize: servingSize,
+		calories: totalCalories,
+		ingredients: ingredientsList,
+		steps: listOfSteps,
+		image: imgDataURL
+	};
+
+	const testOutput = {
+		title: recipeTitle,
+		author: sessionStorage.getItem("id"),	// save userId for author
 		description: description,
 		dateCreated: new Date().toISOString(),
 		dietType: dietType,
@@ -302,7 +320,7 @@ function createRecipe() {
 		steps: listOfSteps
 	};
 
-	console.log(JSON.stringify(newRecipe));
+	console.log(testOutput);
 
 	fetch('http://localhost:8080/api/recipes/save', {
             method: 'POST',
@@ -311,7 +329,9 @@ function createRecipe() {
             },
             body: JSON.stringify(newRecipe)
         })
-        .then(response => response.json())
+        .then(response => {
+        	//response.json()
+        })
         .then(data => {
         	console.log('Success:', data);
         })
