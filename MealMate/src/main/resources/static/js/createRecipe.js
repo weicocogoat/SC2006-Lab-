@@ -1,3 +1,20 @@
+$(document).ready(function() {
+	// Search Ingredient on Enter Keypress (if search input in focus)
+	$('#ingredientInput').on('keyup', function(e) {
+		if(e.key === "Enter" || e.key === 13) {
+			searchIngredient();
+		}
+	});
+
+	// Add Step on Enter Keypress (if textarea in focus)
+	$('#stepInput').on('keyup', function(e) {
+		if(e.key === "Enter" || e.key === 13) {
+			addStep();
+		}
+	});
+
+});
+
 let imgDataURL;
 function getImage(input) {
 	const img = input.files[0];
@@ -9,19 +26,17 @@ function getImage(input) {
 		imgDataURL = fileReader.result;
 	};
 
+	/*
 	fileReader.onloadend = function() {
 		console.log(imgDataURL);
 	};
+	*/
 
 	fileReader.readAsDataURL(img);
-
-	
 }
 
 function searchIngredient() {
 	const ingredient = document.getElementById("ingredientInput").value.trim();
-
-	console.log(ingredient.length);
 
 	if(ingredient.length == 0) {
 		// Show some error msg here
@@ -29,10 +44,6 @@ function searchIngredient() {
 		toastr.error('pls enter');
 		
 	} else {
-		// Reset Search Results
-		//const ingredientsCont = document.getElementById("ingredientList");
-		//ingredientsCont.innerHTML = "";
-
 		// Display Spinner
 		//const searchSpinner = document.getElementById("searchSpinner");
 		//searchSpinner.classList.add("d-none");
@@ -139,7 +150,6 @@ function displayModalDetails(ingredient) {
 function calculateNutrition() {
 	// Calculate Calories
 	let quantity = document.getElementById("quantity").value;
-	console.log(quantity);
 
 	let totalCalories = quantity * calories.amount;
 
@@ -209,7 +219,7 @@ function removeIngredient(name) {
 	}
 }
 
-const listOfSteps = [];		// Global Array of Steps
+let listOfSteps = [];		// Global Array of Steps
 
 // Add Step to List
 function addStep() {
@@ -223,11 +233,7 @@ function addStep() {
 		stepInstruction: stepInput
 	};
 
-	console.log(newStep);
-
 	listOfSteps.push(newStep);
-
-	console.log(listOfSteps);
 
 	/* original view with step number
 	const stepView = `
@@ -333,9 +339,27 @@ function createRecipe() {
         	//response.json()
         })
         .then(data => {
-        	console.log('Success:', data);
+        	//console.log('Success:', data);
+        	resetForm();
         })
         .catch((error) => {
             console.error('Error:', error);
         });
+}
+
+// Reset Create Recipe Form (Input fields and lists)
+function resetForm() {
+	// Reset Form Fields
+	$('#newRecipeForm').trigger('reset');
+
+	// Reset Ingredients List
+	ingredientsList = [];
+	$('#noItemsMsg').toggleClass('d-none');
+	$('#noItemsMsg').toggleClass('d-block');
+	$('#ingredientList').html("");
+
+
+	// Reset List of Steps
+	listOfSteps = [];
+	$('#stepsList').html("");
 }

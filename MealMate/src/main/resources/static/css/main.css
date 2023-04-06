@@ -5,8 +5,12 @@
 
 #body{
     background-color: #f6f6f6;
-    font-family: Poppins;
-    /*margin: 0px;*/
+    font-family: 'Lato', sans-serif;
+}
+
+/* On Login and Sign up screens */
+#mealMateLogo {
+    height: 150px;
 }
 
 a {

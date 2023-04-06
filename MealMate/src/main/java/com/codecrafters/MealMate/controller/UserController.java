@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,7 +19,7 @@ public class UserController {
     @GetMapping("/{id}")
     @PreAuthorize("#user.id == #id")
     public ResponseEntity user(@AuthenticationPrincipal User user, @PathVariable String id) {
-        User eUser = userRepo.findById(id).orElseThrow();
+        User eUser = userRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         UserDTO userDTO = new UserDTO(eUser);
 
         return ResponseEntity.ok(userDTO);
@@ -26,7 +27,7 @@ public class UserController {
 
     @GetMapping("/username/{id}")
     public String username(@PathVariable String id) {
-        User user = userRepo.findById(id).orElseThrow();
+        User user = userRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         return user.getUsername();
     }

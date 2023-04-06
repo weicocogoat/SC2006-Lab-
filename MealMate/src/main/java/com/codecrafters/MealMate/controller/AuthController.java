@@ -52,6 +52,8 @@ public class AuthController {
 
         Authentication authentication = UsernamePasswordAuthenticationToken.authenticated(user, signUpDTO.getPassword(), Collections.EMPTY_LIST);
 
+        System.out.println("User successfully created");
+
         return ResponseEntity.ok(tokenGenerator.createToken(authentication));
     }
 

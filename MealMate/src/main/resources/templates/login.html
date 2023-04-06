@@ -8,7 +8,7 @@
 
         <!-- Stylesheets -->
         <th:block th:insert="fragments/style.html :: style"></th:block>
-        <link rel="stylesheet" href="css/loginScreen.css">
+        <link rel="stylesheet" href="css/loginRegister.css">
 
     </head>
     <body id="body">
@@ -17,9 +17,8 @@
 
         <!--Login screen stuff-->
         <div id="loginScreen">
-            <div id="head">
-                <i id="icon" class="fa-solid fa-utensils fa-8x"></i>
-            </div>
+            <img id="mealMateLogo" class="mb-5" src="../images/mealmate.png">
+
             <form id="loginForm" name="userDetails">
                 <div class="row">
                     <input type="text" id="username" placeholder="Username" name="username" class="form-control mb-4" required>
@@ -27,9 +26,9 @@
                     <input type="password" id="password" placeholder="Password" name="password" class="form-control mb-2" required>
                 </div>
                 
-                <div class="input-group mb-4">
-                    <input type="checkbox" placeholder="Show Password" name="ShowPassword" class="showPassword" id="showPassword">
-                    <label class="showPassword" for="showPassword">Show Password</label>
+                <div class="showpassword mb-4">
+                  <input id="showPassword" type="checkbox" name="ShowPassword" class="showPassword">
+                  <label class="showPassword" for="showPassword">Show Password</label>
                 </div>
 
                 <div class="d-grid gap-2 mb-3">
@@ -42,6 +41,7 @@
             </form>
         </div>
 
+        <!-- Scripts -->
         <th:block th:insert="fragments/scripts.html :: scripts"></th:block>
     </body>
 </html>
