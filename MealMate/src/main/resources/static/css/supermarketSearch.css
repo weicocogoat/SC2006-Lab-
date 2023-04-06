@@ -35,110 +35,12 @@
     /*border: 3px solid green;*/
 }
 
-#grid{
-    width: 50%;
-    float: left;
-    display: grid;
-    grid-gap: 15% 0px;
-    margin-left: 2%;
-}
-
 
 #map{
-    text-align: right;
     /*border: 3px solid black;*/
-    width: 40%;
+    width: 80%;
     height: 500px;
-    margin-right: 5%;
-    float: right;
+    margin-left: 10%;
 
 }
 
-#test{
-    display: inline-block;
-    /*border: 3px solid red;*/
-    width: 100%;
-}
-
-.row{
-    height: 120%;
-    box-shadow: 8px 8px #f0f0f0;
-}
-
-.subdiv{
-    /*
-    float: left;
-    background-color: grey;
-    border: 3px solid red;
-    */
-    flex: 0.15;
-    padding: 3%;
-    border: 1px solid black;
-    background-color: grey;
-}
-
-.subdiv2{
-    flex: 0.85;
-    padding: 3%;
-    border: 1px solid black;
-}
-
-#button1{
-    background-color: transparent;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
-    outline: none;
-    color: black;
-    font-weight: bold;
-}
-
-#button1:hover{
-    text-decoration: underline;
-}
-
-#button2{
-    background-color: transparent;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
-    outline: none;
-    color: black;
-    font-weight: bold;
-}
-
-#button2:hover{
-    text-decoration: underline;
-}
-
-#button3{
-    background-color: transparent;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
-    outline: none;
-    color: black;
-    font-weight: bold;
-}
-
-#button3.subdiv2{
-    text-decoration: underline;
-}
-
-#button4{
-    background-color: transparent;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
-    outline: none;
-    color: black;
-    font-weight: bold;
-}
-
-#button4:hover{
-    text-decoration: underline;
-}
