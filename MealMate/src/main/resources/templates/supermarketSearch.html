@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,143 +7,30 @@
         <title>MealMate</title>
 
         <!-- Stylesheets -->
-        <link rel ="stylesheet" href="css/supermarketSearch.css">
+        <th:block th:insert="fragments/style.html :: style"></th:block>
+        <link rel ="stylesheet" href="../css/supermarketSearch.css">
+
     </head>
     <body id = "bodyy">
-        <!--Header buttons-->
-        <div id = "heading">
-            <button id="header">Code Crafters</button>
-            <button id = "home" class="homeButton">Home</button>
-            <button id = "recipe" class="homeButton">Recipe</button>
-            <button id = "storeFinder" class="homeButton">Store Finder</button>
-            <button id = "aboutUs" class="homeButton">About Us</button>
-            <button id = "signin" class="homeButton">Sign in</button> 
-        </div>
+        <!-- Navigation Bar -->
+        <div th:insert="fragments/navbar.html :: navbar"></div>
 
         <div id = "searchSupermarket">
             <header id = "supermarket_header">Browse Stores</header>
 
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Enter Store Name" aria-label="storeName" aria-describedby="button-addon2">
+                <input type="text" class="form-control" placeholder="Enter Address" aria-label="storeName" aria-describedby="button-addon2">
                 <button class="btn btn-outline-secondary" type="button" id="button-addon2">Enter</button>
             </div>
 
-            <div id = "test">
-                <div id = "grid">
-                    <div class="row">
-                        <div class = "subdiv">
-                            
-                        </div>
-                        <div class ="subdiv2">
-                            <button id="button1" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"> test
-                        </div>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Supermarket Name 1</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                Placeholder Text 1
-                                </div>
-                                <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+            <div id = "map">
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4iZaPWXAnyjm3siO3GaFQ7YhuOIC8KAk&libraries=places&callback=initMap&v=weekly" async></script>
 
-                    <div class="row">
-                        <div class = "subdiv">
-                            
-                        </div>
-                        <div class ="subdiv2">
-                            <button id="button2" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2"> test
-                        </div>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel2">Supermarket Name 2</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                Placeholder Text 2
-                                </div>
-                                <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class = "subdiv">
-                            
-                        </div>
-                        <div class ="subdiv2">
-                            <button id="button3" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3"> test
-                        </div>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel3">SuperMarket Name 3</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                Placeholder Text 3
-                                </div>
-                                <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class = "subdiv">
-                            
-                        </div>
-                        <div class ="subdiv2">
-                            <button id="button4" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal4"> test
-                        </div>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel4">SuperMarket Text 4</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                PlaceHolder text 4
-                                </div>
-                                <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div id = "map">
-                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4iZaPWXAnyjm3siO3GaFQ7YhuOIC8KAk&libraries=places&callback=initMap&v=weekly" async></script>
-
-                    <!--<script
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4iZaPWXAnyjm3siO3GaFQ7YhuOIC8KAk&callback=initMap&v=weekly"
-                    defer
-                    ></script>-->
-                </div>
+                <!--<script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4iZaPWXAnyjm3siO3GaFQ7YhuOIC8KAk&callback=initMap&v=weekly"
+                defer
+                ></script>-->
+            </div>
             </div>
 
         </div>
