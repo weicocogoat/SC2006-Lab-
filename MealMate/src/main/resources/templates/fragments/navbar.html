@@ -21,15 +21,15 @@
                         </li>
 
                         <li id="recipeOptions" class="nav-item">
-                            <a th:href="@{/recipes}" class="nav-link">Recipes</a>
+                            <a th:href="@{/recipes}" class="nav-link" th:classappend="${#httpServletRequest.getRequestURI() == '/recipes' ? 'active' : ''}">Recipes</a>
                         </li>
 
                         <li class="nav-item">
-                            <a th:href="@{/supermarkets}" class="nav-link">Store Finder</a>
+                            <a th:href="@{/stores}" class="nav-link" th:classappend="${#httpServletRequest.getRequestURI() == '/stores' ? 'active' : ''}">Store Finder</a>
                         </li>
 
                         <li class="nav-item">
-                            <a th:href="@{/about}" class="nav-link">About Us</a>
+                            <a th:href="@{/contact}" class="nav-link" th:classappend="${#httpServletRequest.getRequestURI() == '/contact' ? 'active' : ''}">Contact Us</a>
                         </li>
 
                         <li id="navbarOptions" class="nav-item">

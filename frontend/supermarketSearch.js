@@ -15,10 +15,10 @@ function initMap() {
     });
 
 
-    
+    /*
     //install chrome extension for cors unblock
     //GeoJson file loading
-    map.data.loadGeoJson('files/supermarket_cleaned.json', {idPropertyName: 'storeid'});
+    map.data.loadGeoJson('supermarket_cleaned.json', {idPropertyName: 'storeid'});
 
     const apiKey = 'AIzaSyC4iZaPWXAnyjm3siO3GaFQ7YhuOIC8KAk';
     const infoWindow = new google.maps.InfoWindow();
@@ -26,14 +26,8 @@ function initMap() {
     map.data.addListener('click', (event) => {
       const name = event.feature.getProperty('name');
       const position = event.feature.getGeometry().get();
-      const street_name = event.feature.getProperty('street_name');
-      const block = event.feature.getProperty('blk');
-      const unit_no = event.feature.getProperty('unit_no');
-      const postal_code = event.feature.getProperty('postal_code');
       const content = `
-        <h3>${name}</h3>
-        <h6>Located at:</h6>
-        <p>${street_name} Block ${block} Postal Code: ${postal_code}</p>
+        <h2>${name}</h2>
       `;
   
       infoWindow.setContent(content);
@@ -41,7 +35,7 @@ function initMap() {
       infoWindow.setOptions({pixelOffset: new google.maps.Size(0, -30)});
       infoWindow.open(map);
     });
-    
+    */
 
     //Search bar
     const options = {
@@ -96,6 +90,61 @@ function initMap() {
     
     
 
+}
+
+async function calculateDistances(data, origin) {
+  const stores = [];
+  const destinations = [];
+
+  // Build parallel arrays for the store IDs and destinations
+  data.forEach((store) => {
+    const storeNum = store.getProperty('storeid');
+    const storeLoc = store.getGeometry().get();
+
+    stores.push(storeNum);
+    destinations.push(storeLoc);
+  });
+
+  // Retrieve the distances of each store from the origin
+  // The returned list will be in the same order as the destinations list
+  const service = new google.maps.DistanceMatrixService();
+  const getDistanceMatrix =
+    (service, parameters) => new Promise((resolve, reject) => {
+      service.getDistanceMatrix(parameters, (response, status) => {
+        if (status != google.maps.DistanceMatrixStatus.OK) {
+          reject(response);
+        } else {
+          const distances = [];
+          const results = response.rows[0].elements;
+          for (let j = 0; j < results.length; j++) {
+            const element = results[j];
+            const distanceText = element.distance.text;
+            const distanceVal = element.distance.value;
+            const distanceObject = {
+              storeid: stores[j],
+              distanceText: distanceText,
+              distanceVal: distanceVal,
+            };
+            distances.push(distanceObject);
+          }
+
+          resolve(distances);
+        }
+      });
+    });
+
+  const distancesList = await getDistanceMatrix(service, {
+    origins: [origin],
+    destinations: destinations,
+    travelMode: 'DRIVING',
+    unitSystem: google.maps.UnitSystem.METRIC,
+  });
+
+  distancesList.sort((first, second) => {
+    return first.distanceVal - second.distanceVal;
+  });
+
+  return distancesList;
 }
 
 /*

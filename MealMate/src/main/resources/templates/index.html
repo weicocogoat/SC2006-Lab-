@@ -31,59 +31,61 @@
             <!-- Main Content -->
             <div class="p-5">
                 <!-- Daily Summary and Nutrition -->
-                <div class="row mb-5">
-                    <!-- Daily Summary -->
-                    <div class="col-sm-12 col-lg-4">
-                        <div class="card h-100">
-                            <div class="card-body p-4">
-                                <h4 class="mb-5">Daily Summary</h4>
+                <div id="summary">
+                    <div class="row mb-5">
+                        <!-- Daily Summary -->
+                        <div class="col-sm-12 col-lg-4">
+                            <div class="card h-100">
+                                <div class="card-body p-4">
+                                    <h4 class="mb-5">Daily Summary</h4>
 
-                                <h5>Calories Intake (kcal)</h5>
-                                <p id="caloriesSummary"></p>
+                                    <h5>Calories Intake (kcal)</h5>
+                                    <p id="caloriesSummary"></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Daily Nutrition -->
-                    <div class="col-sm-12 col-lg-8">
-                        <div class="card h-100">
-                            <div class="card-body p-4">
-                                <div class="d-flex justify-content-between align-items-center mb-5">
-                                    <h4 class="mb-0">Today's Nutrition</h4>
-                                    <div class="dropdown">
-                                        <button class="dropdown-toggle" type="button" id="addMealButton"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa-solid fa-plus"></i> Add New Meal
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="addMealButton">
-                                            <li>
-                                                <a class="dropdown-item" th:href="@{/recipes}">Browse Recipes</a>
-                                            </li>
+                        <!-- Daily Nutrition -->
+                        <div class="col-sm-12 col-lg-8">
+                            <div class="card h-100">
+                                <div class="card-body p-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-5">
+                                        <h4 class="mb-0">Today's Nutrition</h4>
+                                        <div class="dropdown">
+                                            <button class="dropdown-toggle" type="button" id="addMealButton"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa-solid fa-plus"></i> Add New Meal
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="addMealButton">
+                                                <li>
+                                                    <a class="dropdown-item" th:href="@{/recipes}">Browse Recipes</a>
+                                                </li>
 
-                                            <li>
-                                                <a class="dropdown-item" id="custom-meal" href="#" data-bs-toggle="modal" data-bs-target="#customMealModal">Create Custom Meal</a>
-                                            </li>
-                                        </ul>
+                                                <li>
+                                                    <a class="dropdown-item" id="custom-meal" href="#" data-bs-toggle="modal" data-bs-target="#customMealModal">Create Custom Meal</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <p></p>
-                                <div class="row" id="nutrition">
-                                    <div class="col-sm-6 col-lg-3">
-                                        <h5>Breakfast</h5>
-                                        <p id="bfastCalories"></p>
-                                    </div>
-                                    <div class="col-sm-6 col-lg-3">
-                                        <h5>Lunch</h5>
-                                        <p id="lunchCalories"></p>
-                                    </div>
-                                    <div class="col-sm-6 col-lg-3">
-                                        <h5>Dinner</h5>
-                                        <p id="dinnerCalories"></p>
-                                    </div>
-                                    <div class="col-sm-6 col-lg-3">
-                                        <h5>Dessert</h5>
-                                        <p id="dessertCalories"></p>
+                                    <p></p>
+                                    <div class="row" id="nutrition">
+                                        <div class="col-sm-6 col-lg-3">
+                                            <h5>Breakfast</h5>
+                                            <p id="bfastCalories"></p>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-3">
+                                            <h5>Lunch</h5>
+                                            <p id="lunchCalories"></p>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-3">
+                                            <h5>Dinner</h5>
+                                            <p id="dinnerCalories"></p>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-3">
+                                            <h5>Dessert</h5>
+                                            <p id="dessertCalories"></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -1,15 +1,44 @@
 $(document).ready(function() {
-    let listOfRecipes = [];
+    let userId = sessionStorage.getItem("id");
 
-    // Get Daily Summary
-    getDailySummary();
+    if(userId) {
+        let accessToken = sessionStorage.getItem("accessToken");
+        console.log("Access token: " + accessToken);
+
+        // Get User Information
+        fetch('http://localhost:8080/api/users/' + userId, {
+                method: 'GET',
+                withCredentials: true,
+                credentials: 'include',
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': 'Bearer ' + accessToken
+                }
+            })
+            .then(response => {
+                //console.log('Success:', response);
+                
+                return response.json();
+             })
+            .then(data => {
+                $('#summary').show();
+
+                // Get Daily Summary
+                getDailySummary();                
+             })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    } else {
+        $('#summary').hide();
+    }
+
+    let listOfRecipes = [];
 
     // Load Trending Recipes
     fetch("http://localhost:8080/api/recipes/all")
         .then((resp) => resp.json())
         .then(function(response) {
-
-            console.log(response);
 
             response.forEach(function (item, index) {
                 const recipeObj = {

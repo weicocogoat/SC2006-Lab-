@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>MealMate | Search Stores</title>
+
+        <!-- Stylesheets -->
+        <th:block th:insert="fragments/style.html :: style"></th:block>
+        <link rel ="stylesheet" href="../css/stores.css">
+
+    </head>
+    <body id="body">
+        <!-- Navigation Bar -->
+        <div th:insert="fragments/navbar.html :: navbar"></div>
+
+        <div class="container p-5">
+            <h1>Browse Stores</h1>
+
+            <div class="input-group my-4">
+                <input type="text" class="form-control" placeholder="Enter Address" aria-label="storeName" aria-describedby="button-addon2">
+
+                <button type="button" id="button-addon2" class="input-group-text">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+
+            <div id="map">
+
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <th:block th:insert="fragments/scripts.html :: scripts"></th:block>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4iZaPWXAnyjm3siO3GaFQ7YhuOIC8KAk&libraries=places&callback=initMap&v=weekly" async></script>
+        <script src = "../js/stores.js"></script>
+    </body>
+</html>

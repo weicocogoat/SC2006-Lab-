@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>MealMate | Contact Us</title>
+
+        <!-- Stylesheets -->
+        <th:block th:insert="fragments/style.html :: style"></th:block>
+    </head>
+    <body id = "body">
+        <!-- Navigation Bar -->
+        <div th:insert="fragments/navbar.html :: navbar"></div>
+
+        <div class="container p-5">
+            <h1>Contact Us</h1>
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="feedback" class="form-label">Feedback</label>
+                <textarea class="form-control" id="user_feedback" name="feedback" rows="5" required></textarea>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button type="button" class="btn btn-accent" id="submit" onclick="saveFeedback()">
+                    Submit
+                </button>
+            </div>
+
+            <!--Modal-->
+            <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Feedback Received</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    Thank you for your feedback! Please check your email in the next few days for our response!
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <th:block th:insert="fragments/scripts.html :: scripts"></th:block>
+         <script src="../js/contact.js"></script>
+    </body>
+</html>
