@@ -117,6 +117,14 @@
     /* Cursor on hover */
 }
 
+#filter_button{
+    width: 100%;
+    background: black;
+    color: white;
+    border-radius: 30px;
+    margin-top: 5%;
+}
+
 #firstLine {
     display: flex;
     align-items: center;
