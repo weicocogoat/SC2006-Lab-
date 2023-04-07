@@ -32,7 +32,7 @@
         <div class="input-group my-4">
             <input id="recipeInput" class="form-control searchBar" type="search" placeholder="Enter Recipe Title..." name="recipeInput">
 
-            <button type="button" class="input-group-text" onclick="searchIngredient()">
+            <button type="button" class="input-group-text" onclick="searchIngredient(document.getElementById('recipeInput').value.trim())">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
