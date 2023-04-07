@@ -17,6 +17,9 @@ spring:
           auth: true
           starttls:
             enable: true
+  mvc:
+    static-path-pattern: /static/**
+    static-locations: classpath:/static/
 
 
 access-token:
