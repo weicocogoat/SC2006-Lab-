@@ -1,5 +1,5 @@
 // Array that will hold all recipe names retrieved from DB
-const listOfRecipeName = [];
+var listOfRecipeName = [];
 
 document.addEventListener('DOMContentLoaded', function () {
     var slider = document.getElementById("myRange");
@@ -18,11 +18,32 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Array that will hold all recipes retrieved from DB
-const listOfRecipes = [];
+var listOfRecipes = [];
+var dietTypeFilter = [];
+var cal;
 
 // Get All Recipes from DB
 function getRecipes() {
 	console.log("Retrieving receipes from database...");
+
+	listOfRecipes = [];
+	listOfRecipeName = [];
+	dietTypeFilter = [];
+
+	if (document.getElementById("dairyFree").checked){
+		dietTypeFilter.push("dairy free");
+	}
+	if (document.getElementById("glutenFree").checked){
+		dietTypeFilter.push("gluten free");
+	}
+	if (document.getElementById("vegan").checked){
+		dietTypeFilter.push("vegan");
+	}
+	if (document.getElementById("vegetarian").checked){
+		dietTypeFilter.push("vegetarian");
+	}
+
+	cal = parseInt(document.getElementById("myRange").value);
 
 	fetch("http://localhost:8080/api/recipes/all")
 		.then((resp) => resp.json())
@@ -48,9 +69,25 @@ function getRecipes() {
                };
 
                // Store inside global array
-               listOfRecipes.push(recipeObj);
-			   listOfRecipeName.push(recipeObj["title"]);
+			   for (var i = 0; i < recipeObj["dietType"].length; i++){
+					if (dietTypeFilter.includes(recipeObj["dietType"][i])){
+						listOfRecipes.push(recipeObj);
+			   			listOfRecipeName.push(recipeObj["title"]);
+						break;
+					}
+			   }
+
+
           	});
+
+			for (var i = listOfRecipes.length - 1; i >= 0; i--){
+				console.log(listOfRecipes[i].calories);
+				console.log(cal);
+				if (listOfRecipes[i].calories > cal){
+					listOfRecipes.splice(i, 1);
+					listOfRecipeName.splice(i, 1);
+				}
+		    }
 
           	// Display Recipes
           	displayRecipes();
