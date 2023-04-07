@@ -18,7 +18,7 @@ spring:
           starttls:
             enable: true
   mvc:
-    static-path-pattern: /static/**
+    static-path-pattern: /**
     static-locations: classpath:/static/
 
 

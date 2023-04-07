@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    let listOfRecipes = [];
-
     // Get User Details
     getUserDetails();
 
@@ -10,12 +8,17 @@ $(document).ready(function() {
     // Load Today's Meals
     getMeals(new Date());
 
-    // Load Trending Recipes
+    // Load User Recipes
+    loadRecipes();
+});
+
+// Load User Recipes
+function loadRecipes() {
+    let listOfRecipes = [];
+
     fetch("http://localhost:8080/api/recipes/all")
         .then((resp) => resp.json())
         .then(function(response) {
-
-            console.log(response);
 
             response.forEach(function (item, index) {
                 const recipeObj = {
@@ -32,10 +35,10 @@ $(document).ready(function() {
                     calories: item.calories,
                     ingredients: item.ingredients,
                     steps: item.steps
-               };
+                };
 
-               // Store inside global array
-               listOfRecipes.push(recipeObj);
+                // Store inside global array
+                listOfRecipes.push(recipeObj);
               });
 
               // Display Recipes
@@ -60,7 +63,7 @@ $(document).ready(function() {
         }).catch(function(error) {
             console.log(error);
         });
-});
+}
 
 // Load User Details
 function getUserDetails() {
@@ -153,16 +156,58 @@ const myRecipeView = (recipe) =>
 	        <img src="${recipe.image}" class="card-img-top">
 	        <div class="card-body">
 	            <div id="firstLine">
-	                <h5 id="card-title">${recipe.title}</h5>
-	                <h6 id="star-rating"> ${recipe.numOfBookmarks} <i class="fa-solid fa-star"></i></h6>
+	                <h5 id="card-title">${recipe.title} ${recipe.numOfBookmarks} <i class="fa-solid fa-star"></i></h5>
+	                <a href="#" id="recipeDropdown${recipe.id}" class="text-dark" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                    <ul class="dropdown-menu" aria-labelledby="recipeDropdown${recipe.id}">
+                        <li>
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteRecipeModal" data-recipe-id="${recipe.id}" onclick="updateDeleteModal(this)">
+                                <i class="fa-solid fa-trash mr-2"></i> Delete Recipe
+                            </a>
+                        </li>
+                    </ul>
 	            </div>
 	            <p class="card-text">${recipe.description}</p>
-
-	            <a class="stretched-link" href="recipes/${recipe.id}"></a>
 	        </div>
 	    </div>
 	</div>
 `;
+
+//<a class="stretched-link" href="recipes/${recipe.id}"></a>
+
+function updateDeleteModal(event) {
+    // Fetch data-recipe-id attribute value from selected recipe to delete (on card)
+    const recipeToDelete = $(event).data('recipe-id')
+    $('#deleteRecipeBtn').attr('data-recipe-id', recipeToDelete);
+}
+
+function deleteRecipe() {
+    // Fetch data-recipe-id attribute value from deleteRecipeBtn (on modal)
+    const recipeToDelete = $('#deleteRecipeBtn').data('recipe-id');
+
+    fetch('http://localhost:8080/api/recipes/delete/' + recipeToDelete, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+    .then(response => {
+        console.log(response);
+    })
+    .then(data => {
+        console.log("Successfully deleted recipe");
+
+        // Reload list of recipes
+        loadRecipes();
+
+        // Hide Modal
+        let deleteModal = bootstrap.Modal.getInstance(document.querySelector("#deleteRecipeModal"));
+        deleteModal.hide();
+    })
+    .catch((error) => {
+        console.log("Error deleting recipe");
+        console.log(error);
+    });
+}
 
 // Create Custom Meal
 function addCustomMeal() {

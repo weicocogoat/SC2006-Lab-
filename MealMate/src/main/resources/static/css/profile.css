@@ -224,6 +224,7 @@
 #firstLine {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 #star-rating {

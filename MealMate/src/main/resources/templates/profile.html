@@ -370,6 +370,25 @@
         </div>
     </div>
 
+    <!-- Delete Recipe Modal -->
+    <div class="modal fade" id="deleteRecipeModal" tabindex="-1" role="dialog" aria-labelledby="deleteRecipeLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="deleteRecipeLabel">Delete Recipe</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>This action will be irreversible. Proceed to delete?</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="deleteRecipeBtn" onclick="deleteRecipe()">Confirm Deletion</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Scripts -->
     <th:block th:insert="fragments/scripts.html :: scripts"></th:block>
