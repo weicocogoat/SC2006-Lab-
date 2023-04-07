@@ -224,3 +224,24 @@ function autocomplete(inp, arr) {
 	  closeAllLists(e.target);
   });
   }
+
+function searchIngredient(recipeName){
+	var i = 0;
+	for(i ; i < listOfRecipeName.length; i++) {
+		if (listOfRecipeName[i] === recipeName){
+			break;
+		}
+	}
+
+	const recipeViewList = [];	// Array that will hold all individual HTML views to generate of each recipe
+	const itemViewHTML = recipeView(listOfRecipes[i]);
+	recipeViewList.push(itemViewHTML);
+
+	// Combine all the recipe cards together into a string
+	const recipeViewHTML = recipeViewList.join("\n");
+
+	// Insert into Recipe Container
+	const recipeContainer = document.getElementById("recipeContainer");
+	recipeContainer.innerHTML = recipeViewHTML;
+
+}
