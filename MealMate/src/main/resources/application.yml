@@ -6,6 +6,18 @@ spring:
     mongodb:
       uri: mongodb+srv://codecrafters2006:20066002@codecrafters.833xjuo.mongodb.net/mealmate
       database: mealmate
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: codecrafters2006@gmail.com
+    password: 20066002
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 
 access-token:
   public: "access-refresh-token-keys/access-token-public.key"
