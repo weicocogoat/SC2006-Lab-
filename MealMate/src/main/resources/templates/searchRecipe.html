@@ -42,34 +42,35 @@
                 <h4>Filter Options</h4>
                 <hr class="mt-4 mb-4">
 
-                <h5>By Calories</h5>
+                <h5>By Calories(Max)</h5>
                 <div class="slidecontainer mb-5">
-                    <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                    <input type="range" min="100" max="1000" value="500" class="slider" id="myRange">
                     <p>Value (kcal): <span id="val"></span></p>
                 </div>
 
                 <h5>By Diet Type</h5>
                 <form class="dietType">
                     <div>
-                        <input type="radio" name="dairyFree" id="dairyFree" />
+                        <input type="checkbox" name="dairyFree" id="dairyFree" checked/>
                         <label for="dairyFree">Dairy-free</label>
                     </div>
 
                     <div>
-                        <input type="radio" name="glutenFree" id="glutenFree" />
+                        <input type="checkbox" name="glutenFree" id="glutenFree" checked/>
                         <label for="glutenFree">Gluten-free</label>
                     </div>
 
                     <div>
-                        <input type="radio" name="vegan" id="vegan" />
+                        <input type="checkbox" name="vegan" id="vegan" checked/>
                         <label for="vegan">Vegan</label>
                     </div>
 
                     <div>
-                        <input type="radio" name="vegetarian" id="vegetarian" />
+                        <input type="checkbox" name="vegetarian" id="vegetarian" checked/>
                         <label for="vegetarian">Vegetarian</label>
                     </div>
                 </form>
+                <button id = "filter_button" type = "button" onclick="getRecipes()">Apply Filter</button>
             </div>
 
             <div class="col-sm-12 col-lg-9">
