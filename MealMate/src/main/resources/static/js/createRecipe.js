@@ -300,6 +300,10 @@ function createRecipe() {
 		toastr.error("Please input a positive Preparation Time.");
 		return;
 	}
+	if (imgDataURL === undefined){
+		toastr.error("Please add image.");
+		return;
+	}
 
 	let dietType = [];
 	$('input[name="dietType"]:checked').each(function() {
@@ -326,11 +330,6 @@ function createRecipe() {
 	let totalCalories = 0;
 	for(var i = 0; i < ingredientsList.length; i++) {
 		totalCalories += ingredientsList[i].calories;
-	}
-
-	if (imgDataURL === undefined){
-		toastr.error("Please add image.");
-		return;
 	}
 
 	const newRecipe = {
