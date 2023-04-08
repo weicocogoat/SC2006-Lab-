@@ -131,6 +131,8 @@
 
                 <div class="row">
                     <!-- Calendar -->
+                    <input type="hidden" id="selectedDate" />
+
                     <div class="col-sm-12 col-lg-8 pl-0">
                         <section class="ftco-section">
                             <div class="row">
@@ -236,6 +238,8 @@
                     </div> <!-- End of Calendar -->
 
                     <!-- Meals -->
+                    <input type="hidden" id="selectedMeal" />
+                    
                     <div class="col-sm-12 col-lg-4">
                         <div class="card">
                             <div class="card-body">
@@ -346,14 +350,20 @@
 
                     <br>
 
-                    <select id="mealType" class="form-select mb-4" name="mealType">
-                        <option value="Breakfast">Breakfast</option>
-                        <option value="Lunch">Lunch</option>
-                        <option value="Dinner">Dinner</option>
-                        <option value="Dessert">Dessert</option>
-                    </select>
-
                     <div class="row">
+                        <div class="col-sm-12 col-lg-6 mb-4">
+                            <select id="mealType" class="form-select" name="mealType">
+                                <option value="Breakfast">Breakfast</option>
+                                <option value="Lunch">Lunch</option>
+                                <option value="Dinner">Dinner</option>
+                                <option value="Dessert">Dessert</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-12 col-lg-6 mb-4">
+                            <input type="date" id="mealDate" class="form-control" placeholder="Enter Date">
+                        </div>
+
                         <div class="col-sm-12 col-lg-7 mb-4">
                             <input type="text" id="mealName" class="form-control" placeholder="Enter meal name" name="mealName">
                         </div>
@@ -393,7 +403,8 @@
     <!-- Scripts -->
     <th:block th:insert="fragments/scripts.html :: scripts"></th:block>
     <script src=”https://cdnjs.cloudflare.com/ajax/libs/easy-pie-chart/2.1.6/jquery.easypiechart.min.js”></script>
-    <script src="../js/calendar.js"></script>
     <script src="../js/profile.js"></script>
+    <script src="../js/meals.js"></script>
+    <script src="../js/calendar.js"></script>
 </body>
 </html>

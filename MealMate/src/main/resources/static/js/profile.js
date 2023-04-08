@@ -5,11 +5,14 @@ $(document).ready(function() {
     // Get Daily Summary
     getDailySummary();
 
-    // Load Today's Meals
-    getMeals(new Date());
+    // Load Today's Meals (to show on food diary)
+    getMeals(new Date().convertToLocal());
 
     // Load User Recipes
     loadRecipes();
+
+    // Set default date value for custom meal modal
+    $('#mealDate').val(new Date().convertToLocal().toDateInputValue());
 });
 
 // Load User Recipes
@@ -39,7 +42,7 @@ function loadRecipes() {
 
                 // Store inside global array
                 listOfRecipes.push(recipeObj);
-              });
+              }); 
 
               // Display Recipes
               const recipeViewList = [];
@@ -61,6 +64,7 @@ function loadRecipes() {
               console.log(listOfRecipes);
 
         }).catch(function(error) {
+            toastr.error("An error occurred, please try again!", "Failed to Load Recipes.");
             console.log(error);
         });
 }
@@ -96,6 +100,7 @@ function getUserDetails() {
 
          })
         .catch((error) => {
+            toastr.error("An error occurred, please try again!", "Failed to Retrieve User Details.");
             console.error('Error:', error);
         });
 }
@@ -110,7 +115,7 @@ function getDailySummary() {
     if(userId != null) {
         const mealDTO = {
             "userId": userId,
-            "mealDate": new Date().toISOString()
+            "mealDate": new Date().convertToLocal().toISOString()
         }
 
         fetch('http://localhost:8080/api/meal/find/mealDate', {
@@ -144,6 +149,7 @@ function getDailySummary() {
             $('#dessertCalories').text(dessertCalories + " kcal");
 
         }).catch(function(error) {
+            toastr.error("An error occurred, please try again!", "Failed to Retrieve Summary.");
             console.log(error);
         });
     } 
@@ -204,51 +210,9 @@ function deleteRecipe() {
         deleteModal.hide();
     })
     .catch((error) => {
-        console.log("Error deleting recipe");
+        toastr.error("An error occurred, please try again!", "Failed to Delete Recipe.");
         console.log(error);
     });
-}
-
-// Create Custom Meal
-function addCustomMeal() {
-    // New Meal Object
-    const newMeal = {
-        "userId": localStorage.getItem("id"),
-        "name": $('#mealName').val(),
-        "calories": $('#calories').val(),
-        "mealType": $('#mealType').find(':selected').val(),
-        "mealDate": new Date().toISOString()
-    }
-
-    // Create Meal
-    fetch('http://localhost:8080/api/meal/save', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newMeal)
-        })
-        .then(response => {
-            console.log(response);
-            //response.json()
-        })
-        .then(data => {
-            // Some success message here
-
-            // Hide Modal
-            let customMealModal = bootstrap.Modal.getInstance(document.querySelector("#customMealModal"));
-            customMealModal.hide();
-
-            // Update Summary
-            getDailySummary();
-
-            // Update Meals
-            getMeals(new Date());
-
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
 }
 
 function getMeals(date) {
@@ -279,15 +243,15 @@ function getMeals(date) {
             const dessertMeals = document.getElementById("dessertMeals");
 
             // Clear Items first
-            bfastMeals.innerHTML = addNewMealDropdown;
-            lunchMeals.innerHTML = addNewMealDropdown;
-            dinnerMeals.innerHTML = addNewMealDropdown;
-            dessertMeals.innerHTML = addNewMealDropdown;
+            bfastMeals.innerHTML = addNewMealDropdown("Breakfast");
+            lunchMeals.innerHTML = addNewMealDropdown("Lunch");
+            dinnerMeals.innerHTML = addNewMealDropdown("Dinner");
+            dessertMeals.innerHTML = addNewMealDropdown("Dessert");
 
             let bfastItems = "";
             let lunchItems = "";
             let dinnerItems = "";
-            let dessertItems = "";
+            let dessertItems = "";    
 
             // Add Items Respectively
             for(var i = 0; i < data.length; i++) {
@@ -313,15 +277,16 @@ function getMeals(date) {
             console.log(data);
          })
         .catch((error) => {
+            toastr.error("An error occurred, please try again!", "Failed to Retrieve Meals.");
             console.error('Error:', error);
         });
 }
 
-const addNewMealDropdown =
+const addNewMealDropdown = (mealType) =>
 `
     <span class="dropdown">
         <button class="dropdown-toggle text-muted" type="button" id="addMealButton1"
-            data-bs-toggle="dropdown" aria-expanded="false">
+            data-bs-toggle="dropdown" aria-expanded="false" onclick="setSelectedMeal('${mealType}')">
             <i class="fa-solid fa-plus"></i> Add New Meal
         </button>
         <ul class="dropdown-menu" aria-labelledby="addMealButton1">
@@ -330,3 +295,8 @@ const addNewMealDropdown =
         </ul>
     </span>
 `;
+
+// Sets hidden input value for selected meal type (to auto select for custom meal modal)
+function setSelectedMeal(mealType) {
+    $('#mealType').val(mealType);
+}

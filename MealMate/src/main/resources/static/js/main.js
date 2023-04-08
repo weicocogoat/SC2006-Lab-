@@ -68,4 +68,19 @@ $(document).ready(function() {
 	} else {
 		navbarOptions.innerHTML = `<a class="btn btn-light px-4" href="/login">Sign In</a>`;
 	}
+
+	// For Date Conversion (to local time)
+	// Reference: https://stackoverflow.com/questions/6982692/how-to-set-input-type-dates-default-value-to-today
+	Date.prototype.convertToLocal = (function() {
+	    var local = new Date(this);
+	    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+
+	    return local;
+	});
+
+	Date.prototype.toDateInputValue = (function() {
+		var local = new Date(this);
+		
+	    return local.toJSON().slice(0,10);
+	});
 });

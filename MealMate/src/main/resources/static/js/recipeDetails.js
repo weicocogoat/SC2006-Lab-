@@ -118,7 +118,7 @@ function addToMeal() {
 		"name": $('#recipeTitle').text(),
 		"calories": $('#calories').text().split(" ")[0],	// get float only, minus 'kcal' string
 		"mealType": $('#mealType').find(':selected').val(),
-		"mealDate": new Date().toISOString()
+		"mealDate": new Date().convertToLocal().toISOString()
 	}
 
 	// Create Meal
@@ -134,14 +134,16 @@ function addToMeal() {
         	//response.json()
         })
         .then(data => {
-        	// Some success message here
+        	// Success message here
+        	toastr.success("Meal successfully added!", "Added to Meal.");
 
         	// Hide Modal
 			let mealModal = bootstrap.Modal.getInstance(document.querySelector("#addMealModal"));
-			mealModal.hide();
+			mealModal.hide(); 
 
         })
         .catch((error) => {
+        	toastr.error("An error occurred, please try again!", "Failed to Add to Meal.");
             console.error('Error:', error);
         });
 }

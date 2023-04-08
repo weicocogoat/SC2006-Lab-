@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    // Set default date value for custom meal modal
+    $('#mealDate').val(new Date().convertToLocal().toDateInputValue());
+
     let userId = localStorage.getItem("id");
 
     if(userId) {
@@ -21,10 +24,11 @@ $(document).ready(function() {
                 return response.json();
              })
             .then(data => {
+                // Toggle Daily Summary Details to show
                 $('#summary').toggleClass("d-none");
 
                 // Get Daily Summary
-                getDailySummary();                
+                getDailySummary();
              })
             .catch((error) => {
                 console.error('Error:', error);
@@ -90,10 +94,13 @@ function getDailySummary() {
     let totalDailyCalories = 0;
     let bfastCalories = 0, lunchCalories = 0, dinnerCalories = 0, dessertCalories = 0;
 
+    console.log(new Date().toISOString());
+    console.log(new Date().convertToLocal().toISOString());
+
     if(userId != null) {
         const mealDTO = {
             "userId": userId,
-            "mealDate": new Date().toISOString()
+            "mealDate": new Date().convertToLocal().toISOString()
         }
     
         fetch('http://localhost:8080/api/meal/find/mealDate', {
@@ -150,42 +157,3 @@ const recipeView = (recipe) =>
         </div>
     </div>
 `;
-
-// Create Custom Meal
-function addCustomMeal() {
-    // New Meal Object
-    const newMeal = {
-        "userId": localStorage.getItem("id"),
-        "name": $('#mealName').val(),
-        "calories": $('#calories').val(),
-        "mealType": $('#mealType').find(':selected').val(),
-        "mealDate": new Date().toISOString()
-    }
-
-    // Create Meal
-    fetch('http://localhost:8080/api/meal/save', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newMeal)
-        })
-        .then(response => {
-            console.log(response);
-            //response.json()
-        })
-        .then(data => {
-            // Some success message here
-
-            // Hide Modal
-            let customMealModal = bootstrap.Modal.getInstance(document.querySelector("#customMealModal"));
-            customMealModal.hide();
-
-            // Update Summary
-            getDailySummary();
-
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-}

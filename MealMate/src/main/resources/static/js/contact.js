@@ -3,17 +3,17 @@ function saveFeedback(){
     const email = document.getElementById("email").value;
     const message = document.getElementById("message").value;
 
-    if (author.length == 0){
+    if (author.length == 0) {
         toastr.error("Please enter your name.");
         return;
     }
 
-    if (!ValidateEmail(email)){
+    if (!ValidateEmail(email)) {
         toastr.error("Please enter a valid email.");
         return;
     }
 
-    if (message == 0){
+    if (message.length == 0) {
         toastr.error("Please enter a valid feedback message.");
         return;
     }
@@ -28,7 +28,7 @@ function ValidateEmail(mail)
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)){
         return true;
     }
-    alert("You have entered an invalid email address!")
+
     return false;
 }
 

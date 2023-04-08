@@ -117,20 +117,26 @@
 
                         <br>
 
-                        <select id="mealType" class="form-select mb-4" name="mealType">
-                            <option value="Breakfast">Breakfast</option>
-                            <option value="Lunch">Lunch</option>
-                            <option value="Dinner">Dinner</option>
-                            <option value="Dessert">Dessert</option>
-                        </select>
-
                         <div class="row">
+                            <div class="col-sm-12 col-lg-6 mb-4">
+                                <select id="mealType" class="form-select" name="mealType">
+                                    <option value="Breakfast">Breakfast</option>
+                                    <option value="Lunch">Lunch</option>
+                                    <option value="Dinner">Dinner</option>
+                                    <option value="Dessert">Dessert</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-12 col-lg-6 mb-4">
+                                <input type="date" id="mealDate" class="form-control" placeholder="Enter Date">
+                            </div>
+
                             <div class="col-sm-12 col-lg-7 mb-4">
                                 <input type="text" id="mealName" class="form-control" placeholder="Enter meal name" name="mealName">
                             </div>
 
                             <div class="col-sm-12 col-lg-5 mb-4">
-                                <input type="text" id="calories" class="form-control" placeholder="Calories (kcal)" name="calories">
+                                <input type="number" id="calories" class="form-control" placeholder="Calories (kcal)" name="calories">
                             </div>
                         </div>
 
@@ -144,5 +150,6 @@
         <!-- Scripts -->
         <th:block th:insert="fragments/scripts.html :: scripts"></th:block>
         <script src="../js/index.js"></script>
+        <script src="../js/meals.js"></script>
     </body>
 </html>

@@ -92,8 +92,13 @@
         this.drawHeader(o.innerHTML);
         this.setCookie('selected_day', 1);
 
+        // Set date value on create custom meal modal (for profile page)
+        let selectedDate = selectedDay.convertToLocal();
+        $('#selectedDate').val(selectedDate);
+        $('#mealDate').val(selectedDate.toDateInputValue());
+
         // Get meals according to day selected (fn found in profile.js)
-        getMeals(selectedDay);
+        getMeals(selectedDay.convertToLocal());
     };
     
     Calendar.prototype.preMonth = function() {
