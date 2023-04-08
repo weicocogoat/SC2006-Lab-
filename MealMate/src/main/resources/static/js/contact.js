@@ -1,9 +1,9 @@
 function saveFeedback(){
-    const name = document.getElementById("name").value;
+    const author = document.getElementById("author").value;
     const email = document.getElementById("email").value;
-    const user_feedback = document.getElementById("user_feedback").value;
+    const message = document.getElementById("message").value;
 
-    if (name.length == 0){
+    if (author.length == 0){
         alert("Please input your name");
         return;
     }
@@ -12,26 +12,14 @@ function saveFeedback(){
         return;
     }
 
-    if (user_feedback == 0){
+    if (message == 0){
         alert("Feedback is not filled up yet");
         return;
     }
 
     //Can add code for backend here
-    console.log(name);
-    console.log(email);
-    console.log(user_feedback);
-
-
-    let myModal = new bootstrap.Modal(document.getElementById('myModal'), {});
-    myModal.show();
-
-    document.getElementById("name").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("user_feedback").value = "";
-
+    SubmitFeedback();
 }
-
 
 function ValidateEmail(mail) 
 {
@@ -41,4 +29,49 @@ function ValidateEmail(mail)
     }
     alert("You have entered an invalid email address!")
     return false;
+}
+
+function SubmitFeedback()
+{
+    const formData = new FormData();
+
+    const feedback = {
+        author: document.getElementById("author").value,
+        email:document.getElementById("email").value,
+        message: document.getElementById("message").value,
+        dateSent: new Date().toISOString()}
+
+        console.log(feedback);
+
+    fetch('http://localhost:8080/feedback', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+
+        body: JSON.stringify(feedback)
+    })
+    .then(response => {
+
+        // return some response from the backend (can either be success (200) or failure (e.g. 404, 401, 500 etc.))
+
+        return response;     // can be in different formats e.g. json, text etc.
+     })
+    .then(data => {
+
+            let myModal = new bootstrap.Modal(document.getElementById('myModal'), {});
+            myModal.show();
+
+            document.getElementById("author").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("message").value = "";
+        // if i'm not wrong this is when if there's a success, state what else do you want it to do here
+
+     })
+    .catch((error) => {
+
+        console.log('error');
+        console.log(error);
+        // otherwise if there's an error, do your error msgs here
+    });
 }

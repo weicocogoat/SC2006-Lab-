@@ -4,12 +4,14 @@ import com.codecrafters.MealMate.model.Feedback;
 import com.codecrafters.MealMate.repository.FeedbackRepository;
 import com.codecrafters.MealMate.services.FeedbackEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 
@@ -31,15 +33,15 @@ public class FeedbackController {
     }
 
     @PostMapping("/feedback")
-    public String submitFeedback(@Valid @ModelAttribute Feedback feedback, BindingResult bindingResult) {
+    public ResponseEntity<?> submitFeedback(@RequestBody Feedback feedback, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "feedback";
+            return ResponseEntity.badRequest().body("Please fill in all required fields.");
         }
 
         feedbackRepository.save(feedback);
         feedbackEmailService.sendFeedbackEmail(feedback);
 
-        return "redirect:/feedback?success";
+        return ResponseEntity.ok().body("Thank you for your feedback!");
     }
 }
 

@@ -16,9 +16,13 @@
         <div class="container p-5">
             <h1>Contact Us</h1>
 
+            <div th:if="${param.success}">
+                <p th:text="${successMessage}"></p>
+            </div>
+
             <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                <label for="author" class="form-label">Name</label>
+                <input type="text" class="form-control" id="author" name="author" placeholder="Name" required>
             </div>
 
             <div class="mb-3">
@@ -27,8 +31,8 @@
             </div>
 
             <div class="mb-3">
-                <label for="feedback" class="form-label">Feedback</label>
-                <textarea class="form-control" id="user_feedback" name="feedback" rows="5" required></textarea>
+                <label for="message" class="form-label">Feedback</label>
+                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
             </div>
 
             <div class="d-grid gap-2">
