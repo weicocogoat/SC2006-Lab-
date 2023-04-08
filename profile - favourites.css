@@ -1,0 +1,65 @@
+#searchFavourites {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+#recipeTitle {
+    width: 100%;
+    padding: 10px 35px 10px 15px;
+    border-radius: 25px;
+    border-color: #383838;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.search-button {
+    background: transparent;
+    border: none;
+    outline: none;
+    margin-left: -50px;
+
+}
+
+#createRecipe a {
+    text-decoration: none;
+    color: #faf5f5;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 5%;
+    padding-top: 3%;
+}
+
+.card {
+    width: 30%;
+    max-height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+img {
+    max-height: 70%;
+    object-fit: cover;
+}
+
+.card-body {
+    object-fit: contain;
+}
+
+#firstLine {
+    display: flex;
+    align-items: center;
+}
+
+#star-rating {
+    margin-left: 10px;
+}
