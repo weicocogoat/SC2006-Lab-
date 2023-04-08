@@ -17,6 +17,7 @@ $(document).ready(function() {
 
 let imgDataURL;
 function getImage(input) {
+
 	const img = input.files[0];
 
 	const fileReader = new FileReader();
@@ -36,6 +37,7 @@ function getImage(input) {
 }
 
 function searchIngredient() {
+	flag = 0;
 	const ingredient = document.getElementById("ingredientInput").value.trim();
 
 	if(ingredient.length == 0) {
@@ -61,7 +63,12 @@ function searchIngredient() {
 
 					// Display Result
 					displayResults(ingredientObj);
+					flag = 1;
 				});
+
+				if (flag == 0){
+					toastr.error("No results found");
+				}
 
 			}).catch(function(error) {
 				toastr.error("An error occurred, please try again!", "Failed to Search Ingredient.");
@@ -147,7 +154,7 @@ function calculateNutrition() {
 	// Calculate Calories
 	let quantity = document.getElementById("quantity").value;
 
-	let totalCalories = quantity * calories.amount;
+	let totalCalories = Math.round(quantity * calories.amount *100) / 100;
 
 	const nutritionValues = document.getElementById("nutritionValues");
 	nutritionValues.innerHTML = totalCalories + " " + calories.unit;
@@ -281,17 +288,49 @@ function createRecipe() {
 	const servingSize = document.getElementById("servingSize").value;
 	const prepTime = document.getElementById("prepTime").value;
 
+	if (recipeTitle === ""){
+		toastr.error("Please input a Recipe Title.");
+		return;
+	}
+	if (servingSize === ""  || parseInt(servingSize) < 1){
+		toastr.error("Please input a positive Serving Size.");
+		return;
+	}
+	if (prepTime === ""  || parseInt(prepTime) < 1){
+		toastr.error("Please input a positive Preparation Time.");
+		return;
+	}
+
 	let dietType = [];
 	$('input[name="dietType"]:checked').each(function() {
 		dietType.push(this.value);
 	});
 
 	const description = document.getElementById("desc").value;
+	if (description === ""){
+		toastr.error("Please input a Description.");
+		return;
+	}
+
+	if (ingredientsList.length == 0){
+		toastr.error("Please add the ingredients.");
+		return;
+	}
+
+	if(listOfSteps.length == 0){
+		toastr.error("Please add the list of steps.");
+		return;
+	}
 
 	// Calculate Total Calories for Entire Recipe
 	let totalCalories = 0;
 	for(var i = 0; i < ingredientsList.length; i++) {
 		totalCalories += ingredientsList[i].calories;
+	}
+
+	if (imgDataURL === undefined){
+		toastr.error("Please add image.");
+		return;
 	}
 
 	const newRecipe = {
