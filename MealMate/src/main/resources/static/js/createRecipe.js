@@ -41,13 +41,9 @@ function searchIngredient() {
 	if(ingredient.length == 0) {
 		// Show some error msg here
 		//console.log("pls enter");
-		toastr.error('pls enter');
+		toastr.error('Please enter a valid name.');
 		
 	} else {
-		// Display Spinner
-		//const searchSpinner = document.getElementById("searchSpinner");
-		//searchSpinner.classList.add("d-none");
-
 		fetch("https://api.spoonacular.com/food/ingredients/autocomplete?query="+ ingredient +"&metaInformation=true&number=2&apiKey=46e36064541946a6bf3c8f20c84f188a")
 			.then((resp) => resp.json())
 			.then(function(response) {
@@ -68,6 +64,7 @@ function searchIngredient() {
 				});
 
 			}).catch(function(error) {
+				toastr.error("An error occurred, please try again!", "Failed to Search Ingredient.");
 				console.log(error);
 			});
 	}
@@ -114,8 +111,6 @@ function displayModalDetails(ingredient) {
 			.then((resp) => resp.json())
 			.then(function(response) {
 
-				console.log(response);
-
 				let weightPerServing = response.nutrition.weightPerServing;		// An array containing amount (e.g. 108) and unit (e.g. g)
 
 				document.getElementById("quantityUnit").innerHTML = weightPerServing.unit;
@@ -139,6 +134,7 @@ function displayModalDetails(ingredient) {
 				};
 
 			}).catch(function(error) {
+				toastr.error("An error occurred, please try again!", "Failed to Load Details.");
 				console.log(error);
 			});
 
@@ -198,6 +194,9 @@ function addIngredient() {
 	</li>`;
 
 	ingredientList.innerHTML += newItem;
+
+	// Show Success Toast
+	toastr.success("Ingredient Successfully Added");
 }
 
 // Remove Ingredient from List
@@ -289,8 +288,6 @@ function createRecipe() {
 
 	const description = document.getElementById("desc").value;
 
-	//ingredientsList, listOfSteps
-
 	// Calculate Total Calories for Entire Recipe
 	let totalCalories = 0;
 	for(var i = 0; i < ingredientsList.length; i++) {
@@ -299,7 +296,7 @@ function createRecipe() {
 
 	const newRecipe = {
 		title: recipeTitle,
-		author: sessionStorage.getItem("id"),	// save userId for author
+		author: localStorage.getItem("id"),	// save userId for author
 		description: description,
 		dateCreated: new Date().toISOString(),
 		dietType: dietType,
@@ -314,7 +311,7 @@ function createRecipe() {
 
 	const testOutput = {
 		title: recipeTitle,
-		author: sessionStorage.getItem("id"),	// save userId for author
+		author: localStorage.getItem("id"),	// save userId for author
 		description: description,
 		dateCreated: new Date().toISOString(),
 		dietType: dietType,
@@ -339,10 +336,11 @@ function createRecipe() {
         	//response.json()
         })
         .then(data => {
-        	//console.log('Success:', data);
+        	toastr.success("Recipe successfully created.", "Recipe Created!");
         	resetForm();
         })
         .catch((error) => {
+        	toastr.error("An error occurred, please try again!", "Failed to Create Recipe.");
             console.error('Error:', error);
         });
 }

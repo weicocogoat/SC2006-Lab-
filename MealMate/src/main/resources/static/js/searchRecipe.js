@@ -48,9 +48,6 @@ function getRecipes() {
 	fetch("http://localhost:8080/api/recipes/all")
 		.then((resp) => resp.json())
 		.then(function(response) {
-
-			console.log(response);
-
 			response.forEach(function (item, index) {
                 const recipeObj = {
                 	id: item.id,
@@ -76,13 +73,11 @@ function getRecipes() {
 						break;
 					}
 			   }
-
-
           	});
 
 			for (var i = listOfRecipes.length - 1; i >= 0; i--){
-				console.log(listOfRecipes[i].calories);
-				console.log(cal);
+				//console.log(listOfRecipes[i].calories);
+				//console.log(cal);
 				if (listOfRecipes[i].calories > cal){
 					listOfRecipes.splice(i, 1);
 					listOfRecipeName.splice(i, 1);
@@ -100,7 +95,7 @@ function getRecipes() {
 // Recipe Card HTML View Template
 const recipeView = (recipe) => 
 	`
-	    <div class="recipeCard card shadow-sm mb-4">
+	    <div class="recipeCard card shadow-sm mb-4" data-aos="fade-up">
 	        <div class="row no-gutters">
 	            <div class="col-md-3">
 	            	<div class="recipeCardImg">
@@ -133,7 +128,6 @@ const recipeView = (recipe) =>
 ;
 
 function generateBadges(recipe) {
-	console.log(recipe.dietType);
 	let badgesView = "";
 
 	for(var i = 0; i < recipe.dietType.length; i++) {
@@ -151,7 +145,6 @@ function displayRecipes() {
 
 	for(var i=0; i < listOfRecipes.length; i++) {
 		const recipe = listOfRecipes[i];
-		//const itemViewHTML = recipeView(recipe.id, recipe.title, recipe.numOfBookmarks, recipe.servingSize, recipe.prepTime, recipe.description);
 		const itemViewHTML = recipeView(recipe);
 
 		recipeViewList.push(itemViewHTML);
@@ -263,22 +256,33 @@ function autocomplete(inp, arr) {
   }
 
 function searchIngredient(recipeName){
-	var i = 0;
-	for(i ; i < listOfRecipeName.length; i++) {
-		if (listOfRecipeName[i] === recipeName){
-			break;
+	console.log(listOfRecipeName);
+
+	if(recipeName.length <= 0) {
+		// If search field is empty
+		getRecipes();
+	} else {
+		var i = 0;
+		for(i ; i < listOfRecipeName.length; i++) {
+			if (listOfRecipeName[i] === recipeName){
+				break;
+			}
 		}
+
+		if(i > listOfRecipeName.length) {
+			// No results found
+			$('#recipeContainer').html("<h6 class='text-center'>No search results found!</h6>");
+		}
+
+		const recipeViewList = [];	// Array that will hold all individual HTML views to generate of each recipe
+		const itemViewHTML = recipeView(listOfRecipes[i]);
+		recipeViewList.push(itemViewHTML);
+
+		// Combine all the recipe cards together into a string
+		const recipeViewHTML = recipeViewList.join("\n");
+
+		// Insert into Recipe Container
+		const recipeContainer = document.getElementById("recipeContainer");
+		recipeContainer.innerHTML = recipeViewHTML;
 	}
-
-	const recipeViewList = [];	// Array that will hold all individual HTML views to generate of each recipe
-	const itemViewHTML = recipeView(listOfRecipes[i]);
-	recipeViewList.push(itemViewHTML);
-
-	// Combine all the recipe cards together into a string
-	const recipeViewHTML = recipeViewList.join("\n");
-
-	// Insert into Recipe Container
-	const recipeContainer = document.getElementById("recipeContainer");
-	recipeContainer.innerHTML = recipeViewHTML;
-
 }

@@ -114,7 +114,7 @@ function loadRecipeDetails(recipe) {
 function addToMeal() {
 	// New Meal Object
 	const newMeal = {
-		"userId": sessionStorage.getItem("id"),
+		"userId": localStorage.getItem("id"),
 		"name": $('#recipeTitle').text(),
 		"calories": $('#calories').text().split(" ")[0],	// get float only, minus 'kcal' string
 		"mealType": $('#mealType').find(':selected').val(),

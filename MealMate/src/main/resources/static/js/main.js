@@ -1,11 +1,19 @@
 $(document).ready(function() {
+	// Initiate Animate on Scroll (AOS) Library
+	AOS.init();
+
+	// Toast Options
+	toastr.options = {
+		"positionClass": "toast-bottom-right"
+	}
+
 	const recipeOptions = document.getElementById("recipeOptions");
 	const navbarOptions = document.getElementById("navbarOptions");
 
-	let userId = sessionStorage.getItem("id");
+	let userId = localStorage.getItem("id");
 
 	if(userId) {
-		let accessToken = sessionStorage.getItem("accessToken");
+		let accessToken = localStorage.getItem("accessToken");
 		console.log("Access token: " + accessToken);
 
 		// Get User Information
@@ -24,8 +32,6 @@ $(document).ready(function() {
 	            return response.json();
 	         })
 	        .then(data => {
-	            console.log(data);
-
 	            // Update Recipes Dropdown View
 	            $("#recipeOptions").toggleClass("dropdown");
 	            recipeOptions.innerHTML =

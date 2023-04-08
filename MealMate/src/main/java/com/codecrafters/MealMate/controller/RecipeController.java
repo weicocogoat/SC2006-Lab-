@@ -34,7 +34,6 @@ public class RecipeController {
     @GetMapping("/find/{id}")
     public Optional<Recipe> getRecipeById(@PathVariable String id)
     {
-        //ObjectId recipeId = new ObjectId(id);
         return recipeRepo.findById(id);
     }
 

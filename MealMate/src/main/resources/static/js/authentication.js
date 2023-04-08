@@ -68,10 +68,10 @@ function authenticateUser() {
         .then(data => {
             console.log('Success:', data);
 
-            // Save userId, accessToken and refreshToken into session storage
-            window.sessionStorage.setItem('id', data.userId);
-            window.sessionStorage.setItem('accessToken', data.accessToken);
-            window.sessionStorage.setItem('refreshToken', data.refreshToken);
+            // Save userId, accessToken and refreshToken into local storage
+            window.localStorage.setItem('id', data.userId);
+            window.localStorage.setItem('accessToken', data.accessToken);
+            window.localStorage.setItem('refreshToken', data.refreshToken);
 
             // Redirect to home page
             window.location.href="/";
@@ -84,8 +84,8 @@ function authenticateUser() {
 }
 
 function logoutUser() {
-    // Clear Session Storage
-    sessionStorage.clear();
+    // Clear Local Storage
+    localStorage.clear();
 
     // Redirect to home page
     window.location.href="/";

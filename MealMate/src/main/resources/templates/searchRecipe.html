@@ -4,9 +4,6 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.108.0">
     
     <title>MealMate | Search Recipes</title>
 
@@ -38,11 +35,11 @@
         </div>
 
         <div class="row mt-5">
-            <div class="col-sm-12 col-lg-3">
+            <div class="col-sm-12 col-lg-3 mb-5">
                 <h4>Filter Options</h4>
                 <hr class="mt-4 mb-4">
 
-                <h5>By Calories(Max)</h5>
+                <h5>By Calories (Max)</h5>
                 <div class="slidecontainer mb-5">
                     <input type="range" min="100" max="1000" value="500" class="slider" id="myRange">
                     <p>Value (kcal): <span id="val"></span></p>
@@ -73,38 +70,7 @@
                 <button id = "filter_button" type = "button" onclick="getRecipes()">Apply Filter</button>
             </div>
 
-            <div class="col-sm-12 col-lg-9">
-                <!-- If want to load data dynamically, comment this section here -->
-                <!--
-                <div id="searchResults" class="searchResults">
-                    <div class="card shadow-sm mb-4">
-                        <div class="row no-gutters">
-                            <div class="col-md-3">
-                                <img src="images/pancakes.jpg" class="card-img" alt="Alternative text for image">
-                            </div>
-                            <div class="col-md-9">
-                                <div class="card-body">
-                                    <div id="firstLine">
-                                        <h5 id="title">Recipe Title</h5>
-                                        <h6 id="star-rating"> 3.5 <i class="fa-solid fa-star"></i></h6>
-                                    </div>
-                                    <div id="secondLine" class="fw-bold text-muted">
-                                        <p id="servingSize">2 servings</p> 
-                                        <p id="duration"> 45 minutes</p>
-                                    </div>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                    </p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <button type="button" id="readMore"><h6>Read More <i
-                                            class="fa-solid fa-arrow-right"></i></h6></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> Until here -->
-
+            <div class="col-sm-12 col-lg-9 mb-5">
                 <!-- This is the recipe container that will hold the dynamic data retrieved from DB -->
                 <div id="recipeContainer">
                 </div>

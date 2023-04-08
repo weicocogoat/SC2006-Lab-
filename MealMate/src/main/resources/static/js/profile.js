@@ -67,8 +67,8 @@ function loadRecipes() {
 
 // Load User Details
 function getUserDetails() {
-    let userId = sessionStorage.getItem('id');
-    let accessToken = sessionStorage.getItem('accessToken');
+    let userId = localStorage.getItem('id');
+    let accessToken = localStorage.getItem('accessToken');
 
     // Get User Information
     fetch('http://localhost:8080/api/users/' + userId, {
@@ -102,7 +102,7 @@ function getUserDetails() {
 
 // Calculate Daily Calories Summary 
 function getDailySummary() {
-    let userId = sessionStorage.getItem('id');
+    let userId = localStorage.getItem('id');
 
     let totalDailyCalories = 0;
     let bfastCalories = 0, lunchCalories = 0, dinnerCalories = 0, dessertCalories = 0;
@@ -213,7 +213,7 @@ function deleteRecipe() {
 function addCustomMeal() {
     // New Meal Object
     const newMeal = {
-        "userId": sessionStorage.getItem("id"),
+        "userId": localStorage.getItem("id"),
         "name": $('#mealName').val(),
         "calories": $('#calories').val(),
         "mealType": $('#mealType').find(':selected').val(),
@@ -252,7 +252,7 @@ function addCustomMeal() {
 }
 
 function getMeals(date) {
-    let userId = sessionStorage.getItem('id');
+    let userId = localStorage.getItem('id');
 
     const mealDTO = {
         "userId": userId,

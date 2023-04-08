@@ -1,8 +1,8 @@
 $(document).ready(function() {
-    let userId = sessionStorage.getItem("id");
+    let userId = localStorage.getItem("id");
 
     if(userId) {
-        let accessToken = sessionStorage.getItem("accessToken");
+        let accessToken = localStorage.getItem("accessToken");
         console.log("Access token: " + accessToken);
 
         // Get User Information
@@ -21,7 +21,7 @@ $(document).ready(function() {
                 return response.json();
              })
             .then(data => {
-                $('#summary').show();
+                $('#summary').toggleClass("d-none");
 
                 // Get Daily Summary
                 getDailySummary();                
@@ -30,7 +30,7 @@ $(document).ready(function() {
                 console.error('Error:', error);
             });
     } else {
-        $('#summary').hide();
+        $('#summary').addClass("d-none");
     }
 
     let listOfRecipes = [];
@@ -78,8 +78,6 @@ $(document).ready(function() {
                 const recipeContainer = document.getElementById("recipeContainer");
                 recipeContainer.innerHTML = recipeViewHTML;
 
-              console.log(listOfRecipes);
-
         }).catch(function(error) {
             console.log(error);
         });
@@ -87,7 +85,7 @@ $(document).ready(function() {
 
 // Calculate Daily Calories Summary 
 function getDailySummary() {
-    let userId = sessionStorage.getItem('id');
+    let userId = localStorage.getItem('id');
 
     let totalDailyCalories = 0;
     let bfastCalories = 0, lunchCalories = 0, dinnerCalories = 0, dessertCalories = 0;
@@ -137,7 +135,7 @@ function getDailySummary() {
 // Recipe Card View
 const recipeView = (recipe) => 
 `
-    <div class="col-sm-12 col-lg-4 mb-3">
+    <div class="col-sm-12 col-lg-4 mb-3" data-aos="fade-up">
         <div class="card">
             <img src="${recipe.image}" class="card-img-top">
             <div class="card-body">
@@ -157,7 +155,7 @@ const recipeView = (recipe) =>
 function addCustomMeal() {
     // New Meal Object
     const newMeal = {
-        "userId": sessionStorage.getItem("id"),
+        "userId": localStorage.getItem("id"),
         "name": $('#mealName').val(),
         "calories": $('#calories').val(),
         "mealType": $('#mealType').find(':selected').val(),

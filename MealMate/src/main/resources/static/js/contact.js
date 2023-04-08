@@ -4,16 +4,17 @@ function saveFeedback(){
     const message = document.getElementById("message").value;
 
     if (author.length == 0){
-        alert("Please input your name");
+        toastr.error("Please enter your name.");
         return;
     }
 
     if (!ValidateEmail(email)){
+        toastr.error("Please enter a valid email.");
         return;
     }
 
     if (message == 0){
-        alert("Feedback is not filled up yet");
+        toastr.error("Please enter a valid feedback message.");
         return;
     }
 
@@ -53,25 +54,22 @@ function SubmitFeedback()
     })
     .then(response => {
 
-        // return some response from the backend (can either be success (200) or failure (e.g. 404, 401, 500 etc.))
-
-        return response;     // can be in different formats e.g. json, text etc.
+        return response;
      })
     .then(data => {
+        // Show Success Modal
+        let myModal = new bootstrap.Modal(document.getElementById('myModal'), {});
+        myModal.show();
 
-            let myModal = new bootstrap.Modal(document.getElementById('myModal'), {});
-            myModal.show();
-
-            document.getElementById("author").value = "";
-            document.getElementById("email").value = "";
-            document.getElementById("message").value = "";
-        // if i'm not wrong this is when if there's a success, state what else do you want it to do here
+        // Clear Form
+        document.getElementById("author").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("message").value = "";
 
      })
     .catch((error) => {
-
+        toastr.error("An error occurred, please try again!", "Failed to Send Feedback");
         console.log('error');
         console.log(error);
-        // otherwise if there's an error, do your error msgs here
     });
 }

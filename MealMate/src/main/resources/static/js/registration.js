@@ -60,14 +60,6 @@ function validateForm() {
     }
 
     //Add code to validate with db (check for dupes)
-
-    const userInfo = {
-        username : username,
-        password : password
-    }
-    window.sessionStorage.setItem('user', JSON.stringify(userInfo));
-
-    //Add code to store username, password, height, weight to DB
     createUser();
 
     return true;
