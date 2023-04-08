@@ -154,14 +154,16 @@ function calculateNutrition() {
 	// Calculate Calories
 	let quantity = document.getElementById("quantity").value;
 
-	let totalCalories = Math.round(quantity * calories.amount *100) / 100;
+	if(quantity > 0) {
+		let totalCalories = Math.round(quantity * calories.amount *100) / 100;
 
-	const nutritionValues = document.getElementById("nutritionValues");
-	nutritionValues.innerHTML = totalCalories + " " + calories.unit;
+		const nutritionValues = document.getElementById("nutritionValues");
+		nutritionValues.innerHTML = totalCalories + " " + calories.unit;
 
-	// Update Ingredient Object
-	currIngredient.calories = totalCalories;
-	currIngredient.quantity = quantity;
+		// Update Ingredient Object
+		currIngredient.calories = totalCalories;
+		currIngredient.quantity = quantity;
+	}
 }
 
 
@@ -170,40 +172,44 @@ let ingredientsList = [];
 // Add Ingredient to List
 function addIngredient() {
 	
-	// Hide Modal
-	let ingredientModal = bootstrap.Modal.getInstance(document.querySelector("#ingredientModal"));
-	ingredientModal.hide();
+	if($('#quantity').val().length == 0 || $('#quantity').val() <= 0) {
+		toastr.error("Please enter a valid quantity.");
+	} else {
+		// Hide Modal
+		let ingredientModal = bootstrap.Modal.getInstance(document.querySelector("#ingredientModal"));
+		ingredientModal.hide();
 
-	console.log("Trying to add...");
-	console.log(currIngredient);
+		console.log("Trying to add...");
+		console.log(currIngredient);
 
-	// Add to Global Array
-	ingredientsList.push(currIngredient);
+		// Add to Global Array
+		ingredientsList.push(currIngredient);
 
-	// Reset Add Ingredient Modal Details
-	$('#quantity').val("");
-	$('#nutritionValues').text("Not calculated yet");
+		// Reset Add Ingredient Modal Details
+		$('#quantity').val("");
+		$('#nutritionValues').text("Not calculated yet");
 
-	// Remove empty message if visible
-	if(ingredientsList.length != 0) {
-		document.getElementById("noItemsMsg").classList.remove("d-block");
-		document.getElementById("noItemsMsg").classList.add("d-none");
+		// Remove empty message if visible
+		if(ingredientsList.length != 0) {
+			document.getElementById("noItemsMsg").classList.remove("d-block");
+			document.getElementById("noItemsMsg").classList.add("d-none");
+		}
+
+		// Display Ingredient (right-side list)
+		const ingredientList = document.getElementById("ingredientList");
+
+		const newItem = 
+		`<li id="${currIngredient.name}ListItem">
+			<img src="https://spoonacular.com/cdn/ingredients_100x100/${currIngredient.image}">
+			${currIngredient.name} - ${currIngredient.calories} kcal (${currIngredient.quantity} ${currIngredient.quantityUnit})
+			<button class="btn" type="button" onclick="removeIngredient('${currIngredient.name}')"><i class="fa-solid fa-xmark"></i></button>
+		</li>`;
+
+		ingredientList.innerHTML += newItem;
+
+		// Show Success Toast
+		toastr.success("Ingredient Successfully Added");
 	}
-
-	// Display Ingredient (right-side list)
-	const ingredientList = document.getElementById("ingredientList");
-
-	const newItem = 
-	`<li id="${currIngredient.name}ListItem">
-		<img src="https://spoonacular.com/cdn/ingredients_100x100/${currIngredient.image}">
-		${currIngredient.name} - ${currIngredient.calories} kcal (${currIngredient.quantity} ${currIngredient.quantityUnit})
-		<button class="btn" type="button" onclick="removeIngredient('${currIngredient.name}')"><i class="fa-solid fa-xmark"></i></button>
-	</li>`;
-
-	ingredientList.innerHTML += newItem;
-
-	// Show Success Toast
-	toastr.success("Ingredient Successfully Added");
 }
 
 // Remove Ingredient from List

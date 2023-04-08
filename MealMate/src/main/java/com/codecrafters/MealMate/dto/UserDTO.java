@@ -2,6 +2,8 @@ package com.codecrafters.MealMate.dto;
 
 import com.codecrafters.MealMate.model.User;
 
+import java.time.LocalDate;
+
 public class UserDTO {
     private String id;
     private String username;
@@ -10,6 +12,7 @@ public class UserDTO {
     private int weight;
     private double bmi;
     private String[] recipeBookmarks;
+    private LocalDate dateJoined;
 
     public UserDTO(User user) {
         this.id = user.getId();
@@ -19,6 +22,7 @@ public class UserDTO {
         this.weight = user.getWeight();
         this.bmi = user.getBmi();
         this.recipeBookmarks = user.getRecipeBookmarks();
+        this.dateJoined = user.getDateJoined();
     }
 
     public String getId() {
@@ -77,18 +81,11 @@ public class UserDTO {
         this.recipeBookmarks = recipeBookmarks;
     }
 
-    /*
-    public static UserDTO from(User user) {
-        return UserDTO.builder()
-                .id(user.getId())
-                .username(user.getUsername())
-                .email(user.getEmail())
-                .height(user.getHeight())
-                .weight(user.getWeight())
-                .bmi(user.getBmi())
-                .recipeBookmarks(user.getRecipeBookmarks())
-                .build();
+    public LocalDate getDateJoined() {
+        return dateJoined;
     }
 
-     */
+    public void setDateJoined(LocalDate dateJoined) {
+        this.dateJoined = dateJoined;
+    }
 }

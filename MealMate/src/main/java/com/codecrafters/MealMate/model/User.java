@@ -2,11 +2,13 @@ package com.codecrafters.MealMate.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import org.bson.codecs.jsr310.LocalDateCodec;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -23,28 +25,31 @@ public class User implements UserDetails {
     private int weight;
     private double bmi;
     private String[] recipeBookmarks;   // Just store the ID of Recipe
+    private LocalDate dateJoined;
 
     public User() {}
 
-    public User(String username, String password, String email, int height, int weight, double bmi, String[] recipeBookmarks) {
+    public User(String username, String password, String email, int height, int weight, double bmi, String[] recipeBookmarks, LocalDate dateJoined) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.height = height;
         this.weight = weight;
-        this.bmi = bmi;
+        this.bmi = ((double) this.weight / (double) this.height / (double) this.height) * 10000;
         this.recipeBookmarks = recipeBookmarks;
+        this.dateJoined = dateJoined;
     }
 
-    public User(String id, String username, String password, String email, int height, int weight, double bmi, String[] recipeBookmarks) {
+    public User(String id, String username, String password, String email, int height, int weight, double bmi, String[] recipeBookmarks, LocalDate dateJoined) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.height = height;
         this.weight = weight;
-        this.bmi = bmi;
+        this.bmi = ((double) this.weight / (double) this.height / (double) this.height) * 10000;
         this.recipeBookmarks = recipeBookmarks;
+        this.dateJoined = dateJoined;
     }
 
     public String getId() {
@@ -99,11 +104,13 @@ public class User implements UserDetails {
     }
 
     public double getBmi() {
-        return bmi;
+        //return bmi;
+
+        return ((double) this.weight / (double) this.height / (double) this.height) * 10000;
     }
 
     public void setBmi(double bmi) {
-        this.bmi = (this.weight / this.height / this.height) * 10000;
+        this.bmi = ((double) this.weight / (double) this.height / (double) this.height) * 10000;
     }
 
     public String[] getRecipeBookmarks() {
@@ -112,6 +119,14 @@ public class User implements UserDetails {
 
     public void setRecipeBookmarks(String[] recipeBookmarks) {
         this.recipeBookmarks = recipeBookmarks;
+    }
+
+    public LocalDate getDateJoined() {
+        return dateJoined;
+    }
+
+    public void setDateJoined(LocalDate dateJoined) {
+        this.dateJoined = dateJoined;
     }
 
     @Override

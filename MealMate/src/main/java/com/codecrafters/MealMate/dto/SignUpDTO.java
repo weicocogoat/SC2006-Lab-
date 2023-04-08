@@ -1,5 +1,7 @@
 package com.codecrafters.MealMate.dto;
 
+import java.time.LocalDate;
+
 public class SignUpDTO {
     private String username;
     private String password;
@@ -8,6 +10,7 @@ public class SignUpDTO {
     private int weight;
     private double bmi;
     private String[] recipeBookmarks;   // Just store the ID of Recipe
+    private LocalDate dateJoined;
 
     public String getUsername() {
         return username;
@@ -54,7 +57,7 @@ public class SignUpDTO {
     }
 
     public void setBmi(double bmi) {
-        this.bmi = (this.weight / this.height / this.height) * 10000;
+        this.bmi = ((double) this.weight / (double) this.height / (double) this.height) * 10000;
     }
 
     public String[] getRecipeBookmarks() {
@@ -63,5 +66,13 @@ public class SignUpDTO {
 
     public void setRecipeBookmarks(String[] recipeBookmarks) {
         this.recipeBookmarks = recipeBookmarks;
+    }
+
+    public LocalDate getDateJoined() {
+        return dateJoined;
+    }
+
+    public void setDateJoined(LocalDate dateJoined) {
+        this.dateJoined = dateJoined;
     }
 }

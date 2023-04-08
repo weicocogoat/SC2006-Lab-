@@ -36,26 +36,37 @@ function validateForm() {
 
     //Empty username, email and password
     if (username.length < 8) {
-      alert("Username must be at least 8 characters");
+      toastr.error("Username must be at least 8 characters.");
       return false;
     }
 
     if (!ValidateEmail(email)){
+        toastr.error("You have entered an invalid email address!");
         return false;
     }
 
     if (password.length < 8) {
-        alert("Password must be at least 8 characters");
+        toastr.error("Password must be at least 8 characters.");
         return false;
     }
 
     if (confirmpassword === "") {
-        // alert("Password must be filled out");
+        toastr.error("Please confirm your password.");
         return false;
     }
 
     if (password !== confirmpassword) {
-        alert('Passwords do not match!');
+        toastr.error("Passwords do not match!");
+        return false;
+    }
+
+    if (weight <= 0 || weight.length == 0) {
+        toastr.error("Please enter a valid weight.");
+        return false;
+    }
+
+    if (height <= 0 || height.length == 0) {
+        toastr.error("Please enter a valid height.");
         return false;
     }
 
@@ -71,7 +82,7 @@ function ValidateEmail(mail)
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)){
         return true;
     }
-    alert("You have entered an invalid email address!")
+
     return false;
 }
 
@@ -84,15 +95,20 @@ function createUser() {
 
     const bmi = calculateBmi(height, weight);
 
+    const currDate = new Date().convertToLocal();
+
     const newUser = {
         username: username,
         password: password,
         email: email,
         height: height,
         weight: weight,
-        bmi: bmi,
-        recipeBookmarks: []
+        bmi: bmi.toString(),
+        recipeBookmarks: [],
+        dateJoined: new Date().convertToLocal().toDateInputValue()
     };
+
+    console.log(newUser);
 
     fetch('http://localhost:8080/api/auth/register', {
              method: 'POST',
@@ -108,8 +124,9 @@ function createUser() {
          .catch((error) => {
              console.error('Error:', error);
          });
+         
 }
 
 function calculateBmi(height, weight) {
-    return (weight/height/height) * 10000;
+    return ((weight/height/height) * 10000).toFixed(2);
 }
