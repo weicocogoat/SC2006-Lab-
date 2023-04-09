@@ -405,3 +405,8 @@ function resetForm() {
 	listOfSteps = [];
 	$('#stepsList').html("");
 }
+
+// Add Recipe to Bookmark
+function addBookmark() {
+
+}

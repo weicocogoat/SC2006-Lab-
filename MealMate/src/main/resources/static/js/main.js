@@ -4,7 +4,8 @@ $(document).ready(function() {
 
 	// Toast Options
 	toastr.options = {
-		"positionClass": "toast-bottom-right"
+		"positionClass": "toast-bottom-right",
+		"preventDuplicates": true
 	}
 
 	const recipeOptions = document.getElementById("recipeOptions");

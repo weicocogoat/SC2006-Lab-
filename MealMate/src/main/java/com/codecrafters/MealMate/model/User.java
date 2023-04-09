@@ -2,13 +2,13 @@ package com.codecrafters.MealMate.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import org.bson.codecs.jsr310.LocalDateCodec;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -24,12 +24,13 @@ public class User implements UserDetails {
     private int height;
     private int weight;
     private double bmi;
-    private String[] recipeBookmarks;   // Just store the ID of Recipe
+    //private String[] recipeBookmarks;   // Just store the ID of Recipe
+    private ArrayList<String> recipeBookmarks;
     private LocalDate dateJoined;
 
     public User() {}
 
-    public User(String username, String password, String email, int height, int weight, double bmi, String[] recipeBookmarks, LocalDate dateJoined) {
+    public User(String username, String password, String email, int height, int weight, double bmi, ArrayList<String> recipeBookmarks, LocalDate dateJoined) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -40,7 +41,7 @@ public class User implements UserDetails {
         this.dateJoined = dateJoined;
     }
 
-    public User(String id, String username, String password, String email, int height, int weight, double bmi, String[] recipeBookmarks, LocalDate dateJoined) {
+    public User(String id, String username, String password, String email, int height, int weight, double bmi, ArrayList<String> recipeBookmarks, LocalDate dateJoined) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -109,16 +110,20 @@ public class User implements UserDetails {
         return ((double) this.weight / (double) this.height / (double) this.height) * 10000;
     }
 
-    public void setBmi(double bmi) {
+    public void setBmi() {
         this.bmi = ((double) this.weight / (double) this.height / (double) this.height) * 10000;
     }
 
-    public String[] getRecipeBookmarks() {
+    public ArrayList<String> getRecipeBookmarks() {
         return recipeBookmarks;
     }
 
-    public void setRecipeBookmarks(String[] recipeBookmarks) {
+    public void setRecipeBookmarks(ArrayList<String> recipeBookmarks) {
         this.recipeBookmarks = recipeBookmarks;
+    }
+
+    public void addBookmark(String recipeId) {
+        this.recipeBookmarks.add(recipeId);
     }
 
     public LocalDate getDateJoined() {
