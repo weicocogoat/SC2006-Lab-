@@ -257,6 +257,11 @@ function autocomplete(inp, arr) {
 
 function searchIngredient(recipeName){
 	console.log(listOfRecipeName);
+	
+	if (recipeName === ""){
+		toastr.error("Please input a Recipe Title.");
+		return;
+	}
 
 	if(recipeName.length <= 0) {
 		// If search field is empty
