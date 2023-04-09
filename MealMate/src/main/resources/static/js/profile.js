@@ -11,6 +11,9 @@ $(document).ready(function() {
     // Load User Recipes
     loadRecipes();
 
+    // Load Bookmarks
+    loadBookmarks();
+
     // Set default date value for custom meal modal
     $('#mealDate').val(new Date().convertToLocal().toDateInputValue());
 });
@@ -19,33 +22,41 @@ $(document).ready(function() {
 function loadRecipes() {
     let listOfRecipes = [];
 
-    fetch("http://localhost:8080/api/recipes/all")
+    let userId = localStorage.getItem('id');
+    const recipeContainer = document.getElementById("myRecipesContainer");
+
+    fetch("http://localhost:8080/api/recipes/user/" + userId)
         .then((resp) => resp.json())
         .then(function(response) {
 
-            response.forEach(function (item, index) {
-                const recipeObj = {
-                    id: item.id,
-                    title: item.title,
-                    author: item.author,
-                    image: item.image,
-                    description: item.description,
-                    dateCreated: item.dateCreated,
-                    dietType: item.dietType,
-                    numOfBookmarks: item.numOfBookmarks,
-                    prepTime: item.prepTime,
-                    servingSize: item.servingSize,
-                    calories: item.calories,
-                    ingredients: item.ingredients,
-                    steps: item.steps
-                };
+            console.log(response.length);
 
-                // Store inside global array
-                listOfRecipes.push(recipeObj);
-              }); 
+            let recipes = response;
 
-              // Display Recipes
-              const recipeViewList = [];
+            if(recipes.length > 0) {
+                recipes.forEach(function (item, index) {
+                    const recipeObj = {
+                        id: item.id,
+                        title: item.title,
+                        author: item.author,
+                        image: item.image,
+                        description: item.description,
+                        dateCreated: item.dateCreated,
+                        dietType: item.dietType,
+                        numOfBookmarks: item.numOfBookmarks,
+                        prepTime: item.prepTime,
+                        servingSize: item.servingSize,
+                        calories: item.calories,
+                        ingredients: item.ingredients,
+                        steps: item.steps
+                    };
+
+                    // Store inside global array
+                    listOfRecipes.push(recipeObj);
+                }); 
+
+                // Display Recipes
+                const recipeViewList = [];
 
                 for(var i=0; i < listOfRecipes.length; i++) {
                     const recipe = listOfRecipes[i];
@@ -58,10 +69,11 @@ function loadRecipes() {
                 const recipeViewHTML = recipeViewList.join("\n");
 
                 // Insert into Recipe Container
-                const recipeContainer = document.getElementById("myRecipesContainer");
                 recipeContainer.innerHTML = recipeViewHTML;
 
-              console.log(listOfRecipes);
+            } else {
+                recipeContainer.innerHTML = recipeContainer.innerHTML = "<h6 class='text-muted text-center'>No Recipes Found</h6>";
+            }
 
         }).catch(function(error) {
             toastr.error("An error occurred, please try again!", "Failed to Load Recipes.");
@@ -96,6 +108,7 @@ function getUserDetails() {
             $('#height').text(data.height + "cm");
             $('#weight').text(data.weight + "kg");
             $('#bmi').text(parseFloat(data.bmi).toFixed(2));
+            $('#dateJoined').text(new Date(data.dateJoined).convertToLocal().toDateInputValue());
 
             // Load current user values on Edit Profile Modal
             $('#editUsername').val(data.username);
@@ -161,12 +174,15 @@ function getDailySummary() {
 const myRecipeView = (recipe) => 
 `
 	<div class="col-sm-12 col-lg-4 mb-3">
-		<div class="card">
+		<div class="card h-100">
 	        <img src="${recipe.image}" class="card-img-top">
 	        <div class="card-body">
 	            <div id="firstLine">
-	                <h5 id="card-title">${recipe.title} ${recipe.numOfBookmarks} <i class="fa-solid fa-star"></i></h5>
+	                <h5 id="card-title"><a class="text-dark" href="/recipes/${recipe.id}">${recipe.title}</a> <span class="small text-muted fw-bold ml-2">${recipe.numOfBookmarks} <i class="fa-solid fa-star"></i></span></h5>
+                    <h6>
+
 	                <a href="#" id="recipeDropdown${recipe.id}" class="text-dark" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+
                     <ul class="dropdown-menu" aria-labelledby="recipeDropdown${recipe.id}">
                         <li>
                             <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteRecipeModal" data-recipe-id="${recipe.id}" onclick="updateDeleteModal(this)">
@@ -181,7 +197,21 @@ const myRecipeView = (recipe) =>
 	</div>
 `;
 
-//<a class="stretched-link" href="recipes/${recipe.id}"></a>
+const bookmarkView = (recipe) => 
+`
+    <div class="col-sm-12 col-lg-4 mb-3">
+        <div class="card h-100">
+            <img src="${recipe.image}" class="card-img-top">
+            <div class="card-body">
+                <div id="firstLine">
+                    <h5 id="card-title"><a class="text-dark" href="/recipes/${recipe.id}">${recipe.title}</a> <span class="small text-muted fw-bold ml-2">${recipe.numOfBookmarks} <i class="fa-solid fa-star"></i></span></h5>
+                    <h6>
+                </div>
+                <p class="card-text">${recipe.description}</p>
+            </div>
+        </div>
+    </div>
+`;
 
 function updateDeleteModal(event) {
     // Fetch data-recipe-id attribute value from selected recipe to delete (on card)
@@ -189,6 +219,7 @@ function updateDeleteModal(event) {
     $('#deleteRecipeBtn').attr('data-recipe-id', recipeToDelete);
 }
 
+// Delete Existing Recipe
 function deleteRecipe() {
     // Fetch data-recipe-id attribute value from deleteRecipeBtn (on modal)
     const recipeToDelete = $('#deleteRecipeBtn').data('recipe-id');
@@ -211,6 +242,8 @@ function deleteRecipe() {
         // Hide Modal
         let deleteModal = bootstrap.Modal.getInstance(document.querySelector("#deleteRecipeModal"));
         deleteModal.hide();
+
+        toastr.success("Recipe successfully deleted!", "Recipe Deleted");
     })
     .catch((error) => {
         toastr.error("An error occurred, please try again!", "Failed to Delete Recipe.");
@@ -218,6 +251,7 @@ function deleteRecipe() {
     });
 }
 
+// Get User Meals
 function getMeals(date) {
     let userId = localStorage.getItem('id');
 
@@ -306,6 +340,16 @@ function setSelectedMeal(mealType) {
 
 // Update User Details
 function saveProfile() {
+    let username = $('#editUsername').val();
+    let height = $('#editHeight').val();
+    let weight = $('#editWeight').val();
+
+    if(!username || !height || !weight) {
+        toastr.error("Please ensure that all fields are filled in.");
+
+        return false;
+    }
+
     let userId = localStorage.getItem('id');
 
     const newUserDetails = {
@@ -333,9 +377,82 @@ function saveProfile() {
 
             // Success Toast Message
             toastr.success("Account details successfuly updated!", "Account Details Saved");
+
+            // Hide Modal
+            let editProfileModal = bootstrap.Modal.getInstance(document.querySelector("#editProfileModal"));
+            editProfileModal.hide();
          })
         .catch((error) => {
             toastr.error("An error occurred, please try again!", "Failed to Save Details");
             console.error('Error:', error);
         });
+}
+
+// Get User Bookmarks
+function loadBookmarks() {
+    let userId = localStorage.getItem('id');
+    const bookmarkCont = document.getElementById('bookmarksContainer');
+
+    if(userId) {
+        fetch('http://localhost:8080/api/users/' + userId + "/bookmarks", {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+        .then(response => {
+
+            return response.json();
+         })
+        .then(data => {
+            console.log(data);
+
+            let bookmarks = data;
+
+            if(bookmarks.length > 0) {
+                for(var i = 0; i < bookmarks.length; i++) {
+                    let recipeId = bookmarks[i]
+
+                    // Fetch details of each recipe bookmark
+                    fetch("http://localhost:8080/api/recipes/find/" + recipeId)
+                    .then((resp) => resp.json())
+                    .then(function(response) {
+
+                        const recipe = {
+                            id: response.id,
+                            title: response.title,
+                            author: response.author,
+                            image: response.image,
+                            description: response.description,
+                            dateCreated: response.dateCreated,
+                            dietType: response.dietType,
+                            numOfBookmarks: response.numOfBookmarks,
+                            prepTime: response.prepTime,
+                            servingSize: response.servingSize,
+                            calories: response.calories,
+                            ingredients: response.ingredients,
+                            steps: response.steps
+                        }
+
+                        // Load Recipe Details on View
+                        let bookmarkCardView = bookmarkView(recipe);
+                        bookmarkCont.innerHTML += bookmarkCardView;
+
+                    }).catch(function(error) {
+                        console.log(error);
+                    });
+                }
+            } else {
+                bookmarkCont.innerHTML = "<h6 class='text-muted text-center'>No Bookmarks Found</h6>"
+            }
+
+            
+
+         })
+        .catch((error) => {
+            toastr.error("An error occurred, please try again!", "Failed to fetch bookmarks");
+            console.error('Error:', error);
+        });
+    }
+    
 }

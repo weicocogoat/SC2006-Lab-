@@ -68,7 +68,9 @@ $(document).ready(function() {
               // Display Recipes
               const recipeViewList = [];
 
-                for(var i=0; i < listOfRecipes.length; i++) {
+                //for(var i=0; i < listOfRecipes.length; i++) {
+                // Show Top 6 only
+                for(var i=0; i < 6; i++) {
                     const recipe = listOfRecipes[i];
                     const itemViewHTML = recipeView(recipe);
 
@@ -143,7 +145,7 @@ function getDailySummary() {
 const recipeView = (recipe) => 
 `
     <div class="col-sm-12 col-lg-4 mb-3" data-aos="fade-up">
-        <div class="card">
+        <div class="card h-100">
             <img src="${recipe.image}" class="card-img-top">
             <div class="card-body">
                 <div id="firstLine">

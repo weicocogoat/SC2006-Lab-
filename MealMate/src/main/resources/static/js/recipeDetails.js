@@ -3,29 +3,35 @@ $(document).ready(function() {
 	let userId = localStorage.getItem('id');
     let accessToken = localStorage.getItem('accessToken');
 
-    fetch('http://localhost:8080/api/users/' + userId, {
-        method: 'GET',
-        withCredentials: true,
-        credentials: 'include',
-        headers: {
-            'content-type': 'application/json',
-            'authorization': 'Bearer ' + accessToken
-        }
-    })
-    .then(response => {
-        //console.log('Success:', response);
-        
-        return response.json();
-     })
-    .then(data => {
-        //console.log(data);
-        $('#addToMealBtn').toggleClass('d-none');
-        $('#addToBookmarksBtn').toggleClass('d-none');
+    if(userId) {
+    	fetch('http://localhost:8080/api/users/' + userId, {
+	        method: 'GET',
+	        withCredentials: true,
+	        credentials: 'include',
+	        headers: {
+	            'content-type': 'application/json',
+	            'authorization': 'Bearer ' + accessToken
+	        }
+	    })
+	    .then(response => {
+	        //console.log('Success:', response);
+	        
+	        return response.json();
+	     })
+	    .then(data => {
+	        //console.log(data);
 
-     })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
+	        // If user is authenticated
+	        $('#addToMealBtn').removeClass('d-none');
+	        $('#addToBookmarksBtn').removeClass('d-none');
+
+	        containsBookmark();
+
+	     })
+	    .catch((error) => {
+	        console.error('Error:', error);
+	    });
+    }
 });
 
 /*** FOR RECIPE DETAILS PAGE ***/
@@ -176,9 +182,4 @@ function addToMeal() {
         	toastr.error("An error occurred, please try again!", "Failed to Add to Meal.");
             console.error('Error:', error);
         });
-}
-
-// Add to Bookmarks
-function addToBookmark() {
-
 }

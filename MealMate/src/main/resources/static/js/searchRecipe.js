@@ -24,8 +24,6 @@ var cal;
 
 // Get All Recipes from DB
 function getRecipes() {
-	console.log("Retrieving receipes from database...");
-
 	listOfRecipes = [];
 	listOfRecipeName = [];
 	dietTypeFilter = [];

@@ -126,6 +126,10 @@ public class User implements UserDetails {
         this.recipeBookmarks.add(recipeId);
     }
 
+    public void removeBookmark(String recipeId) {
+        this.recipeBookmarks.remove(recipeId);
+    }
+
     public LocalDate getDateJoined() {
         return dateJoined;
     }

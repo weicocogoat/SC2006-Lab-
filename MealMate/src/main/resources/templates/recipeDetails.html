@@ -25,7 +25,9 @@
 
                 <button id="addToMealBtn" type="button" class="btn btn-accent btn-sm d-none" data-bs-toggle="modal" data-bs-target="#addMealModal"><i class="fa-solid fa-plus"></i> Add to Meal</button>
 
-                <button id="addToBookmarksBtn" type="button" class="btn btn-primary btn-accent btn-sm d-none"><i class="fa-solid fa-bookmark"></i> Add to Bookmarks</button>
+                <button id="addToBookmarksBtn" type="button" class="btn btn-primary btn-accent btn-sm d-none" onclick="addBookmark()"><i class="fa-solid fa-bookmark"></i> Add to Bookmarks</button>
+
+                <button id="removeFromBookmarksBtn" type="button" class="btn btn-primary btn-accent btn-sm d-none" onclick="removeBookmark()"><i class="fa-solid fa-bookmark"></i> Remove from Bookmarks</button>
 
                 <!-- Details -->
                 <div class="row mt-4 mb-5">
@@ -118,6 +120,7 @@
 
         <!-- Scripts -->
         <th:block th:insert="fragments/scripts.html :: scripts"></th:block>
+        <script src="../js/bookmarks.js"></script>
         <script src="../js/recipeDetails.js"></script>
     </body>
 </html>

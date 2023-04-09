@@ -36,13 +36,13 @@ function validateForm() {
     const pass_word = document.forms["userDetails"]["password"].value;
 
     //Empty username and password
-    if (user_name.length < 8) {
-      toastr.error("Username must be at least 8 characters.");
+    if (!user_name || user_name.length == 0) {
+      toastr.error("Please enter a username.");
       return false;
     }
 
-    if (pass_word.length < 8 ) {
-        toastr.error("Password must be at least 8 characters.");
+    if (!pass_word || pass_word.length == 0) {
+        toastr.error("Please enter a password.");
         return false;
     }
 
@@ -86,7 +86,7 @@ function authenticateUser() {
 
         })
         .catch((error) => {
-            toastr.error("Authentication failed, please try again!", "Failed to Login");
+            toastr.error("Authentication failed, please try again!", "Failed to login");
             console.error('Error:', error);
         });
 }

@@ -23,7 +23,7 @@
             <div class="col-sm-12 col-lg-10 mb-4">
                 <h2 id="username"></h2>
 
-                <p class="mt-3">Joined on <span id="dateJoined" class="fw-bold text-muted">11 March 2023</span></p>
+                <p class="mt-3">Joined on <span id="dateJoined" class="fw-bold text-muted"></span></p>
 
                 <br>
 
@@ -63,7 +63,7 @@
             </li>
             
             <li class="nav-item">
-                <button class="nav-link" id="favTab" data-bs-toggle="tab" data-bs-target="#fav" type="button" aria-controls="fav" aria-selected="false">Favourites</button>
+                <button class="nav-link" id="favTab" data-bs-toggle="tab" data-bs-target="#fav" type="button" aria-controls="fav" aria-selected="false">Bookmarks</button>
             </li>
         </ul>
 
@@ -303,12 +303,12 @@
                 </div>
             </div> <!-- End of Recipes Tab -->
 
-            <!-- Favourites Tab -->
+            <!-- Bookmarks Tab -->
             <div class="tab-pane fade" id="fav" role="tabpanel" aria-labelledby="fav-tab">
-                <div id="favContainer" class="row">
+                <div id="bookmarksContainer" class="row">
 
                 </div>
-            </div> <!-- End of Favourites Tab -->
+            </div> <!-- End of Bookmarks Tab -->
         </div>
     </div>
 
@@ -374,7 +374,7 @@
                         </div>
 
                         <div class="col-sm-12 col-lg-6 mb-4">
-                            <h6 for="editWeight" class="form-label">Weight (cm)</h6>
+                            <h6 for="editWeight" class="form-label">Weight (kg)</h6>
                             <input type="number" id="editWeight" class="form-control" placeholder="New Weight (kg)" name="weight">
                         </div>
                     </div>
@@ -408,6 +408,7 @@
     <!-- Scripts -->
     <th:block th:insert="fragments/scripts.html :: scripts"></th:block>
     <script src=”https://cdnjs.cloudflare.com/ajax/libs/easy-pie-chart/2.1.6/jquery.easypiechart.min.js”></script>
+    <script src="../js/bookmarks.js"></script>
     <script src="../js/profile.js"></script>
     <script src="../js/meals.js"></script>
     <script src="../js/calendar.js"></script>

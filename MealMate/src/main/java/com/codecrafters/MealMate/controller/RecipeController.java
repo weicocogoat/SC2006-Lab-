@@ -38,6 +38,13 @@ public class RecipeController {
     }
 
     @CrossOrigin
+    @GetMapping("/user/{id}")
+    public List<Recipe> getRecipesByUser(@PathVariable String id)
+    {
+        return recipeRepo.findByAuthor(id);
+    }
+
+    @CrossOrigin
     @PostMapping("/save")
     public void saveRecipe(@RequestBody Recipe recipe) {
         recipeRepo.save(recipe);

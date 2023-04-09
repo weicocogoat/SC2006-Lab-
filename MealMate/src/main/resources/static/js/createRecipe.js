@@ -238,41 +238,45 @@ function addStep() {
 	const stepInput = document.getElementById("stepInput").value;
 	const stepsList = document.getElementById("stepsList");
 
-	let stepNum = listOfSteps.length + 1;
+	if(!stepInput || stepInput.length == 0) {
+		toastr.error("Please enter a step instruction message.");
+	} else {
+		let stepNum = listOfSteps.length + 1;
 
-	let newStep = {
-		stepNum: stepNum,
-		stepInstruction: stepInput
-	};
+		let newStep = {
+			stepNum: stepNum,
+			stepInstruction: stepInput
+		};
 
-	listOfSteps.push(newStep);
+		listOfSteps.push(newStep);
 
-	/* original view with step number
-	const stepView = `
-		<div id="step${newStep.stepNum}Cont" class="recipeStepBox mb-3">
-	        <h6 class="mb-3">
-	            Step ${newStep.stepNum}
-	            <button class="btn rounded-circle float-end" type="button" onclick="removeStep(${newStep.stepNum})"><i class="fa-solid fa-trash"></i></button>
-	        </h6>
+		/* original view with step number
+		const stepView = `
+			<div id="step${newStep.stepNum}Cont" class="recipeStepBox mb-3">
+		        <h6 class="mb-3">
+		            Step ${newStep.stepNum}
+		            <button class="btn rounded-circle float-end" type="button" onclick="removeStep(${newStep.stepNum})"><i class="fa-solid fa-trash"></i></button>
+		        </h6>
 
-	        <p>${newStep.stepInstruction}</p>
-	    </div>
-	`;
-	*/
+		        <p>${newStep.stepInstruction}</p>
+		    </div>
+		`;
+		*/
 
-	const stepView = `
-		<div id="step${newStep.stepNum}Cont" class="recipeStepBox mb-3">
-	        <p>
-	        	${newStep.stepInstruction}
-	        	<button class="btn rounded-circle float-end" type="button" onclick="removeStep(${newStep.stepNum})"><i class="fa-solid fa-trash"></i></button>
-        	</p>
-	    </div>
-	`;
+		const stepView = `
+			<div id="step${newStep.stepNum}Cont" class="recipeStepBox mb-3">
+		        <p>
+		        	${newStep.stepInstruction}
+		        	<button class="btn rounded-circle float-end" type="button" onclick="removeStep(${newStep.stepNum})"><i class="fa-solid fa-trash"></i></button>
+	        	</p>
+		    </div>
+		`;
 
-	stepsList.innerHTML += stepView;
+		stepsList.innerHTML += stepView;
 
-	// Reset input value
-	document.getElementById("stepInput").value = "";
+		// Reset input value
+		document.getElementById("stepInput").value = "";
+	}
 }
 
 // Remove Step from List
