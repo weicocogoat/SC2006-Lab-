@@ -1,3 +1,33 @@
+$(document).ready(function() {
+	// Check if user is signed in and authenticated
+	let userId = localStorage.getItem('id');
+    let accessToken = localStorage.getItem('accessToken');
+
+    fetch('http://localhost:8080/api/users/' + userId, {
+        method: 'GET',
+        withCredentials: true,
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json',
+            'authorization': 'Bearer ' + accessToken
+        }
+    })
+    .then(response => {
+        //console.log('Success:', response);
+        
+        return response.json();
+     })
+    .then(data => {
+        //console.log(data);
+        $('#addToMealBtn').toggleClass('d-none');
+        $('#addToBookmarksBtn').toggleClass('d-none');
+
+     })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+});
+
 /*** FOR RECIPE DETAILS PAGE ***/
 function getRecipeDetails() {
 	const url = window.location.href;

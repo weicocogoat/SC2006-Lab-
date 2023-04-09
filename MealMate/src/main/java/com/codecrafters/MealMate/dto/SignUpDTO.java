@@ -1,6 +1,7 @@
 package com.codecrafters.MealMate.dto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class SignUpDTO {
     private String username;
@@ -9,7 +10,7 @@ public class SignUpDTO {
     private int height;
     private int weight;
     private double bmi;
-    private String[] recipeBookmarks;   // Just store the ID of Recipe
+    private ArrayList<String> recipeBookmarks;   // Just store the ID of Recipe
     private LocalDate dateJoined;
 
     public String getUsername() {
@@ -60,11 +61,11 @@ public class SignUpDTO {
         this.bmi = ((double) this.weight / (double) this.height / (double) this.height) * 10000;
     }
 
-    public String[] getRecipeBookmarks() {
+    public ArrayList<String> getRecipeBookmarks() {
         return recipeBookmarks;
     }
 
-    public void setRecipeBookmarks(String[] recipeBookmarks) {
+    public void setRecipeBookmarks(ArrayList<String> recipeBookmarks) {
         this.recipeBookmarks = recipeBookmarks;
     }
 

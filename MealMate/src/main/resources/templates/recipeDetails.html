@@ -10,9 +10,6 @@
         <th:block th:insert="fragments/style.html :: style"></th:block>
         <link rel="stylesheet" href="../css/recipeDetails.css">
         <link rel="stylesheet" href="../css/searchRecipe.css">
-
-        <!-- Scripts -->
-        <script src="../js/recipeDetails.js"></script>
     </head>
 
     <body id="body" onload="getRecipeDetails()">
@@ -26,9 +23,9 @@
                 <h2 id="recipeTitle"></h1>
                 <p class="mt-3">Published on <span id="datePublished" class="fw-bold text-muted"></span> by <span id="author" class="fw-bold text-muted"></span></p>
 
-                <button type="button" class="btn btn-accent btn-sm px-4" data-bs-toggle="modal" data-bs-target="#addMealModal"><i class="fa-solid fa-plus"></i> Add to Meal</button>
+                <button id="addToMealBtn" type="button" class="btn btn-accent btn-sm d-none" data-bs-toggle="modal" data-bs-target="#addMealModal"><i class="fa-solid fa-plus"></i> Add to Meal</button>
 
-                <button type="button" class="btn btn-primary btn-accent btn-sm px-4"><i class="fa-solid fa-bookmark"></i> Add to Bookmarks</button>
+                <button id="addToBookmarksBtn" type="button" class="btn btn-primary btn-accent btn-sm d-none"><i class="fa-solid fa-bookmark"></i> Add to Bookmarks</button>
 
                 <!-- Details -->
                 <div class="row mt-4 mb-5">
@@ -119,6 +116,8 @@
             </div>
         </div> <!-- End of Meal Modal -->
 
+        <!-- Scripts -->
         <th:block th:insert="fragments/scripts.html :: scripts"></th:block>
+        <script src="../js/recipeDetails.js"></script>
     </body>
 </html>

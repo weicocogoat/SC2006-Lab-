@@ -2,11 +2,7 @@ var x = true;
 document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelector('#register').onclick = function() {
-        // temporary, to be replaced
         var validate = validateForm();
-        if (validate) {
-            //window.location.href = 'transition.html'
-        }
     }
 
     document.querySelector('.showPassword').onclick = function() {
@@ -21,6 +17,12 @@ document.addEventListener('DOMContentLoaded', function() {
             x = true;
         }
     }
+
+    // Submit Form on Enter Key Up (once user releases key)
+    $(document).on('keyup', function(e) {
+        if(e.key === 'Enter' || e.key === 13)
+            validateForm();
+    });
 });
 
 function validateForm() {
@@ -30,9 +32,6 @@ function validateForm() {
     const confirmpassword = document.forms["userDetails"]["confirm-password"].value;
     const weight = document.forms["userDetails"]["weight"].value;
     const height = document.forms["userDetails"]["height"].value;
-
-    //TODO
-    //code to check user and pass against database
 
     //Empty username, email and password
     if (username.length < 8) {
@@ -78,7 +77,7 @@ function validateForm() {
 
 function ValidateEmail(mail) 
 {
-    /*Email Regex */
+    // Email Regex
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)){
         return true;
     }
@@ -114,14 +113,15 @@ function createUser() {
              method: 'POST',
              headers: {
                  'content-type': 'application/json'
-                 //'X-CSRFToken': $('input[name="_csrf"]').val()
              },
              body: JSON.stringify(newUser)
          })
          .then(data => {
+             toastr.success("Account successfully created.", "Account Created!");
              console.log('Success:', data);
          })
          .catch((error) => {
+             toastr.error("Registration failed, please try again!", "Failed to Register");
              console.error('Error:', error);
          });
          

@@ -31,4 +31,23 @@ public class UserController {
 
         return user.getUsername();
     }
+
+    @PostMapping("/save/{id}")
+    public void updateUser(@PathVariable String id, @RequestBody User user) {
+        User userToFind = userRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        userToFind.setUsername(user.getUsername());
+        userToFind.setHeight(user.getHeight());
+        userToFind.setWeight(user.getWeight());
+        userToFind.setBmi();
+
+        userRepo.save(userToFind);
+    }
+
+    @PostMapping("/add/bookmark/{id}")
+    public void addBookmark(@PathVariable String id, @RequestBody String recipeId) {
+        User user = userRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        user.addBookmark(recipeId);
+        userRepo.save(user);
+    }
 }

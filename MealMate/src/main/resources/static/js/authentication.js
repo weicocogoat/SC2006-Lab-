@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if($("#signin2").length > 0) {
         document.querySelector("#signin2").onclick = function() {
-            //temp code. will be replaced later
             var validate = validateForm();
             if (validate) {
                 authenticateUser();
@@ -23,6 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
+
+    // Submit Form on Enter Key Up (once user releases key)
+    $(document).on('keyup', function(e) {
+        if(e.key === 'Enter' || e.key === 13) {
+            validateForm();
+        }
+    });
 });
 
 function validateForm() {
@@ -31,14 +37,17 @@ function validateForm() {
 
     //Empty username and password
     if (user_name.length < 8) {
-      alert("Username must be at least 8 characters");
+      toastr.error("Username must be at least 8 characters.");
       return false;
     }
 
     if (pass_word.length < 8 ) {
-        alert("Password must be at least 8 characters");
+        toastr.error("Password must be at least 8 characters.");
         return false;
     }
+
+    authenticateUser();
+
     return true;
 }
 
@@ -55,7 +64,6 @@ function authenticateUser() {
              method: 'POST',
              headers: {
                  'content-type': 'application/json'
-                 //'X-CSRFToken': $('input[name="_csrf"]').val()
              },
              body: JSON.stringify(user)
          })
@@ -78,7 +86,7 @@ function authenticateUser() {
 
         })
         .catch((error) => {
-            alert("Failed to login, please try again!");
+            toastr.error("Authentication failed, please try again!", "Failed to Login");
             console.error('Error:', error);
         });
 }

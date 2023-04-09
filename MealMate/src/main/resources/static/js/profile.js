@@ -90,14 +90,17 @@ function getUserDetails() {
             return response.json();
          })
         .then(data => {
-            //console.log(data);
 
             // Load User Details on View
             $('#username').text(data.username);
             $('#height').text(data.height + "cm");
             $('#weight').text(data.weight + "kg");
-            $('#bmi').text(data.bmi);
+            $('#bmi').text(parseFloat(data.bmi).toFixed(2));
 
+            // Load current user values on Edit Profile Modal
+            $('#editUsername').val(data.username);
+            $('#editHeight').val(data.height);
+            $('#editWeight').val(data.weight);
          })
         .catch((error) => {
             toastr.error("An error occurred, please try again!", "Failed to Retrieve User Details.");
@@ -299,4 +302,40 @@ const addNewMealDropdown = (mealType) =>
 // Sets hidden input value for selected meal type (to auto select for custom meal modal)
 function setSelectedMeal(mealType) {
     $('#mealType').val(mealType);
+}
+
+// Update User Details
+function saveProfile() {
+    let userId = localStorage.getItem('id');
+
+    const newUserDetails = {
+        "username": $('#editUsername').val(),
+        'height': $('#editHeight').val(),
+        "weight": $('#editWeight').val()
+    };
+
+    fetch('http://localhost:8080/api/users/save/' + userId, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newUserDetails)
+        })
+        .then(response => {
+
+            return response;
+         })
+        .then(data => {
+            console.log(data);
+
+            // Update User Details on View
+            getUserDetails();
+
+            // Success Toast Message
+            toastr.success("Account details successfuly updated!", "Account Details Saved");
+         })
+        .catch((error) => {
+            toastr.error("An error occurred, please try again!", "Failed to Save Details");
+            console.error('Error:', error);
+        });
 }
