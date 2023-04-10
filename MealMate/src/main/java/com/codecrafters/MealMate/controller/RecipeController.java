@@ -3,6 +3,7 @@ package com.codecrafters.MealMate.controller;
 import com.codecrafters.MealMate.model.Recipe;
 import com.codecrafters.MealMate.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,12 @@ public class RecipeController {
     public List<Recipe> getRecipes()
     {
         return recipeRepo.findAll();
+    }
+
+    @CrossOrigin
+    @GetMapping("/all/sort/bookmarks")
+    public List<Recipe> getRecipesByBookmarks() {
+        return recipeRepo.findAll(Sort.by(Sort.Direction.DESC, "numOfBookmarks"));
     }
 
     @CrossOrigin

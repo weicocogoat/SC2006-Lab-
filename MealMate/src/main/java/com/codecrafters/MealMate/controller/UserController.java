@@ -20,6 +20,9 @@ public class UserController {
     @Autowired
     UserRepository userRepo;
 
+    @Autowired
+    RecipeRepository recipeRepo;
+
     @GetMapping("/{id}")
     @PreAuthorize("#user.id == #id")
     public ResponseEntity user(@AuthenticationPrincipal User user, @PathVariable String id) {
@@ -65,13 +68,24 @@ public class UserController {
     public void addBookmark(@PathVariable String id, @PathVariable String recipeId) {
         User user = userRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         user.addBookmark(recipeId);
+
+        // Increment Bookmark Counter
+        Recipe recipe = recipeRepo.findById(recipeId).orElseThrow();
+        recipe.addBookmark();
+
         userRepo.save(user);
+        recipeRepo.save(recipe);
     }
 
     @PostMapping("/{id}/bookmarks/remove/{recipeId}")
     public void removeBookmark(@PathVariable String id, @PathVariable String recipeId) {
         User user = userRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         user.removeBookmark(recipeId);
+
+        // Decrement Bookmark Counter
+        Recipe recipe = recipeRepo.findById(recipeId).orElseThrow();
+        recipe.removeBookmark();
+
         userRepo.save(user);
     }
 }

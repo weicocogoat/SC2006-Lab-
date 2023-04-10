@@ -40,7 +40,7 @@ $(document).ready(function() {
     let listOfRecipes = [];
 
     // Load Trending Recipes
-    fetch("http://localhost:8080/api/recipes/all")
+    fetch("http://localhost:8080/api/recipes/all/sort/bookmarks")
         .then((resp) => resp.json())
         .then(function(response) {
 
@@ -68,13 +68,16 @@ $(document).ready(function() {
               // Display Recipes
               const recipeViewList = [];
 
-                //for(var i=0; i < listOfRecipes.length; i++) {
-                // Show Top 6 only
-                for(var i=0; i < 6; i++) {
-                    const recipe = listOfRecipes[i];
-                    const itemViewHTML = recipeView(recipe);
+                for(var i=0; i < listOfRecipes.length; i++) {
+                    if(i < 6) {
+                        // Show Top 6 only
+                        const recipe = listOfRecipes[i];
+                        const itemViewHTML = recipeView(recipe);
 
-                    recipeViewList.push(itemViewHTML);
+                        recipeViewList.push(itemViewHTML);
+                    } else {
+                        break;
+                    }
                 }
 
                 // Combine all the recipe cards together into a string

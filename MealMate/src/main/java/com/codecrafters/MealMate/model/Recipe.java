@@ -107,6 +107,14 @@ public class Recipe {
         this.numOfBookmarks = numOfBookmarks;
     }
 
+    public void addBookmark() {
+        this.numOfBookmarks++;
+    }
+
+    public void removeBookmark() {
+        this.numOfBookmarks--;
+    }
+
     public String getPrepTime() {
         return prepTime;
     }
