@@ -16,14 +16,6 @@ public class RecipeController {
     @Autowired
     private RecipeRepository recipeRepo;
 
-    /*
-    final RecipeService recipeService;
-
-    public RecipeController(@Autowired RecipeService recipeService) {
-        this.recipeService = recipeService;
-    }
-     */
-
     @CrossOrigin
     @GetMapping("/all")
     public List<Recipe> getRecipes()
@@ -32,16 +24,16 @@ public class RecipeController {
     }
 
     @CrossOrigin
-    @GetMapping("/all/sort/bookmarks")
-    public List<Recipe> getRecipesByBookmarks() {
-        return recipeRepo.findAll(Sort.by(Sort.Direction.DESC, "numOfBookmarks"));
-    }
-
-    @CrossOrigin
     @GetMapping("/find/{id}")
     public Optional<Recipe> getRecipeById(@PathVariable String id)
     {
         return recipeRepo.findById(id);
+    }
+
+    @CrossOrigin
+    @GetMapping("/all/sort/bookmarks")
+    public List<Recipe> getRecipesByBookmarks() {
+        return recipeRepo.findAll(Sort.by(Sort.Direction.DESC, "numOfBookmarks"));
     }
 
     @CrossOrigin

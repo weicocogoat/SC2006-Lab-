@@ -26,7 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Submit Form on Enter Key Up (once user releases key)
     $(document).on('keyup', function(e) {
         if(e.key === 'Enter' || e.key === 13) {
-            validateForm();
+            if(window.location.pathname.includes("login")) {
+                validateForm();
+            }
         }
     });
 });

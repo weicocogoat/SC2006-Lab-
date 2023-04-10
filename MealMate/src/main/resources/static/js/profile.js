@@ -29,8 +29,6 @@ function loadRecipes() {
         .then((resp) => resp.json())
         .then(function(response) {
 
-            console.log(response.length);
-
             let recipes = response;
 
             if(recipes.length > 0) {
@@ -316,8 +314,6 @@ function getMeals(date) {
                 dinnerMeals.innerHTML = dinnerItems;
             if(dessertItems != "")
                 dessertMeals.innerHTML = dessertItems;
-
-            console.log(data);
          })
         .catch((error) => {
             toastr.error("An error occurred, please try again!", "Failed to Retrieve Meals.");
@@ -411,13 +407,11 @@ function loadBookmarks() {
             return response.json();
          })
         .then(data => {
-            console.log(data);
-
             let bookmarks = data;
 
             if(bookmarks.length > 0) {
                 for(var i = 0; i < bookmarks.length; i++) {
-                    let recipeId = bookmarks[i]
+                    let recipeId = bookmarks[i];
 
                     // Fetch details of each recipe bookmark
                     fetch("http://localhost:8080/api/recipes/find/" + recipeId)
@@ -439,6 +433,8 @@ function loadBookmarks() {
                             ingredients: response.ingredients,
                             steps: response.steps
                         }
+
+                        console.log(recipe);
 
                         // Load Recipe Details on View
                         let bookmarkCardView = bookmarkView(recipe);

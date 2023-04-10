@@ -23,6 +23,12 @@
 
                 <h4 class="mb-4">General Information</h4>
 
+                <!-- Hidden Date Created -->
+                <input type="hidden" id="dateCreated">
+
+                <!-- Hidden Num of Bookmarks -->
+                <input type="hidden" id="numOfBookmarks">
+
                 <div class="row">
                     <div class="col-12 col-lg-4 mb-4">
                         <label for="title"><h6 class="form-label mb-2">Recipe Title</h6></label>
@@ -47,6 +53,7 @@
                     <div class="col-12 col-lg-6 mb-4">
                         <label for="image"><h6 class="form-label">Recipe Image</h6></label>
                         <input id="image" class="form-control pl-0" type="file" onchange="getImage(this)">
+                        <input type="hidden" id="oldImage">
                     </div>
 
                     <!-- Diet Type -->
@@ -144,7 +151,7 @@
                 <hr class="my-5">
 
                 <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-accent" onclick="createRecipe()">Create Recipe</button>
+                    <button type="button" class="btn btn-accent" onclick="saveRecipe()">Update Recipe</button>
                 </div>
                 
             </form>

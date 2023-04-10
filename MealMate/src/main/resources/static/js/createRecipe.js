@@ -302,7 +302,7 @@ function removeStep(stepNum) {
 }
 
 // Create Recipe
-function createRecipe() {
+function saveRecipe() {
 	// Get General Information
 	const recipeTitle = document.getElementById("title").value;
 	const servingSize = document.getElementById("servingSize").value;
@@ -320,10 +320,32 @@ function createRecipe() {
 		toastr.error("Please input a positive Preparation Time.");
 		return;
 	}
-	if (imgDataURL === undefined){
-		toastr.error("Please add image.");
-		return;
+
+	let recipeImage;
+	if(window.location.pathname.includes("/recipes/edit")) {
+		const oldImage = document.getElementById('oldImage').value;
+		const newImage = document.getElementById('image').files;
+
+		if(newImage.length == 0) {
+			// If user did not select a new image to replace with
+			recipeImage = oldImage;
+		} else {
+			if(imgDataURL === undefined) {
+				toastr.error("Please add an image.");
+				return;
+			} else {
+				recipeImage = imgDataURL;
+			}
+		}
+	} else {
+		if (imgDataURL === undefined){
+			toastr.error("Please add an image.");
+			return;
+		} else {
+			recipeImage = imgDataURL;
+		}
 	}
+	
 
 	let dietType = [];
 	$('input[name="dietType"]:checked').each(function() {
@@ -352,50 +374,57 @@ function createRecipe() {
 		totalCalories += ingredientsList[i].calories;
 	}
 
-	const newRecipe = {
-		title: recipeTitle,
-		author: localStorage.getItem("id"),	// save userId for author
-		description: description,
-		dateCreated: new Date().toISOString(),
-		dietType: dietType,
-		numOfBookmarks: 0,
-		prepTime: prepTime,
-		servingSize: servingSize,
-		calories: totalCalories,
-		ingredients: ingredientsList,
-		steps: listOfSteps,
-		image: imgDataURL
-	};
+	let recipeToSave;
 
-	const testOutput = {
-		title: recipeTitle,
-		author: localStorage.getItem("id"),	// save userId for author
-		description: description,
-		dateCreated: new Date().toISOString(),
-		dietType: dietType,
-		numOfBookmarks: 0,
-		prepTime: prepTime,
-		servingSize: servingSize,
-		calories: totalCalories,
-		ingredients: ingredientsList,
-		steps: listOfSteps
-	};
-
-	console.log(testOutput);
+	if(window.location.pathname.includes("/recipes/create")) {
+		recipeToSave = {
+			title: recipeTitle,
+			author: localStorage.getItem("id"),	// save userId for author
+			description: description,
+			dateCreated: new Date().toISOString(),
+			dietType: dietType,
+			numOfBookmarks: 0,
+			prepTime: prepTime,
+			servingSize: servingSize,
+			calories: totalCalories,
+			ingredients: ingredientsList,
+			steps: listOfSteps,
+			image: recipeImage
+		};
+	} else if(window.location.pathname.includes("/recipes/edit")) {
+		recipeToSave = {
+			id: window.location.pathname.split('/')[3],
+			title: recipeTitle,
+			author: localStorage.getItem("id"),	// save userId for author
+			description: description,
+			dateCreated: $('#dateCreated').val(),
+			dietType: dietType,
+			numOfBookmarks: $('#numOfBookmarks').val(),
+			prepTime: prepTime,
+			servingSize: servingSize,
+			calories: totalCalories,
+			ingredients: ingredientsList,
+			steps: listOfSteps,
+			image: recipeImage
+		};
+	}
+	
 
 	fetch('http://localhost:8080/api/recipes/save', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(newRecipe)
+            body: JSON.stringify(recipeToSave)
         })
         .then(response => {
         	//response.json()
         })
         .then(data => {
-        	toastr.success("Recipe successfully created.", "Recipe Created!");
-        	resetForm();
+        	toastr.success("Recipe successfully saved.", "Recipe Saved!");
+
+        	if(window.location.pathname.includes("/recipes/create"))
+        		resetForm();
         })
         .catch((error) => {
         	toastr.error("An error occurred, please try again!", "Failed to Create Recipe.");
@@ -420,7 +449,7 @@ function resetForm() {
 	$('#stepsList').html("");
 }
 
-// Load Existing Details of Recipe
+// Load Existing Details of Recipe (for edit recipe page)
 function loadExistingRecipe(recipeId) {
 	console.log("loading recipe");
 	console.log(recipeId);
@@ -448,10 +477,19 @@ function loadExistingRecipe(recipeId) {
             steps: response.steps
 		}
 
+		ingredientsList = recipe.ingredients;
+		listOfSteps = recipe.steps;
+
+
 		// Load Recipe Details on View
 		$('#title').val(recipe.title);
 		$('#servingSize').val(recipe.servingSize);
 		$('#prepTime').val(recipe.prepTime);
+
+		$('#oldImage').val(recipe.image);
+
+		$('#dateCreated').val(recipe.dateCreated);
+		$('#numOfBookmarks').val(recipe.numOfBookmarks);
 
 		// Diet Type
 		for(var i = 0; i < recipe.dietType.length; i++) {
@@ -467,8 +505,8 @@ function loadExistingRecipe(recipeId) {
 		// Ingredients List
 		const ingredientList = document.getElementById("ingredientList");
 
-		for(var i = 0; i < recipe.ingredients; i++) {
-			let currIngredient = recipe.ingredients[i];
+		for(var i = 0; i < ingredientsList.length; i++) {
+			let currIngredient = ingredientsList[i];
 
 			let newItem = 
 			`<li id="${currIngredient.name}ListItem">
@@ -482,14 +520,15 @@ function loadExistingRecipe(recipeId) {
 
 		// Steps
 		const stepsList = document.getElementById("stepsList");
+		$('#noItemsMsg').addClass('d-none');
 		
-		for(var i = 0; i < recipe.steps; i++) {
-			let currStep = recipe.steps[i];
+		for(var i = 0; i < listOfSteps.length; i++) {
+			let currStep = listOfSteps[i];
 
 			const stepView = `
 				<div id="step${currStep.stepNum}Cont" class="recipeStepBox mb-3">
 			        <p>
-			        	${newcurrStepStep.stepInstruction}
+			        	${currStep.stepInstruction}
 			        	<button class="btn rounded-circle float-end" type="button" onclick="removeStep(${currStep.stepNum})"><i class="fa-solid fa-trash"></i></button>
 		        	</p>
 			    </div>
