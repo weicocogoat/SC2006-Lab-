@@ -301,7 +301,7 @@ function removeStep(stepNum) {
 }
 
 // Create Recipe
-function saveRecipe() {
+function createRecipe() {
 	// Get General Information
 	const recipeTitle = document.getElementById("title").value;
 	const servingSize = document.getElementById("servingSize").value;
@@ -320,31 +320,12 @@ function saveRecipe() {
 		return;
 	}
 
-	let recipeImage;
-	if(window.location.pathname.includes("/recipes/edit")) {
-		const oldImage = document.getElementById('oldImage').value;
-		const newImage = document.getElementById('image').files;
-
-		if(newImage.length == 0) {
-			// If user did not select a new image to replace with
-			recipeImage = oldImage;
-		} else {
-			if(imgDataURL === undefined) {
-				toastr.error("Please add an image.");
-				return;
-			} else {
-				recipeImage = imgDataURL;
-			}
-		}
+	if (imgDataURL === undefined){
+		toastr.error("Please add an image.");
+		return;
 	} else {
-		if (imgDataURL === undefined){
-			toastr.error("Please add an image.");
-			return;
-		} else {
-			recipeImage = imgDataURL;
-		}
+		recipeImage = imgDataURL;
 	}
-	
 
 	let dietType = [];
 	$('input[name="dietType"]:checked').each(function() {
@@ -373,62 +354,141 @@ function saveRecipe() {
 		totalCalories += ingredientsList[i].calories;
 	}
 
-	let recipeToSave;
+	let recipeToSave = {
+		title: recipeTitle,
+		author: localStorage.getItem("id"),	// save userId for author
+		description: description,
+		dateCreated: new Date().toISOString(),
+		dietType: dietType,
+		numOfBookmarks: 0,
+		prepTime: prepTime,
+		servingSize: servingSize,
+		calories: totalCalories,
+		ingredients: ingredientsList,
+		steps: listOfSteps,
+		image: recipeImage
+	};
 
-	if(window.location.pathname.includes("/recipes/create")) {
-		recipeToSave = {
-			title: recipeTitle,
-			author: localStorage.getItem("id"),	// save userId for author
-			description: description,
-			dateCreated: new Date().toISOString(),
-			dietType: dietType,
-			numOfBookmarks: 0,
-			prepTime: prepTime,
-			servingSize: servingSize,
-			calories: totalCalories,
-			ingredients: ingredientsList,
-			steps: listOfSteps,
-			image: recipeImage
-		};
-	} else if(window.location.pathname.includes("/recipes/edit")) {
-		recipeToSave = {
-			id: window.location.pathname.split('/')[3],
-			title: recipeTitle,
-			author: localStorage.getItem("id"),	// save userId for author
-			description: description,
-			dateCreated: $('#dateCreated').val(),
-			dietType: dietType,
-			numOfBookmarks: $('#numOfBookmarks').val(),
-			prepTime: prepTime,
-			servingSize: servingSize,
-			calories: totalCalories,
-			ingredients: ingredientsList,
-			steps: listOfSteps,
-			image: recipeImage
-		};
+	fetch('http://localhost:8080/api/recipes/create', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(recipeToSave)
+    })
+    .then(response => {
+    	//response.json()
+    })
+    .then(data => {
+    	toastr.success("Recipe successfully saved.", "Recipe Saved!");
+
+    	if(window.location.pathname.includes("/recipes/create"))
+    		resetForm();
+    })
+    .catch((error) => {
+    	toastr.error("An error occurred, please try again!", "Failed to Create Recipe.");
+        console.error('Error:', error);
+    });
+}
+
+// Update Recipe
+function updateRecipe() {
+	// Get General Information
+	const recipeTitle = document.getElementById("title").value;
+	const servingSize = document.getElementById("servingSize").value;
+	const prepTime = document.getElementById("prepTime").value;
+
+	if (recipeTitle === ""){
+		toastr.error("Please input a Recipe Title.");
+		return;
 	}
-	
+	if (servingSize === ""  || parseInt(servingSize) < 1){
+		toastr.error("Please input a positive Serving Size.");
+		return;
+	}
+	if (prepTime === ""  || parseFloat(prepTime) <= 0){
+		toastr.error("Please input a positive Preparation Time.");
+		return;
+	}
 
-	fetch('http://localhost:8080/api/recipes/save', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(recipeToSave)
-        })
-        .then(response => {
-        	//response.json()
-        })
-        .then(data => {
-        	toastr.success("Recipe successfully saved.", "Recipe Saved!");
+	let recipeImage;
 
-        	if(window.location.pathname.includes("/recipes/create"))
-        		resetForm();
-        })
-        .catch((error) => {
-        	toastr.error("An error occurred, please try again!", "Failed to Create Recipe.");
-            console.error('Error:', error);
-        });
+	const oldImage = document.getElementById('oldImage').value;
+	const newImage = document.getElementById('image').files;
+
+	if(newImage.length == 0) {
+		// If user did not select a new image to replace with
+		recipeImage = oldImage;
+	} else {
+		if(imgDataURL === undefined) {
+			toastr.error("Please add an image.");
+			return;
+		} else {
+			recipeImage = imgDataURL;
+		}
+	}
+
+	let dietType = [];
+	$('input[name="dietType"]:checked').each(function() {
+		dietType.push(this.value);
+	});
+
+	const description = document.getElementById("desc").value;
+	if (description === ""){
+		toastr.error("Please input a Description.");
+		return;
+	}
+
+	if (ingredientsList.length == 0){
+		toastr.error("Please add the ingredients.");
+		return;
+	}
+
+	if(listOfSteps.length == 0){
+		toastr.error("Please add the list of steps.");
+		return;
+	}
+
+	// Calculate Total Calories for Entire Recipe
+	let totalCalories = 0;
+	for(var i = 0; i < ingredientsList.length; i++) {
+		totalCalories += ingredientsList[i].calories;
+	}
+
+	let recipeToSave = {
+		id: window.location.pathname.split('/')[3],
+		title: recipeTitle,
+		author: localStorage.getItem("id"),	// save userId for author
+		description: description,
+		dateCreated: $('#dateCreated').val(),
+		dietType: dietType,
+		numOfBookmarks: $('#numOfBookmarks').val(),
+		prepTime: prepTime,
+		servingSize: servingSize,
+		calories: totalCalories,
+		ingredients: ingredientsList,
+		steps: listOfSteps,
+		image: recipeImage
+	};
+
+	fetch('http://localhost:8080/api/recipes/update', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(recipeToSave)
+    })
+    .then(response => {
+    	//response.json()
+    })
+    .then(data => {
+    	toastr.success("Recipe successfully saved.", "Recipe Saved!");
+
+    })
+    .catch((error) => {
+    	toastr.error("An error occurred, please try again!", "Failed to update recipe");
+        console.error('Error:', error);
+    });
 }
 
 // Reset Create Recipe Form (Input fields and lists)

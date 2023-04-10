@@ -44,8 +44,15 @@ public class RecipeController {
     }
 
     @CrossOrigin
-    @PostMapping("/save")
-    public void saveRecipe(@RequestBody Recipe recipe) {
+    @PostMapping("/create")
+    public void createRecipe(@RequestBody Recipe recipe) {
+        recipeRepo.save(recipe);
+        System.out.println("Recipe successfully saved");
+    }
+
+    @CrossOrigin
+    @PostMapping("/update")
+    public void updateRecipe(@RequestBody Recipe recipe) {
         recipeRepo.save(recipe);
         System.out.println("Recipe successfully saved");
     }

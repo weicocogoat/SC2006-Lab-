@@ -51,16 +51,6 @@ public class UserController {
         userRepo.save(userToFind);
     }
 
-    public boolean userExists(String id) {
-        Optional<User> userToFind = userRepo.findById(id);
-
-        if(userToFind.isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     @GetMapping("/{id}/bookmarks")
     public List<String> getBookmarks(@PathVariable String id) {
         User user = userRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
@@ -97,5 +87,6 @@ public class UserController {
         recipe.removeBookmark();
  
         userRepo.save(user);
+        recipeRepo.save(recipe);
     }
 }
