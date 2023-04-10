@@ -95,7 +95,7 @@ $(document).ready(function() {
 // Calculate Daily Calories Summary 
 function getDailySummary() {
     let userId = localStorage.getItem('id');
-
+    // test
     let totalDailyCalories = 0;
     let bfastCalories = 0, lunchCalories = 0, dinnerCalories = 0, dessertCalories = 0;
 
