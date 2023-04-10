@@ -306,7 +306,7 @@ function createRecipe() {
 		toastr.error("Please input a positive Serving Size.");
 		return;
 	}
-	if (prepTime === ""  || parseInt(prepTime) < 1){
+	if (prepTime === ""  || parseFloat(prepTime) <= 0){
 		toastr.error("Please input a positive Preparation Time.");
 		return;
 	}
