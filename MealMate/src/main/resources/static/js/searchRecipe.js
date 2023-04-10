@@ -106,6 +106,11 @@ function getRecipes() {
 				}
 		    }
 
+			if (listOfRecipeName.length == 0){
+				toastr.error("No Recipe Found.");
+				return;
+			}
+
           	// Display Recipes
           	displayRecipes();
 
@@ -279,15 +284,23 @@ function autocomplete(inp, arr) {
 
 function searchIngredient(recipeName){
 
+	var flag3 = 0;
+
 	if(recipeName.length <= 0) {
 		// If search field is empty
 		getRecipes();
 	} else {
 		var i = 0;
 		for(i ; i < listOfRecipeName.length; i++) {
-			if (listOfRecipeName[i].includes(recipeName)){
+			if (listOfRecipeName[i].toLowerCase().includes(recipeName.toLowerCase())){
+				flag3 = 1;
 				break;
 			}
+		}
+
+		if (flag3 == 0){
+			toastr.error("No Recipe Found.");
+			return;
 		}
 
 		if(i > listOfRecipeName.length) {
