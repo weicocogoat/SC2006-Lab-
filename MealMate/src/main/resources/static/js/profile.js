@@ -185,6 +185,12 @@ const myRecipeView = (recipe) =>
 
                     <ul class="dropdown-menu" aria-labelledby="recipeDropdown${recipe.id}">
                         <li>
+                            <a class="dropdown-item" href="/recipes/edit/${recipe.id}">
+                                <i class="fa-solid fa-pen-to-square mr-2"></i> Edit Recipe
+                            </a>
+                        </li>
+
+                        <li>
                             <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteRecipeModal" data-recipe-id="${recipe.id}" onclick="updateDeleteModal(this)">
                                 <i class="fa-solid fa-trash mr-2"></i> Delete Recipe
                             </a>
@@ -288,18 +294,18 @@ function getMeals(date) {
             let bfastItems = "";
             let lunchItems = "";
             let dinnerItems = "";
-            let dessertItems = "";    
+            let dessertItems = "";
 
             // Add Items Respectively
             for(var i = 0; i < data.length; i++) {
                 if(data[i].mealType == "Breakfast")
-                    bfastItems += `<li>${data[i].name} (${data[i].calories}kcal)</li>`;
+                    bfastItems += `<li>${data[i].name} (${data[i].calories}kcal) <button type="button" class="nav-link text-dark" onclick="removeMeal()"><i class="fa-solid fa-xmark ml-2"></i></button></li>`;
                 else if(data[i].mealType == "Lunch")
-                    lunchItems += `<li>${data[i].name} (${data[i].calories}kcal)</li>`;
+                    lunchItems += `<li>${data[i].name} (${data[i].calories}kcal) <button type="button" class="nav-link text-dark" onclick="removeMeal()"><i class="fa-solid fa-xmark ml-2"></i></button></li>`;
                 else if(data[i].mealType == "Dinner")
-                    dinnerItems += `<li>${data[i].name} (${data[i].calories}kcal)</li>`;
+                    dinnerItems += `<li>${data[i].name} (${data[i].calories}kcal) <button type="button" class="nav-link text-dark" onclick="removeMeal()"><i class="fa-solid fa-xmark ml-2"></i></button></li>`;
                 else if(data[i].mealType == "Dessert")
-                    dessertItems += `<li>${data[i].name} (${data[i].calories}kcal)</li>`;
+                    dessertItems += `<li>${data[i].name} (${data[i].calories}kcal) <button type="button" class="nav-link text-dark" onclick="removeMeal()"><i class="fa-solid fa-xmark ml-2"></i></button></li>`;
             }            
             
             if(bfastItems != "")
@@ -445,9 +451,6 @@ function loadBookmarks() {
             } else {
                 bookmarkCont.innerHTML = "<h6 class='text-muted text-center'>No Bookmarks Found</h6>"
             }
-
-            
-
          })
         .catch((error) => {
             toastr.error("An error occurred, please try again!", "Failed to fetch bookmarks");

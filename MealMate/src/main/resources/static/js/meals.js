@@ -35,6 +35,7 @@ function addCustomMeal() {
             })
             .then(data => {
                 // Some success message here
+                toastr.success("Custom meal successfully added!", "Custom Meal Added");
 
                 // Hide Modal
                 let customMealModal = bootstrap.Modal.getInstance(document.querySelector("#customMealModal"));
@@ -50,8 +51,43 @@ function addCustomMeal() {
 
             })
             .catch((error) => {
-                toastr.error("An error occurred, please try again!", "Failed to Add Custom Meal.");
+                toastr.error("An error occurred, please try again!", "Failed to Add Custom Meal");
                 console.error('Error:', error);
             });
+    }
+}
+
+// Remove Meal
+function removeMeal(mealId) {
+    let userId = localStorage.getItem('id');
+
+    if(userId && mealId) {
+        fetch('http://localhost:8080/api/users/' + userId + "/bookmarks/remove/" + recipeId, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+        .then(response => {
+            console.log(response);
+            //response.json()
+        })
+        .then(data => {
+            // Some success message here
+            toastr.success("Meal successfully removed!", "Meal Removed");
+
+            // Update Summary
+            getDailySummary();
+
+            // Update Meals (only on profile page)
+            if(window.location.pathname == "/profile") {
+                getMeals(new Date($('#selectedDate').val()));
+            }
+
+        })
+        .catch((error) => {
+            toastr.error("An error occurred, please try again!", "Failed to remove meal");
+            console.error('Error:', error);
+        });
     }
 }

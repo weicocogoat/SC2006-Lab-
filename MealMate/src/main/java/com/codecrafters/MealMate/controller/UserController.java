@@ -24,7 +24,7 @@ public class UserController {
     RecipeRepository recipeRepo;
 
     @GetMapping("/{id}")
-    @PreAuthorize("#user.id == #id")
+    //@PreAuthorize("#user.id == #id")
     public ResponseEntity user(@AuthenticationPrincipal User user, @PathVariable String id) {
         User eUser = userRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         UserDTO userDTO = new UserDTO(eUser);
@@ -85,7 +85,7 @@ public class UserController {
         // Decrement Bookmark Counter
         Recipe recipe = recipeRepo.findById(recipeId).orElseThrow();
         recipe.removeBookmark();
-
+ 
         userRepo.save(user);
     }
 }

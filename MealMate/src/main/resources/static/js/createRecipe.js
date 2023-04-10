@@ -13,8 +13,17 @@ $(document).ready(function() {
 		}
 	});
 
+	// Check if on edit profile page
+	// If so, load existing values of recipes onto field
+	if(window.location.pathname.includes("/recipes/edit")) {
+		let recipeId = window.location.pathname.split('/')[3];
+
+		loadExistingRecipe(recipeId);
+	}
+
 });
 
+// Recipe Image Input Field
 let imgDataURL;
 function getImage(input) {
 
@@ -36,6 +45,7 @@ function getImage(input) {
 	fileReader.readAsDataURL(img);
 }
 
+// Search Ingredient by Name
 function searchIngredient() {
 	flag = 0;
 	const ingredient = document.getElementById("ingredientInput").value.trim();
@@ -410,7 +420,85 @@ function resetForm() {
 	$('#stepsList').html("");
 }
 
-// Add Recipe to Bookmark
-function addBookmark() {
+// Load Existing Details of Recipe
+function loadExistingRecipe(recipeId) {
+	console.log("loading recipe");
+	console.log(recipeId);
 
+	fetch("http://localhost:8080/api/recipes/find/" + recipeId)
+	.then((resp) => {
+		return resp.json();
+	})
+	.then(function(response) {
+		console.log("successfully retrieved");
+
+		const recipe = {
+			id: response.id,
+        	title: response.title,
+            author: response.author,
+            image: response.image,
+            description: response.description,
+            dateCreated: response.dateCreated,
+            dietType: response.dietType,
+            numOfBookmarks: response.numOfBookmarks,
+            prepTime: response.prepTime,
+            servingSize: response.servingSize,
+            calories: response.calories,
+            ingredients: response.ingredients,
+            steps: response.steps
+		}
+
+		// Load Recipe Details on View
+		$('#title').val(recipe.title);
+		$('#servingSize').val(recipe.servingSize);
+		$('#prepTime').val(recipe.prepTime);
+
+		// Diet Type
+		for(var i = 0; i < recipe.dietType.length; i++) {
+			let dietType = recipe.dietType[i];
+
+			if($('input[value="'+ dietType +'"]').val() == dietType) {
+				$('input[value="'+ dietType +'"]').prop('checked', true);
+			}
+		}
+
+		$('#desc').val(recipe.description);
+
+		// Ingredients List
+		const ingredientList = document.getElementById("ingredientList");
+
+		for(var i = 0; i < recipe.ingredients; i++) {
+			let currIngredient = recipe.ingredients[i];
+
+			let newItem = 
+			`<li id="${currIngredient.name}ListItem">
+				<img src="https://spoonacular.com/cdn/ingredients_100x100/${currIngredient.image}">
+				${currIngredient.name} - ${currIngredient.calories} kcal (${currIngredient.quantity} ${currIngredient.quantityUnit})
+				<button class="btn" type="button" onclick="removeIngredient('${currIngredient.name}')"><i class="fa-solid fa-xmark"></i></button>
+			</li>`;
+
+			ingredientList.innerHTML += newItem;
+		}
+
+		// Steps
+		const stepsList = document.getElementById("stepsList");
+		
+		for(var i = 0; i < recipe.steps; i++) {
+			let currStep = recipe.steps[i];
+
+			const stepView = `
+				<div id="step${currStep.stepNum}Cont" class="recipeStepBox mb-3">
+			        <p>
+			        	${newcurrStepStep.stepInstruction}
+			        	<button class="btn rounded-circle float-end" type="button" onclick="removeStep(${currStep.stepNum})"><i class="fa-solid fa-trash"></i></button>
+		        	</p>
+			    </div>
+			`;
+
+			stepsList.innerHTML += stepView;
+		}
+
+	}).catch(function(error) {
+		console.log(error);
+	});
 }
