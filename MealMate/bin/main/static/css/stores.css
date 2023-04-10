@@ -1,0 +1,46 @@
+#searchSupermarket{
+
+    /*background*/
+    border: 3px solid gray;
+    background-color: white;
+
+
+    width: 70%;
+    height: fit-content;
+
+    padding: 20px;
+    margin-top: 3%;
+    margin-left: 15%;
+
+}
+
+#supermarket_header{
+    font-size: 30px;
+    font-weight: bold;
+    /*can change it later*/
+    /*-family: Arial;*/
+
+    /*
+    border: 3px solid blue;
+    */
+}
+
+#stores{
+    width: 98%;
+    border-radius: 25px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+
+    /*border: 3px solid green;*/
+}
+
+
+#map{
+    /*border: 3px solid black;*/
+    width: 80%;
+    height: 500px;
+    margin-left: 10%;
+
+}
+

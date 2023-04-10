@@ -1,0 +1,43 @@
+#loginScreen, #regScreen {
+    /*Box's design*/
+    /*border: 3px solid black;*/
+    background-color: white; /*Temp bg colour*/
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 25px;
+
+    /*Box's size*/
+    width: 35vw;
+    height:auto;
+
+    /*Positioning*/
+    padding: 60px;
+    margin: 64px auto;
+
+    /*Aliging text*/
+    text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+    #loginScreen, #regScreen {
+        width: 75vw;
+        padding: 30px;
+    }
+}
+
+.input-group{
+    /* display: flex; */
+    justify-content: space-between;
+    border-radius: 25px;
+}
+
+.showpassword{
+    display: flex;
+}
+
+.showPassword{
+    display: flex;
+    align-items:center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px
+}

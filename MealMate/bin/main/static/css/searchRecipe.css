@@ -1,0 +1,231 @@
+:root {
+    --accent: #313131;
+    /* currently a dark grey, can change when we decide on an accent color */
+    --light-accent: #707070;
+    /* similar to above comment */
+}
+
+.pageContent {
+    margin: 56px 64px;
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+}
+
+.search-button {
+    background: transparent;
+    border: none;
+    outline: none;
+    margin-left: -50px;
+
+}
+
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+
+.slidecontainer {
+    width: 100%;
+    /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;
+    /* Override default CSS styles */
+    appearance: none;
+    width: 100%;
+    /* Full-width */
+    height: 15px;
+    /* Specified height */
+    border-radius: 15px;
+    background: #d3d3d3;
+    /* Grey background */
+    outline: none;
+    /* Remove outline */
+    opacity: 0.7;
+    /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s;
+    /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 1;
+    /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Override default look */
+    appearance: none;
+    width: 25px;
+    /* Set a specific slider handle width */
+    height: 25px;
+    /* Slider handle height */
+    border-radius: 25px;
+    background: #383838;
+    /* Green background */
+    cursor: pointer;
+    /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    /* Set a specific slider handle width */
+    height: 25px;
+    /* Slider handle height */
+    background: #383838;
+    /* Green background */
+    cursor: pointer;
+    /* Cursor on hover */
+}
+
+#filter_button{
+    width: 100%;
+    background: black;
+    color: white;
+    border-radius: 30px;
+    margin-top: 5%;
+}
+
+#firstLine {
+    display: flex;
+    align-items: center;
+}
+
+#title {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#star-rating {
+    display: inline-block;
+}
+
+#secondLine {
+    display: flex;
+    align-items: center;
+}
+
+#servingSize {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#duration {
+    display: inline-block;
+}
+
+.textLink {
+    border: none;
+    background: none;
+    color: black;
+    float: left;
+    font-size: 18px;
+    padding-left: 0px;
+    opacity: 0.7;
+}
+
+.textLink:hover {
+    opacity: 1;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+#searchResults li,
+#ingredientList li {
+    list-style-type: none;
+    padding: 16px 0px;
+    background-color: #F6F6F6;
+    border-radius: 10px;
+    margin: 16px 0px;
+    padding: 16px;
+    text-transform: capitalize;
+}
+
+#searchResults li img,
+#ingredientList li img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    margin-right: 16px;
+}
+
+#searchResults li button,
+#ingredientList li button {
+    border-radius: 48px;
+    margin-left: 16px;
+}
+
+#searchResults li button:hover {
+    background-color: #313131;
+    color: #fff;
+}
+
+#ingredientList li button:hover,
+#stepsList .recipeStepBox h6 button:hover {
+    background-color: #D41414;  /* red */
+    color: #fff;
+}
+
+#modalName {
+    text-transform: capitalize;
+}
+
+.recipeCardImg {
+    position: relative;
+}
+
+.recipeCardImg img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.recipeCalories {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    margin: 0px;
+    background-color: rgba(37, 40, 44, 0.9);
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 15px 10px 15px;
+}

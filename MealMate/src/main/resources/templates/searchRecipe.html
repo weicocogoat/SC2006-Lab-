@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>MealMate | Search Recipes</title>
+
+    <!-- Stylesheets -->
+    <th:block th:insert="fragments/style.html :: style"></th:block>
+    <link rel="stylesheet" href="css/searchRecipe.css">
+    <link rel="stylesheet" href="css/recipeDetails.css">
+
+    <!-- Scripts -->
+    <script src="js/searchRecipe.js"></script>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+
+</head>
+
+<body id="body">
+    <!-- Navigation Bar -->
+    <div th:insert="fragments/navbar.html :: navbar"></div>
+
+    <div class="container p-5">
+        <h1>Browse Recipes</h1>
+
+        <div class="input-group my-4">
+            <input id="recipeInput" class="form-control searchBar" type="search" placeholder="Enter Recipe Title..." name="recipeInput">
+
+            <button type="button" class="input-group-text" onclick="searchIngredient(document.getElementById('recipeInput').value.trim())">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-sm-12 col-lg-3 mb-5">
+                <h4>Filter Options</h4>
+                <hr class="mt-4 mb-4">
+
+                <h5>By Calories (Max)</h5>
+                <div class="slidecontainer mb-5">
+                    <input type="range" min="100" max="1000" value="500" class="slider" id="myRange">
+                    <p>Value (kcal): <span id="val"></span></p>
+                </div>
+
+                <h5>By Diet Type</h5>
+                <form class="dietType">
+                    <div>
+                        <input type="checkbox" name="dairyFree" id="dairyFree"/>
+                        <label for="dairyFree">Dairy-free</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" name="glutenFree" id="glutenFree"/>
+                        <label for="glutenFree">Gluten-free</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" name="vegan" id="vegan"/>
+                        <label for="vegan">Vegan</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" name="vegetarian" id="vegetarian"/>
+                        <label for="vegetarian">Vegetarian</label>
+                    </div>
+                </form>
+                <button id = "filter_button" type = "button" onclick="getRecipes()">Apply Filter</button>
+            </div>
+
+            <div class="col-sm-12 col-lg-9 mb-5">
+                <!-- This is the recipe container that will hold the dynamic data retrieved from DB -->
+                <div id="recipeContainer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:insert="fragments/scripts.html :: scripts"></th:block>
+</body>
+</html>
