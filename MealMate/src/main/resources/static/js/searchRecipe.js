@@ -24,9 +24,12 @@ var cal;
 
 // Get All Recipes from DB
 function getRecipes() {
+	console.log("Retrieving receipes from database...");
+
 	listOfRecipes = [];
 	listOfRecipeName = [];
 	dietTypeFilter = [];
+	var flag2 = 0;
 
 	if (document.getElementById("dairyFree").checked){
 		dietTypeFilter.push("dairy free");
@@ -40,6 +43,14 @@ function getRecipes() {
 	if (document.getElementById("vegetarian").checked){
 		dietTypeFilter.push("vegetarian");
 	}
+
+	//check if all boxes are unchecked
+	for (i= 0; i < 4; i++){
+		if (dietTypeFilter == true){
+			flag2 = 1;
+		}
+	}
+
 
 	cal = parseInt(document.getElementById("myRange").value);
 
@@ -64,13 +75,20 @@ function getRecipes() {
                };
 
                // Store inside global array
-			   for (var i = 0; i < recipeObj["dietType"].length; i++){
-					if (dietTypeFilter.includes(recipeObj["dietType"][i])){
-						listOfRecipes.push(recipeObj);
-			   			listOfRecipeName.push(recipeObj["title"]);
-						break;
+			   if (flag2 == 0){
+					listOfRecipes.push(recipeObj);
+					listOfRecipeName.push(recipeObj["title"]);
+			   }
+			   else{
+					for (var i = 0; i < recipeObj["dietType"].length; i++){
+						if (dietTypeFilter.includes(recipeObj["dietType"][i])){
+							listOfRecipes.push(recipeObj);
+							listOfRecipeName.push(recipeObj["title"]);
+							break;
+						}
 					}
 			   }
+
           	});
 
 			for (var i = listOfRecipes.length - 1; i >= 0; i--){
@@ -255,7 +273,7 @@ function autocomplete(inp, arr) {
 
 function searchIngredient(recipeName){
 	console.log(listOfRecipeName);
-	
+
 	if (recipeName === ""){
 		toastr.error("Please input a Recipe Title.");
 		return;
