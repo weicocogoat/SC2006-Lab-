@@ -51,6 +51,13 @@ public class UserController {
         userRepo.save(userToFind);
     }
 
+    public boolean userExists(String id) {
+        User userToFind = userRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        //return userToFind;
+        return false;
+    }
+
     @GetMapping("/{id}/bookmarks")
     public List<String> getBookmarks(@PathVariable String id) {
         User user = userRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));

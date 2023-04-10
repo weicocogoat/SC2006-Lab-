@@ -19,7 +19,6 @@ $(document).ready(function() {
 	        return response.json();
 	     })
 	    .then(data => {
-	        //console.log(data);
 
 	        // If user is authenticated
 	        $('#addToMealBtn').removeClass('d-none');
@@ -40,31 +39,31 @@ function getRecipeDetails() {
 	const recipeId = url.split("/")[4];
 
 	fetch("http://localhost:8080/api/recipes/find/" + recipeId)
-		.then((resp) => resp.json())
-		.then(function(response) {
+	.then((resp) => resp.json())
+	.then(function(response) {
 
-			const recipe = {
-				id: response.id,
-            	title: response.title,
-                author: response.author,
-                image: response.image,
-                description: response.description,
-                dateCreated: response.dateCreated,
-                dietType: response.dietType,
-                numOfBookmarks: response.numOfBookmarks,
-                prepTime: response.prepTime,
-                servingSize: response.servingSize,
-                calories: response.calories,
-                ingredients: response.ingredients,
-                steps: response.steps
-			}
+		const recipe = {
+			id: response.id,
+        	title: response.title,
+            author: response.author,
+            image: response.image,
+            description: response.description,
+            dateCreated: response.dateCreated,
+            dietType: response.dietType,
+            numOfBookmarks: response.numOfBookmarks,
+            prepTime: response.prepTime,
+            servingSize: response.servingSize,
+            calories: response.calories,
+            ingredients: response.ingredients,
+            steps: response.steps
+		}
 
-			// Load Recipe Details on View
-			loadRecipeDetails(recipe);
+		// Load Recipe Details on View
+		loadRecipeDetails(recipe);
 
-		}).catch(function(error) {
-			console.log(error);
-		});
+	}).catch(function(error) {
+		console.log(error);
+	});
 }
 
 // Load Recipe Details on View

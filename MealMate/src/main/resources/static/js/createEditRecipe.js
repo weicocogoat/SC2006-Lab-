@@ -20,7 +20,6 @@ $(document).ready(function() {
 
 		loadExistingRecipe(recipeId);
 	}
-
 });
 
 // Recipe Image Input Field

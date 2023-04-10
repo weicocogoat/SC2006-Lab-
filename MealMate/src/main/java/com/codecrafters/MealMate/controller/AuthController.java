@@ -27,6 +27,9 @@ public class AuthController {
     UserDetailsManager userDetailsManager;
 
     @Autowired
+    UserRepository userRepo;
+
+    @Autowired
     TokenGenerator tokenGenerator;
 
     @Autowired
@@ -48,6 +51,10 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody SignUpDTO signUpDTO) {
         User user = new User(signUpDTO.getUsername(), signUpDTO.getPassword(), signUpDTO.getEmail(), signUpDTO.getHeight(), signUpDTO.getWeight(), signUpDTO.getBmi(), signUpDTO.getRecipeBookmarks(), signUpDTO.getDateJoined());
+
+
+
+
         userDetailsManager.createUser(user);
 
         Authentication authentication = UsernamePasswordAuthenticationToken.authenticated(user, signUpDTO.getPassword(), Collections.EMPTY_LIST);

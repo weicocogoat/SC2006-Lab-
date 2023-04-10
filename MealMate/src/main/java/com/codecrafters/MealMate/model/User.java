@@ -24,8 +24,7 @@ public class User implements UserDetails {
     private int height;
     private int weight;
     private double bmi;
-    //private String[] recipeBookmarks;   // Just store the ID of Recipe
-    private ArrayList<String> recipeBookmarks;
+    private ArrayList<String> recipeBookmarks;  // store the ID of Recipe
     private LocalDate dateJoined;
 
     public User() {}
@@ -74,9 +73,6 @@ public class User implements UserDetails {
     }
 
     public void setPassword(String password) {
-        //BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        //this.password = encoder.encode(password).toString();
-
         this.password = password;
     }
 

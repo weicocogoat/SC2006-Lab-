@@ -296,6 +296,7 @@ function getMeals(date) {
 
             // Add Items Respectively
             for(var i = 0; i < data.length; i++) {
+                /*
                 if(data[i].mealType == "Breakfast")
                     bfastItems += `<li>${data[i].name} (${data[i].calories}kcal) <button type="button" class="nav-link text-dark" onclick="removeMeal()"><i class="fa-solid fa-xmark ml-2"></i></button></li>`;
                 else if(data[i].mealType == "Lunch")
@@ -304,6 +305,16 @@ function getMeals(date) {
                     dinnerItems += `<li>${data[i].name} (${data[i].calories}kcal) <button type="button" class="nav-link text-dark" onclick="removeMeal()"><i class="fa-solid fa-xmark ml-2"></i></button></li>`;
                 else if(data[i].mealType == "Dessert")
                     dessertItems += `<li>${data[i].name} (${data[i].calories}kcal) <button type="button" class="nav-link text-dark" onclick="removeMeal()"><i class="fa-solid fa-xmark ml-2"></i></button></li>`;
+                */
+
+                if(data[i].mealType == "Breakfast")
+                    bfastItems += `<li>${data[i].name} (${data[i].calories}kcal)</li>`;
+                else if(data[i].mealType == "Lunch")
+                    lunchItems += `<li>${data[i].name} (${data[i].calories}kcal)</li>`;
+                else if(data[i].mealType == "Dinner")
+                    dinnerItems += `<li>${data[i].name} (${data[i].calories}kcal)</li>`;
+                else if(data[i].mealType == "Dessert")
+                    dessertItems += `<li>${data[i].name} (${data[i].calories}kcal)</li>`;
             }            
             
             if(bfastItems != "")
