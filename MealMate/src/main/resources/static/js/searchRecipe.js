@@ -272,12 +272,6 @@ function autocomplete(inp, arr) {
   }
 
 function searchIngredient(recipeName){
-	console.log(listOfRecipeName);
-
-	if (recipeName === ""){
-		toastr.error("Please input a Recipe Title.");
-		return;
-	}
 
 	if(recipeName.length <= 0) {
 		// If search field is empty
@@ -285,7 +279,7 @@ function searchIngredient(recipeName){
 	} else {
 		var i = 0;
 		for(i ; i < listOfRecipeName.length; i++) {
-			if (listOfRecipeName[i] === recipeName){
+			if (listOfRecipeName[i].includes(recipeName)){
 				break;
 			}
 		}
