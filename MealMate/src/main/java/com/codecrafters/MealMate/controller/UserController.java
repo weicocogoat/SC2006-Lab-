@@ -7,12 +7,12 @@ import com.codecrafters.MealMate.repository.RecipeRepository;
 import com.codecrafters.MealMate.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -52,10 +52,13 @@ public class UserController {
     }
 
     public boolean userExists(String id) {
-        User userToFind = userRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        Optional<User> userToFind = userRepo.findById(id);
 
-        //return userToFind;
-        return false;
+        if(userToFind.isPresent()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @GetMapping("/{id}/bookmarks")

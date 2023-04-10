@@ -18,6 +18,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -52,16 +53,22 @@ public class AuthController {
     public ResponseEntity register(@RequestBody SignUpDTO signUpDTO) {
         User user = new User(signUpDTO.getUsername(), signUpDTO.getPassword(), signUpDTO.getEmail(), signUpDTO.getHeight(), signUpDTO.getWeight(), signUpDTO.getBmi(), signUpDTO.getRecipeBookmarks(), signUpDTO.getDateJoined());
 
+        Optional<User> findByUsername = userRepo.findByUsername(user.getUsername());
+        Optional<User> findByEmail = userRepo.findByEmail(user.getEmail());
 
+        if(findByUsername.isPresent()) {
+            return ResponseEntity.badRequest().body("username_in_use");
+        } else if(findByEmail.isPresent()) {
+            return ResponseEntity.badRequest().body("email_in_use");
+        } else {
+            userDetailsManager.createUser(user);
 
+            Authentication authentication = UsernamePasswordAuthenticationToken.authenticated(user, signUpDTO.getPassword(), Collections.EMPTY_LIST);
 
-        userDetailsManager.createUser(user);
+            System.out.println("User successfully created");
 
-        Authentication authentication = UsernamePasswordAuthenticationToken.authenticated(user, signUpDTO.getPassword(), Collections.EMPTY_LIST);
-
-        System.out.println("User successfully created");
-
-        return ResponseEntity.ok(tokenGenerator.createToken(authentication));
+            return ResponseEntity.ok(tokenGenerator.createToken(authentication));
+        }
     }
 
     @PostMapping("/token")

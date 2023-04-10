@@ -110,8 +110,6 @@ function createUser() {
         dateJoined: new Date().convertToLocal().toDateInputValue()
     };
 
-    console.log(newUser);
-
     fetch('http://localhost:8080/api/auth/register', {
              method: 'POST',
              headers: {
@@ -119,13 +117,27 @@ function createUser() {
              },
              body: JSON.stringify(newUser)
          })
+        .then((response) => {
+            if(!response.ok) {
+                return response.text().then(body => {
+                    throw new Error(body);
+                });
+            }
+
+            return response.json();
+        })
          .then(data => {
              toastr.success("Account successfully created.", "Account Created!");
-             console.log('Success:', data);
+             //console.log('Result:', data);
          })
-         .catch((error) => {
-             toastr.error("Registration failed, please try again!", "Failed to Register");
-             console.error('Error:', error);
+         .catch(error => {
+             if(error.message == "username_in_use")
+                 toastr.error("Username is taken, please try again!", "Username Taken");
+             else if(error.message == "email_in_use")
+                 toastr.error("Email is taken, please try again!", "Email Taken");
+             else
+                 toastr.error("Registration failed, please try again!", "Failed to Register");
+
          });
          
 }
