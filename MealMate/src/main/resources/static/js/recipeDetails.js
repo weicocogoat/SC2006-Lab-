@@ -6,11 +6,11 @@ $(document).ready(function() {
     if(userId) {
     	fetch('http://localhost:8080/api/users/' + userId, {
 	        method: 'GET',
-	        withCredentials: true,
-	        credentials: 'include',
+	        //withCredentials: true,
+	        //credentials: 'include',
 	        headers: {
-	            'content-type': 'application/json',
-	            'authorization': 'Bearer ' + accessToken
+	            'content-type': 'application/json'
+	            //'authorization': 'Bearer ' + accessToken
 	        }
 	    })
 	    .then(response => {
@@ -69,7 +69,7 @@ function getRecipeDetails() {
 // Load Recipe Details on View
 function loadRecipeDetails(recipe) {
 	const image = document.getElementById("recipeImg");
-	const title = document.getElementById("recipeTitle");
+	const title = document.getElementById("recipeTitleHolder");
 	const datePublished = document.getElementById("datePublished");
 	const author = document.getElementById("author");
 	const prepTime = document.getElementById("preparationTime");
@@ -79,7 +79,7 @@ function loadRecipeDetails(recipe) {
 
 	// Display General Information
 	image.src = recipe.image;
-	title.innerHTML = recipe.title;
+	title.innerHTML = '<span id="recipeTitle">' + recipe.title + '</span> <span id="star-rating" class="small text-muted ml-4"> ('+ recipe.numOfBookmarks +'<i class="fa-solid fa-star"></i>)</span>';
 
 	let date = new Date(recipe.dateCreated);
 	let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

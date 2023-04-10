@@ -6,33 +6,32 @@ $(document).ready(function() {
 
     if(userId) {
         let accessToken = localStorage.getItem("accessToken");
-        console.log("Access token: " + accessToken);
 
         // Get User Information
         fetch('http://localhost:8080/api/users/' + userId, {
-                method: 'GET',
-                withCredentials: true,
-                credentials: 'include',
-                headers: {
-                    'content-type': 'application/json',
-                    'authorization': 'Bearer ' + accessToken
-                }
-            })
-            .then(response => {
-                //console.log('Success:', response);
-                
-                return response.json();
-             })
-            .then(data => {
-                // Toggle Daily Summary Details to show
-                $('#summary').toggleClass("d-none");
+            method: 'GET',
+            //withCredentials: true,
+            //credentials: 'include',
+            headers: {
+                'content-type': 'application/json'
+                //'authorization': 'Bearer ' + accessToken
+            }
+        })
+        .then(response => {
+            //console.log('Success:', response);
+            
+            return response.json();
+         })
+        .then(data => {
+            // Toggle Daily Summary Details to show
+            $('#summary').toggleClass("d-none");
 
-                // Get Daily Summary
-                getDailySummary();
-             })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+            // Get Daily Summary
+            getDailySummary();
+         })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     } else {
         $('#summary').addClass("d-none");
     }
@@ -100,8 +99,8 @@ function getDailySummary() {
     let totalDailyCalories = 0;
     let bfastCalories = 0, lunchCalories = 0, dinnerCalories = 0, dessertCalories = 0;
 
-    console.log(new Date().toISOString());
-    console.log(new Date().convertToLocal().toISOString());
+    //console.log(new Date().toISOString());
+    //console.log(new Date().convertToLocal().toISOString());
 
     if(userId != null) {
         const mealDTO = {

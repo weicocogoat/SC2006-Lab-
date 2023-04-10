@@ -87,11 +87,11 @@ function getUserDetails() {
     // Get User Information
     fetch('http://localhost:8080/api/users/' + userId, {
             method: 'GET',
-            withCredentials: true,
-            credentials: 'include',
+            //withCredentials: true,
+            //credentials: 'include',
             headers: {
-                'content-type': 'application/json',
-                'authorization': 'Bearer ' + accessToken
+                'content-type': 'application/json'
+                //'authorization': 'Bearer ' + accessToken
             }
         })
         .then(response => {

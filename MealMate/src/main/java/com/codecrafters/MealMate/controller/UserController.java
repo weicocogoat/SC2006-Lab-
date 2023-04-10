@@ -25,7 +25,8 @@ public class UserController {
 
     @GetMapping("/{id}")
     //@PreAuthorize("#user.id == #id")
-    public ResponseEntity user(@AuthenticationPrincipal User user, @PathVariable String id) {
+    //public ResponseEntity user(@AuthenticationPrincipal User user, @PathVariable String id) {
+    public ResponseEntity user(@PathVariable String id) {
         User eUser = userRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         UserDTO userDTO = new UserDTO(eUser);
 
