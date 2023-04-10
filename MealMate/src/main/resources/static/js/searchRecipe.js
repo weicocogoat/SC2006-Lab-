@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Array that will hold all recipes retrieved from DB
 var listOfRecipes = [];
 var dietTypeFilter = [];
+var dietTypeFilterState = [];
 var cal;
 
 // Get All Recipes from DB
@@ -29,26 +30,31 @@ function getRecipes() {
 	listOfRecipes = [];
 	listOfRecipeName = [];
 	dietTypeFilter = [];
+	dietTypeFilterState = [];
+
 	var flag2 = 0;
 
 	if (document.getElementById("dairyFree").checked){
 		dietTypeFilter.push("dairy free");
+		dietTypeFilterState.push(true);
 	}
 	if (document.getElementById("glutenFree").checked){
 		dietTypeFilter.push("gluten free");
+		dietTypeFilterState.push(true);
 	}
 	if (document.getElementById("vegan").checked){
 		dietTypeFilter.push("vegan");
+		dietTypeFilterState.push(true);
 	}
 	if (document.getElementById("vegetarian").checked){
 		dietTypeFilter.push("vegetarian");
+		dietTypeFilterState.push(true);
 	}
 
 	//check if all boxes are unchecked
-	for (i= 0; i < 4; i++){
-		if (dietTypeFilter == true){
-			flag2 = 1;
-		}
+	console.log(dietTypeFilterState.length);
+	if (dietTypeFilterState.length > 0){
+		flag2 = 1;
 	}
 
 
@@ -300,4 +306,5 @@ function searchIngredient(recipeName){
 		const recipeContainer = document.getElementById("recipeContainer");
 		recipeContainer.innerHTML = recipeViewHTML;
 	}
+
 }
