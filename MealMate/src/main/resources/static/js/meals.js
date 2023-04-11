@@ -21,6 +21,8 @@ function addCustomMeal() {
             "mealDate": mealDate
         }
 
+        $('#selectedDate').val(mealDate);
+
         // Create Meal
         fetch('http://localhost:8080/api/meal/save', {
                 method: 'POST',
