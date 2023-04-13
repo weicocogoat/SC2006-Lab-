@@ -29,6 +29,14 @@
 	- Started MealMateApplication in ... seconds (JVM running for ...)
 - Open http://localhost:8080 on browser to open MealMate's web application
 
+### Using VSCode
+- Open the folder "SC2006-Lab-"
+- Go to "MealMate" > "src" > "test" > "MealMateApplicationTests.java"
+- Run MealMateApplicationTests.java and wait for the following messages to appear:
+	- o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+	- c.c.MealMate.MealMateApplication         : Started MealMateApplication in 6.17 seconds (JVM running for 7.01)
+- Open http://localhost:8080 on browser to open MealMate's web application
+
 ## API Routes
 ### AuthController
 
