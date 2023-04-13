@@ -33,37 +33,94 @@
 ### AuthController
 
 #### [POST] Authenticate User (Login) - http://localhost:8080/api/auth/login
+Parameters/Body: LoginDTO
+
 #### [POST] Regiser User - http://localhost:8080/api/auth/register
+Parameters/Body: SignUpDTO
 
 ### FeedbackController
 
 #### [POST] Send Feedback - http://localhost:8080/feedback
+Parameters/Body: Feedback Object
 
 ### MealController
 
 #### [GET] Retrieve All Meals - http://localhost:8080/api/meal/all
+Parameters/Body: -
+
+
 #### [GET] Retreieve Meal by ID - http://localhost:8080/api/meal/find/{id}
+Parameters/Body: MealId
+
+
 #### [GET] Retrieve Meals by User - http://localhost:8080/api/meal/user/{id}
+Parameters/Body: UserId
+
+
 #### [POST] Retrieve Meals by User ID and Date - http://localhost:8080/api/meal/find/mealDate
+Paramaters/Body: MealDateDTO (contains UserId and MealDate)
+
+
 #### [POST] Save Meal - http://localhost:8080/api/meal/save
+Paramaters/Body: Meal Object
+
+
 #### [DELETE] Delete Meal - http://localhost:8080/api/meal/delete
+Paramaters/Body: MealId
+
 
 
 ### RecipeController
 
 #### [GET] Retrieve All Recipes - http://localhost:8080/api/recipes/all
+Paramaters/Body: -
+
+
 #### [GET] Retrieve Recipe by ID - http://localhost:8080/api/recipes/find/{id}
+Paramaters/Body: RecipeId
+
+
 #### [GET] Retrieve All Recipes Sorted by Bookmarks (Descending) - http://localhost:8080/api/recipes/all/sort/bookmarks
+Paramaters/Body: -
+
+
 #### [GET] Retrieve Recipes by User ID - http://localhost:8080/api/recipes/user/{id}
+Paramaters/Body: UserId
+
+
 #### [POST] Create Recipe - http://localhost:8080/api/recipes/create
+Paramaters/Body: Recipe Object
+
+
 #### [POST] Update Recipe - http://localhost:8080/api/recipes/update
+Paramaters/Body: Recipe Object
+
+
 #### [DELETE] Delete Recipe - http://localhost:8080/api/recipes/delete/{id}
+Paramaters/Body: RecipeId
+
 
 ### UserController
 
 #### [GET] Get User by ID - http://localhost:8080/api/users/{id}
+Paramaters/Body: UserId
+
+
 #### [POST] Update User Details - http://localhost:8080/api/users/save/{id}
+Paramaters/Body: User Oject
+
+
 #### [GET] Get User Recipe Bookmarks - http://localhost:8080/api/users/{id}/bookmarks
+Paramaters/Body: UserId
+
+
 #### [GET] Check if User Bookmarked Specific Recipe - http://localhost:8080/api/users/{id}/bookmarks/{recipeId}
+Paramaters/Body: UserId and RecipeId
+
+
 #### [POST] Add Bookmark - http://localhost:8080/api/users/{id}/bookmarks/add/{recipeId}
+Paramaters/Body: UserId and RecipeId
+
+
 #### [POST] Remove Bookmark - http://localhost:8080/api/users/{id}/bookmarks/remove/{recipeId}
+Paramaters/Body: UserId and RecipeId
